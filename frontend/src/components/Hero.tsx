@@ -1,6 +1,6 @@
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import heroPoster from '../assets/hero.png';
-import heroVideo from '../assets/Videohero.mp4';
+import heroVideo from '../assets/videohero.mp4';
 
 export const Hero = () => {
     const handleScroll = () => {

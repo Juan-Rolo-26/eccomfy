@@ -1,12 +1,10 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import {
     motion,
     type MotionValue,
     useReducedMotion,
     useScroll,
     useTransform,
-    useMotionValueEvent,
-    AnimatePresence
 } from 'framer-motion';
 
 import img1 from '../assets/ecosistema.png';
@@ -80,26 +78,11 @@ export const ScrollRevealText = () => {
     });
 
     const revealProgress = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-    useMotionValueEvent(revealProgress, "change", (latest) => {
-        if (latest < 0.33) {
-            setCurrentImageIndex(0);
-        } else if (latest < 0.66) {
-            setCurrentImageIndex(1);
-        } else {
-            setCurrentImageIndex(2);
-        }
-    });
 
     if (shouldReduceMotion) {
         return (
             <section id="nosotros" className="srt">
                 <div className="srt__inner">
-                    <div className="srt__content">
-                        <span className="srt__label">Nuestra filosofía</span>
-                        <p className="srt__text srt__text--static">{PARAGRAPH}</p>
-                    </div>
                     <div className="srt__visuals">
                         <img
                             src={IMAGES[0].src}
@@ -107,6 +90,10 @@ export const ScrollRevealText = () => {
                             className="srt__image"
                             style={{ opacity: 1 }}
                         />
+                    </div>
+                    <div className="srt__content">
+                        <span className="srt__label">Nuestra filosofía</span>
+                        <p className="srt__text srt__text--static">{PARAGRAPH}</p>
                     </div>
                 </div>
             </section>
@@ -118,6 +105,17 @@ export const ScrollRevealText = () => {
             <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
                 <section id="nosotros" className="srt" style={{ width: '100%', height: '100%' }}>
                     <div className="srt__inner">
+                        <div className="srt__visuals">
+                            <iframe
+                                className="srt__image"
+                                src="https://www.youtube.com/embed/Ye9sa6Qk1t4?modestbranding=1&rel=0"
+                                title="Eccomfy video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                style={{ border: 'none', width: '100%', height: '100%' }}
+                            />
+                        </div>
+
                         <div className="srt__content">
                             <span className="srt__label">Nuestra filosofía</span>
                             <p className="srt__text">
@@ -136,21 +134,6 @@ export const ScrollRevealText = () => {
                                     );
                                 })}
                             </p>
-                        </div>
-
-                        <div className="srt__visuals">
-                            <AnimatePresence>
-                                <motion.img
-                                    key={IMAGES[currentImageIndex].id}
-                                    src={IMAGES[currentImageIndex].src}
-                                    alt={IMAGES[currentImageIndex].alt}
-                                    className="srt__image"
-                                    initial={{ opacity: 0, scale: 1.05 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.95 }}
-                                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                                />
-                            </AnimatePresence>
                         </div>
                     </div>
                 </section>
