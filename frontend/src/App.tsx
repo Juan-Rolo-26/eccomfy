@@ -61,11 +61,7 @@ const WaveStat = ({
 
   useEffect(() => {
     if (!hasStarted) return;
-
-    if (reducedMotion) {
-      setDisplayValue(value);
-      return;
-    }
+    if (reducedMotion) return;
 
     let frameId = 0;
     let startTime = 0;
@@ -97,7 +93,7 @@ const WaveStat = ({
   return (
     <div ref={ref} className="wave-stat">
       <span className="wave-stat__num" aria-label={`${label}: +${value}${suffix} `}>
-        +<span>{displayValue}</span>
+        +<span>{reducedMotion && hasStarted ? value : displayValue}</span>
         {suffix}
       </span>
       <span className="wave-stat__label">{label}</span>

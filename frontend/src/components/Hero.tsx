@@ -1,4 +1,6 @@
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
+import heroPoster from '../assets/hero.png';
+import heroVideo from '../assets/Videohero.mp4';
 
 export const Hero = () => {
     const handleScroll = () => {
@@ -21,8 +23,11 @@ export const Hero = () => {
                 loop
                 muted
                 playsInline
+                preload="auto"
+                poster={heroPoster}
+                aria-hidden="true"
             >
-                <source src="/Videohero.mp4" type="video/mp4" />
+                <source src={heroVideo} type="video/mp4" />
             </video>
             <div className="hero-overlay" />
             <div className="hero-noise" />
