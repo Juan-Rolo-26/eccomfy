@@ -1,66 +1,105 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import {
+    motion,
+    useScroll,
+    useTransform,
+    useReducedMotion,
+    useSpring,
+} from 'framer-motion';
+import type { ReactNode } from 'react';
 
 type CircularRevealProps = {
-    /** La sección que queda debajo como fondo (Video) */
-    bottom: React.ReactNode;
-    /** La sección que se revela con el círculo (Features) */
-    top: React.ReactNode;
+    /** Contenido de fondo visible antes de la transición (Video) */
+    video: ReactNode;
+    /** Contenido que se revela con el círculo (Features) */
+    content: ReactNode;
 };
 
 /**
- * Efecto "revelar circular":
- * - `bottom` (Video) queda sticky como una pantalla completa de 100vh.
- * - `top` (Features) arranca con margin-top -100vh, solapado sobre el video.
- * - Un clip-path circle(0%→150%) revela Features a medida que scrolleás.
+ * Circular reveal:
+ * - El video queda de fondo.
+ * - Los servicios se revelan con un círculo durante 100vh de scroll.
+ * - Los servicios están PINNED (sticky) durante esos primeros 100vh.
+ * - Una vez abierto el círculo, los servicios fluyen hacia arriba normalmente.
  */
-export const CircularReveal = ({ bottom, top }: CircularRevealProps) => {
-    const topRef = useRef<HTMLDivElement>(null);
+export const CircularReveal = ({ video, content }: CircularRevealProps) => {
+    // Referencia invisible de 100vh exactos para trackear la duración de la animación
+    const animTrackerRef = useRef<HTMLDivElement>(null);
     const shouldReduceMotion = useReducedMotion();
 
-    // El scroll se trakea relativo al cr-top (Features)
+    // Trackeamos solo los primeros 100vh de scroll
     const { scrollYProgress } = useScroll({
-        target: topRef,
-        // Empieza cuando la parte superior de `top` toca el 100% del viewport (acaba de aparecer)
-        // Termina cuando la parte superior llegó al -20% (bien anclada)
-        offset: ['start 100%', 'start -20%'],
+        target: animTrackerRef,
+        offset: ['start start', 'end start'], // 0 a 1 exactamente en 100vh
     });
 
-    // clip-path circle: de invisible → completamente visible
+    const smooth = useSpring(scrollYProgress, {
+        stiffness: 45,
+        damping: 28,
+        mass: 1,
+    });
+
     const clipPath = useTransform(
-        scrollYProgress,
-        [0, 0.7, 1],
+        smooth,
+        [0.05, 0.95],
         [
-            'circle(0% at 50% 20%)',    // comienza como un punto en la parte alta
-            'circle(70% at 50% 50%)',   // círculo mediano
-            'circle(150% at 50% 50%)',  // cubre todo
+            'circle(0% at 50% 50%)',
+            'circle(150% at 50% 50%)',
         ],
     );
 
     if (shouldReduceMotion) {
         return (
             <div>
-                {bottom}
-                {top}
+                {video}
+                {content}
             </div>
         );
     }
 
     return (
-        <div className="cr-wrapper">
-            {/* Video — sticky, 100vh, queda detrás */}
-            <div className="cr-bottom">
-                {bottom}
-            </div>
+        <div style={{ position: 'relative' }}>
+            {/* 1. Div invisible de 100vh para medir el progreso del círculo */}
+            <div
+                ref={animTrackerRef}
+                style={{ position: 'absolute', top: 0, left: 0, width: '1px', height: '100vh', pointerEvents: 'none' }}
+            />
 
-            {/* Features — solapado encima del video, se revela con clip-path */}
-            <motion.div
-                ref={topRef}
-                className="cr-top"
-                style={{ clipPath }}
-            >
-                {top}
-            </motion.div>
+            {/* 2. Contenedor principal del efecto. */}
+            <div style={{ position: 'relative' }}>
+
+                {/* 3. Contenedor Sticky. 
+                    Se quedará pegado EXACTAMENTE hasta que el div spacer 
+                    inferior termine de scrollear. */}
+                <div style={{ position: 'sticky', top: 0 }}>
+
+                    {/* VIDEO DE FONDO */}
+                    <div style={{ position: 'absolute', inset: 0, zIndex: 1, height: '100vh', overflow: 'hidden' }}>
+                        {video}
+                    </div>
+
+                    {/* FEATURES DENTRO DEL CÍRCULO */}
+                    <motion.div
+                        style={{
+                            clipPath,
+                            position: 'relative',
+                            zIndex: 2,
+                            background: '#080808',
+                            willChange: 'clip-path',
+                            minHeight: '100vh',
+                        }}
+                    >
+                        {content}
+                    </motion.div>
+
+                </div>
+
+                {/* SPACER INVISIBLE DE 100VH 
+                    Esto dicta cuántos vh extra se queda scrolleando (pinned).
+                    Como le dimos 100vh y tracker mide 100vh, la animación dura exactamente 
+                    el mismo tiempo que el anclaje sticky. */}
+                <div style={{ height: '100vh', pointerEvents: 'none' }} aria-hidden="true" />
+            </div>
         </div>
     );
 };

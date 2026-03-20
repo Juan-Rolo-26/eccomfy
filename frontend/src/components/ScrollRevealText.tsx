@@ -101,7 +101,7 @@ export const ScrollRevealText = () => {
     }
 
     return (
-        <div ref={container} style={{ minHeight: '250vh', position: 'relative' }}>
+        <div ref={container} style={{ minHeight: '380vh', position: 'relative' }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
                 <section id="nosotros" className="srt" style={{ width: '100%', height: '100%' }}>
                     <div className="srt__inner">

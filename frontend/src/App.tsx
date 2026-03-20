@@ -112,24 +112,28 @@ function App() {
         <Hero />
       </StackingWrapper>
 
-      <StackingWrapper zIndex={2} overlayColor="#080808">
+      {/* 
+        ScrollRevealText tiene un contenedor de 380vh con sticky interno.
+        Su contenido queda fijo (pinned) mientras el usuario scrollea.
+        Al tener z-index: 2, queda DEBAJO del video (z-index: 3).
+        Cuando el usuario scrollea más allá, el video sube y lo tapa.
+      */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
         <ScrollRevealText />
-      </StackingWrapper>
+      </div>
 
-      <StackingWrapper zIndex={3}>
-        <div style={{ background: '#08111d' }}>
-          <CircularReveal
-            bottom={<VideoShowcase />}
-            top={<Features />}
-          />
-        </div>
-      </StackingWrapper>
+      {/* CircularReveal sube y tapa Nuestra filosofía */}
+      <div style={{ position: 'relative', zIndex: 3, marginTop: '-100vh' }}>
+        <CircularReveal
+          video={<VideoShowcase />}
+          content={<Features />}
+        />
+      </div>
 
-      <StackingWrapper zIndex={4}>
-        <div style={{ background: '#080808' }}>
-          <Process />
-        </div>
-      </StackingWrapper>
+      {/* Process sube y tapa Servicios */}
+      <div style={{ position: 'relative', zIndex: 4, background: '#080808' }}>
+        <Process />
+      </div>
 
       <StackingWrapper zIndex={5}>
         <section className="wave-section" style={{ background: '#080808' }}>

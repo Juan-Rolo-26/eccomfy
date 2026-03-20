@@ -62,7 +62,6 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     },
     {
         title: 'Proceso',
-        note: 'Trabajamos con una metodología clara para convertir ideas en crecimiento medible.',
         links: [
             { label: 'Descubrimiento', href: '#proceso' },
             { label: 'Estrategia', href: '#proceso' },
@@ -73,7 +72,6 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     },
     {
         title: 'Empresa',
-        note: 'Agencia digital de marketing enfocada en ecosistemas, automatización y resultados reales.',
         meta: [
             { label: 'Córdoba, Argentina', href: 'https://maps.google.com/?q=Cordoba+Argentina', external: true },
             { label: 'eccomfyarg@gmail.com', href: 'mailto:eccomfyarg@gmail.com', external: true },

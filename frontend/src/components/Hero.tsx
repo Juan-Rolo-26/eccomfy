@@ -1,6 +1,51 @@
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
 import heroPoster from '../assets/hero.png';
 import heroVideo from '../assets/videohero.mp4';
+
+// Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
+const EASE_CINEMATIC: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const containerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.18,
+            delayChildren: 0.5,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: {
+        opacity: 0,
+        y: 52,
+        filter: 'blur(6px)',
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        transition: {
+            duration: 1.4,
+            ease: EASE_CINEMATIC,
+        },
+    },
+};
+
+// Variante más sutil para los botones (menos desplazamiento)
+const buttonsVariants = {
+    hidden: { opacity: 0, y: 28 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1.2,
+            ease: EASE_CINEMATIC,
+        },
+    },
+};
+
 
 export const Hero = () => {
     const handleScroll = () => {
@@ -33,16 +78,25 @@ export const Hero = () => {
             <div className="hero-noise" />
 
             <div className="hero-container">
-                <div className="hero-content">
-                    <h1 className="hero-main-title">Agencia Digital de Marketing</h1>
+                {/* Contenedor staggered: cada hijo entra de forma escalonada */}
+                <motion.div
+                    className="hero-content"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    style={{ animation: 'none' }} /* desactiva heroFadeUp CSS */
+                >
+                    <motion.h1 className="hero-main-title" variants={itemVariants}>
+                        Agencia Digital de Marketing
+                    </motion.h1>
 
-                    <p className="hero-description">
+                    <motion.p className="hero-description" variants={itemVariants}>
                         Desarrollamos ecosistemas digitales que convierten tráfico en
                         oportunidades reales, transformando cada interacción en
                         crecimiento medible para tu negocio.
-                    </p>
+                    </motion.p>
 
-                    <div className="hero-actions">
+                    <motion.div className="hero-actions" variants={buttonsVariants}>
                         <a href="#contacto" className="hero-btn hero-btn-primary">
                             Hablemos de tu proyecto
                             <ArrowDownRight size={18} />
@@ -55,10 +109,11 @@ export const Hero = () => {
                         >
                             Ver servicios
                         </button>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
 
+            {/* scroll-indicator: CSS se encarga del bounce y del fade-in con delay */}
             <button
                 type="button"
                 className="scroll-indicator"

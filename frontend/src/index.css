@@ -18,7 +18,7 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   /* ── Typography: Font families ── */
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Inter', sans-serif;
   /* Títulos, headings, UI bold */
   --font-body: 'Inter', sans-serif;
   /* Párrafos, labels, nav, botones */
@@ -347,7 +347,7 @@ button {
   letter-spacing: var(--ls-wider);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.72);
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .nb__cta-arrow {
@@ -364,7 +364,12 @@ button {
 
 .nb__cta:hover {
   color: #fff;
-  transform: translateX(2px);
+  transform: translateX(4px) scale(1.03);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.25));
+}
+
+.nb__cta:active {
+  transform: translateX(2px) scale(0.98);
 }
 
 .nb__cta:hover .nb__cta-arrow {
@@ -785,7 +790,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  animation: heroFadeUp 1s ease;
+  /* heroFadeUp desactivado: Framer Motion maneja la entrada con stagger */
 }
 
 .hero-topline {
@@ -869,8 +874,13 @@ button {
 }
 
 .hero-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(62, 178, 144, 0.3);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(62, 178, 144, 0.4), 0 0 15px rgba(62, 178, 144, 0.2);
+}
+
+.hero-btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 6px 15px rgba(62, 178, 144, 0.2);
 }
 
 .hero-btn-secondary {
@@ -881,8 +891,21 @@ button {
 }
 
 .hero-btn-secondary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.02);
   background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.hero-btn-secondary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.hero-btn svg {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-btn:hover svg {
+  transform: translate(3px, -3px) rotate(4deg);
 }
 
 .scroll-indicator {
@@ -899,7 +922,10 @@ button {
   border: none;
   color: rgba(255, 255, 255, 0.88);
   cursor: pointer;
-  animation: bounceSoft 2s infinite;
+  /* Fade-in con delay largo → aparece después del stagger del Hero */
+  opacity: 0;
+  animation: scrollIndicatorIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 2.1s forwards,
+    bounceSoft 2.4s ease-in-out 3.6s infinite;
 }
 
 .scroll-indicator span {
@@ -932,9 +958,14 @@ button {
 }
 
 .btn-large.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(157, 78, 221, 0.7);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(157, 78, 221, 0.6), 0 0 20px rgba(157, 78, 221, 0.3);
   background: #b164f0;
+}
+
+.btn-large.primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 6px 15px rgba(157, 78, 221, 0.2);
 }
 
 .btn-large.secondary {
@@ -947,7 +978,12 @@ button {
 .btn-large.secondary:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.btn-large.secondary:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 /* Services Section (accordion) */
@@ -1110,8 +1146,21 @@ button {
 }
 
 .wave-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(62, 178, 144, 0.4);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(62, 178, 144, 0.45), 0 0 15px rgba(62, 178, 144, 0.2);
+}
+
+.wave-cta:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 6px 15px rgba(62, 178, 144, 0.2);
+}
+
+.wave-cta svg {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.wave-cta:hover svg {
+  transform: translate(3px, -3px) rotate(4deg);
 }
 
 @media (max-width: 640px) {
@@ -1228,13 +1277,21 @@ button {
   color: var(--secondary);
   text-decoration: none;
   border-bottom: 1px solid var(--secondary);
-  padding-bottom: 1px;
+  padding-bottom: 2px;
   width: fit-content;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
 }
 
 .service-link:hover {
-  opacity: 0.7;
+  color: #fff;
+  border-color: #fff;
+  transform: translateX(4px) scale(1.02);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+.service-link:active {
+  transform: translateX(1px) scale(0.98);
 }
 
 @media (max-width: 600px) {
@@ -1456,13 +1513,10 @@ button {
 }
 
 .cr-bottom {
-  /* The video stays sticky while the circle expands */
-  position: sticky;
-  top: 0;
+  /* El video llena toda la zona sticky como fondo */
+  position: absolute;
+  inset: 0;
   z-index: 1;
-  will-change: transform;
-  /* Give it visual height so the sticky has room */
-  height: 100vh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1477,12 +1531,14 @@ button {
 }
 
 .cr-top {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  /* Will-change prepara el clip-path para mejor performance */
-  will-change: clip-path;
-  /* Eliminamos el margin-top negativo para que el texto baje natural, 
-     solamente usamos clip-path al scrollear a este contenido */
+  /* will-change: transform + clip-path para GPU acceleration */
+  will-change: clip-path, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── Full Width Video ── */
@@ -1557,6 +1613,7 @@ button {
   width: min(100%, 1920px);
   margin: 0 auto;
   padding: 92px clamp(24px, 3.3vw, 56px) 30px;
+  overflow: hidden;
 }
 
 .footer__hero {
@@ -1581,13 +1638,15 @@ button {
 .footer__wordmark {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(5.4rem, 20vw, 18rem);
+  font-size: clamp(3.6rem, 13vw, 18rem);
   font-weight: var(--fw-bold);
-  /* Removido el extrabold así no se estira */
   letter-spacing: var(--ls-tighter);
   line-height: 0.8;
   color: rgba(8, 17, 29, 0.17);
   text-transform: uppercase;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 
 .footer__grid {
@@ -1672,12 +1731,17 @@ button {
   line-height: var(--lh-snug);
   text-align: left;
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .footer__link:hover {
   color: #3eb290;
-  transform: translateX(2px);
+  transform: translateX(4px) scale(1.02);
+  text-shadow: 0 0 12px rgba(62, 178, 144, 0.25);
+}
+
+.footer__link:active {
+  transform: translateX(2px) scale(0.98);
 }
 
 .footer__link svg {
@@ -1721,12 +1785,17 @@ button {
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-wide);
   cursor: pointer;
-  transition: color 0.25s ease, transform 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .footer__top:hover {
   color: #3eb290;
-  transform: translateY(-1px);
+  transform: translateY(-4px) scale(1.02);
+  text-shadow: 0 0 12px rgba(62, 178, 144, 0.25);
+}
+
+.footer__top:active {
+  transform: translateY(1px) scale(0.98);
 }
 
 .legal-modal-backdrop {
@@ -1987,6 +2056,18 @@ button {
   }
 }
 
+@keyframes scrollIndicatorIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
 @keyframes heroFadeUp {
   from {
     opacity: 0;
@@ -2096,9 +2177,14 @@ button {
     transition-duration: 0.01ms !important;
   }
 
-  .hero-content,
+  .hero-content {
+    animation: none !important;
+  }
+
   .scroll-indicator {
     animation: none !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
   }
 }
 
