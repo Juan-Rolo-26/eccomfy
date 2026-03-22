@@ -1,105 +1,120 @@
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { type CSSProperties } from 'react';
 import './Process.css';
 
 const STEPS = [
   {
     number: '01',
-    title: 'Descubrimiento',
-    desc: 'Analizamos tu negocio a fondo para detectar oportunidades reales de crecimiento y puntos críticos que hoy están frenando tus resultados.',
-    tags: ['Auditoría', 'Research', 'Brief'],
+    title: 'Diagnóstico',
+    desc: 'Analizamos el negocio del cliente a fondo.',
+    insight: '👉 Acá detectamos qué está frenando las ventas.',
+    tags: ['Producto', 'Mercado', 'Competencia', 'Problemas actuales'],
+    color: 'var(--primary)',
   },
   {
     number: '02',
     title: 'Estrategia',
-    desc: 'Creamos un sistema claro y medible para escalar: canales, mensajes y decisiones alineadas a resultados concretos.',
-    tags: ['Roadmap', 'KPIs', 'Posicionamiento'],
+    desc: 'Armamos el plan de crecimiento.',
+    insight: '👉 Se diseña cómo va a entrar la plata.',
+    tags: ['Definición de público objetivo', 'Propuesta de valor', 'Embudo de ventas', 'Canales a usar'],
+    color: 'var(--secondary)',
   },
   {
     number: '03',
-    title: 'Diseño',
-    desc: 'Diseñamos experiencias que transmiten autoridad, generan confianza y convierten visitantes en clientes.',
-    tags: ['UI/UX', 'Branding', 'Prototipo'],
+    title: 'Construcción',
+    desc: 'Creamos todo el sistema.',
+    insight: '👉 Se arma el ecosistema completo.',
+    tags: ['Landing pages / tienda', 'Creatividades', 'Copywriting', 'Automatizaciones'],
+    color: 'var(--accent)',
   },
   {
     number: '04',
-    title: 'Desarrollo',
-    desc: 'Construimos plataformas rápidas, optimizadas y listas para escalar. Cada detalle está pensado para convertir.',
-    tags: ['Web', 'Performance', 'SEO técnico'],
+    title: 'Lanzamiento',
+    desc: 'Ponemos todo a correr.',
+    insight: '👉 Empieza a moverse el tráfico y las ventas.',
+    tags: ['Activación de campañas', 'Testeo inicial', 'Ajustes rápidos'],
+    color: 'var(--primary)',
   },
   {
     number: '05',
-    title: 'Escalado',
-    desc: 'Optimizamos continuamente lo que funciona para multiplicar resultados y llevar tu negocio al siguiente nivel.',
-    tags: ['Analytics', 'Iteración', 'Growth'],
+    title: 'Optimización y Escala',
+    desc: 'Mejoramos y multiplicamos resultados.',
+    insight: '👉 Convertimos el sistema en una máquina de ventas.',
+    tags: ['Análisis de métricas', 'Optimización de conversiones', 'Escalado de anuncios', 'Automatización avanzada'],
+    color: 'var(--secondary)',
   },
 ] as const;
-
-type Step = (typeof STEPS)[number];
-
-const StepCard = ({ step, index }: { step: Step; index: number }) => {
-  const ref = useRef<HTMLElement | null>(null);
-  const [active, setActive] = useState(index === 0);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setActive(entry.isIntersecting);
-      },
-      { threshold: 0.55 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <article
-      ref={ref}
-      className={`pc ${active ? 'pc--active' : ''}`}
-      style={{ '--delay': `${index * 0.1}s` } as CSSProperties}
-    >
-      <div className="pc__ghost">{step.number}</div>
-
-      <div className="pc__content">
-        <span className="pc__num">{step.number}</span>
-
-        <h3 className="pc__title">{step.title}</h3>
-
-        <p className="pc__desc">{step.desc}</p>
-
-        <ul className="pc__tags">
-          {step.tags.map((t, i) => (
-            <li key={t} style={{ '--i': i } as CSSProperties} className="pc__tag">
-              {t}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </article>
-  );
-};
 
 export const Process = () => {
   return (
     <section className="process" id="proceso">
-      <div className="process__inner">
-        <header className="process__header">
-          <span className="process__eyebrow">Cómo trabajamos</span>
+      <div className="process__container">
 
-          <h2 className="process__title">
-            Un proceso pensado <br />
-            para hacerte <span>crecer.</span>
-          </h2>
-        </header>
+        {/* Lado Izquierdo: Sticky Header */}
+        <div className="process__left">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-20%' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="process__header"
+          >
+            <span className="process__eyebrow">Nuestra metodología</span>
+            <h2 className="process__title">
+              Fases de
+              <br />
+              <span className="gradient-text">crecimiento.</span>
+            </h2>
+            <p className="process__subtitle">
+              No hacemos webs por hacer. Construimos activos digitales escalables,
+              paso a paso, asegurándonos de que cada decisión de diseño o código
+              tenga un impacto real en tus ventas.
+            </p>
+          </motion.div>
+        </div>
 
-        <div className="process__timeline">
+        {/* Lado Derecho: Stacking Cards */}
+        <div className="process__right">
           {STEPS.map((step, i) => (
-            <StepCard key={step.number} step={step} index={i} />
+            <motion.article
+              key={step.number}
+              initial={{ opacity: 0, y: 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-10%' }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="pc-card"
+              style={{ '--i': i } as CSSProperties}
+            >
+              {/* Línea colorida sutil corporativa en el tope */}
+              <div
+                className="pc-card__top-glow"
+                style={{ background: step.color }}
+              />
+
+              <div className="pc-card__inner">
+                <div className="pc-card__header">
+                  <span className="pc-card__num">{step.number}</span>
+                  <h3 className="pc-card__title">{step.title}</h3>
+                </div>
+
+                <p className="pc-card__desc">{step.desc}</p>
+
+                <div className="pc-card__tags">
+                  {step.tags.map((tag) => (
+                    <span key={tag} className="pc-card__tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="pc-card__insight">
+                  {step.insight}
+                </div>
+              </div>
+            </motion.article>
           ))}
         </div>
+
       </div>
     </section>
   );

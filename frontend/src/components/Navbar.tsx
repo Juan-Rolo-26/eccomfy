@@ -1,180 +1,163 @@
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
-import logo from '../assets/logo.png';
+import { useState, useEffect } from "react";
+import logo from "../assets/logo.png";
+import { ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import './Navbar.css';
 
-const NAV_LINKS = [
-    { href: '#nosotros',  label: 'Nosotros'  },
-    { href: '#servicios', label: 'Servicios' },
-    { href: '#proyectos', label: 'Proyectos' },
-];
-
-const MENU_LINKS = [
-    { href: '#inicio',   label: 'Inicio',    num: '01' },
-    { href: '#nosotros', label: 'Nosotros',  num: '02' },
-    { href: '#servicios',label: 'Servicios', num: '03' },
-    { href: '#proyectos',label: 'Proyectos', num: '04' },
-    { href: '#faq',      label: 'FAQ',       num: '05' },
-    { href: '#contacto', label: 'Contacto',  num: '06' },
-];
-
-const SOCIALS = [
-    { href: 'https://www.instagram.com/eccomfy', label: 'Instagram' },
-    { href: 'https://www.linkedin.com/company/eccomfy', label: 'LinkedIn' },
-    { href: 'mailto:eccomfyarg@gmail.com', label: 'Email' },
+const navLinks = [
+    { name: "Servicios", href: "#servicios" },
+    { name: "Proyectos", href: "#proyectos" },
+    { name: "Nosotros", href: "#nosotros" },
+    { name: "FAQ", href: "#faq" },
 ];
 
 export const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [active, setActive] = useState("Servicios");
     const [scrolled, setScrolled] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [visible, setVisible] = useState(false);
-    const timerRef = useRef<number | null>(null);
 
     useEffect(() => {
-        timerRef.current = window.setTimeout(() => setVisible(true), 80);
-        return () => {
-            if (timerRef.current !== null) {
-                window.clearTimeout(timerRef.current);
-            }
-        };
+        const onScroll = () => setScrolled(window.scrollY > 15);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 32);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
+        document.body.style.overflow = isOpen ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [isOpen]);
 
-    useEffect(() => {
-        document.body.style.overflow = menuOpen ? 'hidden' : '';
-        return () => { document.body.style.overflow = ''; };
-    }, [menuOpen]);
-
-    const navigate = (href: string) => {
-        setMenuOpen(false);
-        window.setTimeout(() => {
-            if (href === '#inicio') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
-
-            const el = document.querySelector<HTMLElement>(href);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 340);
+    const handleNavigate = (name: string, href: string) => {
+        if (name) setActive(name);
+        setIsOpen(false);
+        const target = href === "#inicio" ? document.body : document.querySelector(href);
+        setTimeout(() => {
+            target?.scrollIntoView({ behavior: "smooth" });
+        }, 300);
     };
 
     return (
         <>
-            {/* ── Bar ── */}
-            <nav className={[
-                'nb',
-                scrolled  ? 'nb--scrolled'  : '',
-                menuOpen  ? 'nb--open'       : '',
-                visible   ? 'nb--visible'    : '',
-            ].join(' ')}>
-                <div className="nb__inner">
+            <motion.nav
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={`nv ${scrolled ? "nv--scrolled" : ""}`}
+            >
+                <div className="nv__inner">
 
-                    {/* left links */}
-                    <ul className="nb__links">
-                        {NAV_LINKS.map((l) => (
-                            <li key={l.href}>
-                                <button type="button" className="nb__link" onClick={() => navigate(l.href)}>
-                                    {l.label}
-                                    <span className="nb__link-line" />
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+                    {/* ── Lado Izquierdo: Links Animados ── */}
+                    <div className="nv__left">
+                        <div className="nv__desktop-links">
+                            {navLinks.map((link) => (
+                                <motion.button
+                                    key={link.name}
+                                    whileHover={{ y: -2 }}
+                                    onClick={() => handleNavigate(link.name, link.href)}
+                                    className={`nv__link ${active === link.name ? "nv__link--active" : ""}`}
+                                >
+                                    {link.name}
+                                    {/* Subrayado fluido con Framer Motion */}
+                                    {active === link.name ? (
+                                        <motion.div
+                                            layoutId="nav-underline"
+                                            className="nv__link-underline"
+                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                        />
+                                    ) : null}
+                                </motion.button>
+                            ))}
+                        </div>
+                    </div>
 
-                    {/* center logo */}
-                    <button type="button" className="nb__logo" onClick={() => navigate('#inicio')} aria-label="Inicio">
-                        <img src={logo} alt="Eccomfy" />
-                        <span className="nb__logo-name" aria-hidden="true">eccomfy</span>
-                    </button>
+                    {/* ── Centro: Logo ── */}
+                    <div className="nv__center">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                            onClick={() => handleNavigate("Inicio", "#inicio")}
+                            className="nv__logo-container"
+                            aria-label="Inicio"
+                        >
+                            <img src={logo} alt="Eccomfy" className="nv__logo-img" />
+                        </motion.button>
+                    </div>
 
-                    {/* right */}
-                    <div className="nb__right">
-                        <button type="button" className="nb__cta" onClick={() => navigate('#contacto')}>
+                    {/* ── Lado Derecho: CTA y Hamburguesa ── */}
+                    <div className="nv__right">
+                        <motion.button
+                            whileHover={{ x: -2 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => handleNavigate("Contacto", "#contacto")}
+                            className="nv__cta"
+                        >
                             Empezar proyecto
-                            <span className="nb__cta-arrow" aria-hidden="true">
-                                <ArrowUpRight size={15} strokeWidth={2.2} />
-                            </span>
-                        </button>
-
-                        <button
-                            type="button"
-                            className="nb__burger-btn"
-                            onClick={() => setMenuOpen((p) => !p)}
-                            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-                            aria-expanded={menuOpen}
-                        >
-                            <span className={`nb__burger ${menuOpen ? 'nb__burger--open' : ''}`}>
-                                <span className="nb__burger-top" />
-                                <span className="nb__burger-mid" />
-                                <span className="nb__burger-bot" />
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </nav>
-
-            {/* ── Full-screen overlay ── */}
-            <div className={`nb__overlay ${menuOpen ? 'nb__overlay--open' : ''}`} aria-hidden={!menuOpen}>
-
-                {/* overlay header */}
-                <div className="nb__ov-top">
-                    <button type="button" className="nb__logo nb__logo--white" onClick={() => navigate('#inicio')}>
-                        <img src={logo} alt="Eccomfy" />
-                        <span className="nb__logo-name" aria-hidden="true">eccomfy</span>
-                    </button>
-                    <button type="button" className="nb__ov-close" onClick={() => setMenuOpen(false)} aria-label="Cerrar">
-                        <span className="nb__burger nb__burger--open">
-                            <span className="nb__burger-top" />
-                            <span className="nb__burger-mid" />
-                            <span className="nb__burger-bot" />
-                        </span>
-                    </button>
-                </div>
-
-                {/* big links */}
-                <nav className="nb__ov-nav">
-                    {MENU_LINKS.map((l, i) => (
-                        <button
-                            type="button"
-                            key={l.href}
-                            className="nb__ov-link"
-                            style={{ '--i': i } as CSSProperties}
-                            onClick={() => navigate(l.href)}
-                        >
-                            <span className="nb__ov-num">{l.num}</span>
-                            <span className="nb__ov-label">{l.label}</span>
-                            <ArrowUpRight className="nb__ov-arrow" size={28} strokeWidth={1.4} />
-                        </button>
-                    ))}
-                </nav>
-
-                {/* bottom bar */}
-                <div className="nb__ov-footer">
-                    <span className="nb__ov-copy">© 2026 Eccomfy</span>
-                    <div className="nb__ov-socials">
-                        {SOCIALS.map((s) => (
-                            <a
-                                key={s.label}
-                                href={s.href}
-                                target={s.href.startsWith('http') ? '_blank' : undefined}
-                                rel={s.href.startsWith('http') ? 'noreferrer' : undefined}
-                                className="nb__ov-social"
+                            <motion.span
+                                whileHover={{ rotate: 45, x: 2, y: -2 }}
+                                transition={{ type: "spring", stiffness: 300 }}
                             >
-                                {s.label} <ArrowUpRight size={13} strokeWidth={2} />
-                            </a>
-                        ))}
-                    </div>
-                </div>
+                                <ArrowUpRight size={18} strokeWidth={2.5} />
+                            </motion.span>
+                        </motion.button>
 
-                {/* decorative noise */}
-                <div className="nb__ov-noise" aria-hidden="true" />
-            </div>
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className={`nv__burger-btn ${isOpen ? 'nv__burger-btn--open' : ''}`}
+                            aria-label="Menú"
+                        >
+                            <span className="nv__burger-line nv__burger-line-1" />
+                            <span className="nv__burger-line nv__burger-line-2" />
+                        </button>
+                    </div>
+
+                </div>
+            </motion.nav>
+
+            {/* ── Mobile Overlay ── */}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+                        animate={{ opacity: 1, clipPath: "inset(0 0 0 0)" }}
+                        exit={{ opacity: 0, clipPath: "inset(100% 0 0 0)" }}
+                        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+                        className="nv-mobile"
+                    >
+                        <div className="nv-mobile__content">
+                            {navLinks.map((link, i) => (
+                                <motion.div
+                                    key={link.name}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ delay: 0.15 + i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    <button
+                                        onClick={() => handleNavigate(link.name, link.href)}
+                                        className="nv-mobile__link"
+                                    >
+                                        {link.name}
+                                    </button>
+                                </motion.div>
+                            ))}
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                            >
+                                <button
+                                    onClick={() => handleNavigate("Contacto", "#contacto")}
+                                    className="nv-mobile__link nv-mobile__link--cta"
+                                >
+                                    Contacto
+                                </button>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 };

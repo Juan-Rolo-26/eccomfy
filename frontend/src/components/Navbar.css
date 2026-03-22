@@ -1,0 +1,209 @@
+/* ── FONDO SUPERIOR FLUIDO Y OSCURO ── */
+.nv {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: transparent;
+    transition: background 0.4s ease, border-bottom 0.4s ease, padding 0.4s ease;
+    padding: 1.25rem 4%;
+    /* Margen mucho más apretado, como la ref */
+}
+
+/* ── Cuando scrollea se pone oscura sólida ── */
+.nv--scrolled {
+    background: #030303;
+    padding: 1rem 4%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nv__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+/* ── LADO IZQUIERDO: LINKS ── */
+.nv__left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.nv__desktop-links {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .nv__desktop-links {
+        display: flex;
+        gap: 2.5rem;
+    }
+}
+
+.nv__link {
+    position: relative;
+    font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+    font-size: 0.95rem;
+    font-weight: 500;
+    /* Medium para emular el estilo de la imagen */
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    letter-spacing: 0.01em;
+    opacity: 0.75;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.nv__link:hover {
+    opacity: 1;
+}
+
+.nv__link--active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* ── LÍNEA INFERIOR CON FRAMER MOTION ── */
+.nv__link-underline {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+/* ── CENTRO: LOGO ── */
+.nv__center {
+    display: flex;
+    justify-content: center;
+}
+
+.nv__logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.nv__logo-img {
+    height: 28px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+/* ── LADO DERECHO: CTA & HAMBURGESA ── */
+.nv__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nv__cta {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body, system-ui);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.5rem 0;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.01em;
+}
+
+.nv__cta:hover {
+    opacity: 1;
+}
+
+@media (min-width: 1024px) {
+    .nv__cta {
+        display: flex;
+    }
+}
+
+/* Hamburguesa minimalista elegante */
+.nv__burger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 28px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    padding: 0;
+}
+
+.nv__burger-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background-color: #fff;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.nv__burger-btn--open .nv__burger-line-1 {
+    transform: translateY(3.5px) rotate(45deg);
+}
+
+.nv__burger-btn--open .nv__burger-line-2 {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ── MENÚ MÓVIL OVERLAY ── */
+.nv-mobile {
+    position: fixed;
+    inset: 0;
+    background: #030303;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nv-mobile__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.nv-mobile__link {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nv-mobile__link:hover {
+    color: var(--primary, #24c78f);
+    transform: scale(1.02);
+}
+
+.nv-mobile__link--cta {
+    color: var(--primary, #24c78f);
+    margin-top: 1rem;
+}
