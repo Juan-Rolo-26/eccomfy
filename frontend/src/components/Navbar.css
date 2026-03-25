@@ -6,14 +6,17 @@
     right: 0;
     z-index: 50;
     background: transparent;
-    transition: background 0.4s ease, border-bottom 0.4s ease, padding 0.4s ease;
+    transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 1.25rem 4%;
-    /* Margen mucho más apretado, como la ref */
 }
 
 /* ── Cuando scrollea se pone oscura sólida ── */
 .nv--scrolled {
-    background: #030303;
+    background: rgba(3, 3, 3, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     padding: 1rem 4%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -48,15 +51,14 @@
     font-family: var(--font-body, system-ui, -apple-system, sans-serif);
     font-size: 0.95rem;
     font-weight: 500;
-    /* Medium para emular el estilo de la imagen */
     color: #fff;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0.5rem 0;
     letter-spacing: 0.01em;
-    opacity: 0.75;
-    transition: opacity 0.3s ease, color 0.3s ease;
+    opacity: 0.6;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nv__link:hover {
@@ -68,7 +70,7 @@
     font-weight: 600;
 }
 
-/* ── LÍNEA INFERIOR CON FRAMER MOTION ── */
+/* ── LÍNEA INFERIOR ANIMADA (Framer Motion layoutId) ── */
 .nv__link-underline {
     position: absolute;
     bottom: 0px;
@@ -89,16 +91,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.6rem;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
+    position: relative;
 }
 
 .nv__logo-img {
     height: 28px;
     width: auto;
-    filter: brightness(0) invert(1);
+}
+
+/* ── Texto "Eccomfy" ── */
+.nv__logo-text {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    font-family: var(--font-display, var(--font-body, system-ui));
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.02em;
 }
 
 /* ── LADO DERECHO: CTA & HAMBURGESA ── */
@@ -109,10 +124,10 @@
     gap: 2.5rem;
 }
 
+/* ── CTA con underline animado ── */
 .nv__cta {
     display: none;
-    align-items: center;
-    gap: 0.5rem;
+    position: relative;
     font-family: var(--font-body, system-ui);
     font-size: 0.95rem;
     font-weight: 600;
@@ -123,12 +138,47 @@
     text-decoration: none;
     padding: 0.5rem 0;
     opacity: 0.85;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     letter-spacing: 0.01em;
 }
 
 .nv__cta:hover {
     opacity: 1;
+}
+
+.nv__cta-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nv__cta-text {
+    position: relative;
+}
+
+.nv__cta-icon {
+    display: inline-flex;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nv__cta:hover .nv__cta-icon {
+    transform: rotate(45deg) translate(1px, -1px);
+}
+
+/* ── Underline para el CTA ── */
+.nv__cta-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nv__cta:hover .nv__cta-underline {
+    width: 100%;
 }
 
 @media (min-width: 1024px) {
@@ -137,7 +187,7 @@
     }
 }
 
-/* Hamburguesa minimalista elegante */
+/* ── Hamburguesa minimalista elegante ── */
 .nv__burger-btn {
     display: flex;
     flex-direction: column;
@@ -157,7 +207,9 @@
     width: 100%;
     height: 1.5px;
     background-color: #fff;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
 }
 
 .nv__burger-btn--open .nv__burger-line-1 {
@@ -195,7 +247,22 @@
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nv-mobile__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nv-mobile__link:hover {
@@ -203,7 +270,24 @@
     transform: scale(1.02);
 }
 
+.nv-mobile__link:hover::after {
+    width: 60%;
+    background: var(--primary, #24c78f);
+}
+
 .nv-mobile__link--cta {
     color: var(--primary, #24c78f);
     margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+    .nv__burger-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .nv__burger-btn {
+        display: flex;
+    }
 }

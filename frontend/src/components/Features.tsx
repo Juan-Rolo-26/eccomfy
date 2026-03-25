@@ -1,59 +1,9 @@
 import { Plus, Minus } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { SERVICES_DATA } from '../data/services';
 
-const SERVICES = [
-    {
-        id: 'ia',
-        num: '01',
-        title: 'IA y Automatizaciones',
-        items: ['Chatbots con IA', 'Automatización de procesos', 'Flujos con n8n / Make', 'Integraciones con APIs'],
-        desc: 'Potenciá tu negocio con inteligencia artificial y flujos automatizados que trabajan mientras vos descansás.',
-    },
-    {
-        id: 'web',
-        num: '02',
-        title: 'Desarrollo Web',
-        items: ['Websites a medida', 'Landing Pages', 'React, Next.js, Node.js', 'E-commerce & tiendas online'],
-        desc: 'Sitios rápidos, responsivos y diseñados para convertir visitas en clientes reales.',
-    },
-    {
-        id: 'seo',
-        num: '03',
-        title: 'SEO & SEM',
-        items: ['Posicionamiento orgánico', 'Google Ads', 'Auditorías SEO', 'Optimización de conversión'],
-        desc: 'Aparecé primero cuando te buscan. Estrategias que llevan tráfico real y calificado a tu negocio.',
-    },
-    {
-        id: 'branding',
-        num: '04',
-        title: 'Branding',
-        items: ['Identidad visual', 'Diseño de logo', 'Manual de marca', 'Paleta & tipografía'],
-        desc: 'Una marca coherente y memorable que genera confianza desde el primer contacto.',
-    },
-    {
-        id: 'metaads',
-        num: '05',
-        title: 'Meta Ads',
-        items: ['Campañas en Facebook', 'Campañas en Instagram', 'Retargeting', 'Gestión y optimización'],
-        desc: 'Anuncios que llegan a las personas correctas, en el momento justo, con el mensaje adecuado.',
-    },
-    {
-        id: 'estrategia',
-        num: '06',
-        title: 'Estrategia de Marketing',
-        items: ['Plan de marketing digital', 'Análisis de competencia', 'Embudo de ventas', 'Reportes & métricas'],
-        desc: 'Una hoja de ruta clara para hacer crecer tu negocio con acciones concretas y medibles.',
-    },
-    {
-        id: 'community',
-        num: '07',
-        title: 'Community Manager',
-        items: ['Gestión de redes sociales', 'Creación de contenido', 'Calendarios editoriales', 'Análisis de audiencia'],
-        desc: 'Presencia activa y estratégica en redes que construye comunidad y genera oportunidades.',
-    },
- ] as const;
-
-type ServiceId = (typeof SERVICES)[number]['id'];
+type ServiceId = (typeof SERVICES_DATA)[number]['id'];
 
 export const Features = () => {
     const [openId, setOpenId] = useState<ServiceId | null>('ia');
@@ -71,7 +21,7 @@ export const Features = () => {
                 </div>
 
                 <div className="services-list">
-                    {SERVICES.map((svc) => {
+                    {SERVICES_DATA.map((svc) => {
                         const isOpen = openId === svc.id;
                         return (
                             <div key={svc.id} className={`service-item ${isOpen ? 'service-item--open' : ''}`}>
@@ -97,9 +47,9 @@ export const Features = () => {
                                         </ul>
                                         <div className="service-detail">
                                             <p>{svc.desc}</p>
-                                            <a href="#contacto" className="service-link">
+                                            <Link to={`/servicios/${svc.id}`} className="service-link">
                                                 Más información
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 )}

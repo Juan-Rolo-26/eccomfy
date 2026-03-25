@@ -6,42 +6,76 @@ const STEPS = [
   {
     number: '01',
     title: 'Diagnóstico',
-    desc: 'Analizamos el negocio del cliente a fondo.',
-    insight: '👉 Acá detectamos qué está frenando las ventas.',
-    tags: ['Producto', 'Mercado', 'Competencia', 'Problemas actuales'],
+    desc: 'Auditamos el negocio completo para entender dónde se está perdiendo dinero y qué está frenando el crecimiento.',
+    insight: '👉 El problema casi nunca es la falta de tráfico, sino un sistema que no convierte.',
+    tags: [
+      'Análisis de producto y oferta',
+      'Validación de demanda',
+      'Benchmark de competencia',
+      'Auditoría de funnel',
+      'Detección de cuellos de botella',
+    ],
     color: 'var(--primary)',
+    icon: '🔍',
   },
   {
     number: '02',
     title: 'Estrategia',
-    desc: 'Armamos el plan de crecimiento.',
-    insight: '👉 Se diseña cómo va a entrar la plata.',
-    tags: ['Definición de público objetivo', 'Propuesta de valor', 'Embudo de ventas', 'Canales a usar'],
+    desc: 'Diseñamos un sistema de ventas claro y escalable que define cómo el negocio va a generar ingresos de forma consistente.',
+    insight: '👉 Si no está definido cómo entra la plata, no hay sistema: hay improvisación.',
+    tags: [
+      'Definición de cliente ideal',
+      'Propuesta de valor',
+      'Estructura de oferta',
+      'Embudo de ventas',
+      'Selección de canales',
+    ],
     color: 'var(--secondary)',
+    icon: '🎯',
   },
   {
     number: '03',
     title: 'Construcción',
-    desc: 'Creamos todo el sistema.',
-    insight: '👉 Se arma el ecosistema completo.',
-    tags: ['Landing pages / tienda', 'Creatividades', 'Copywriting', 'Automatizaciones'],
+    desc: 'Creamos todos los activos digitales necesarios para atraer, convencer y convertir clientes.',
+    insight: '👉 Cada elemento tiene una función: captar atención, generar confianza o cerrar la venta.',
+    tags: [
+      'Landing pages optimizadas',
+      'Tienda / ecommerce',
+      'Copywriting persuasivo',
+      'Creatividades publicitarias',
+      'Automatizaciones',
+    ],
     color: 'var(--accent)',
+    icon: '⚡',
   },
   {
     number: '04',
     title: 'Lanzamiento',
-    desc: 'Ponemos todo a correr.',
-    insight: '👉 Empieza a moverse el tráfico y las ventas.',
-    tags: ['Activación de campañas', 'Testeo inicial', 'Ajustes rápidos'],
+    desc: 'Activamos el sistema y comenzamos a generar tráfico calificado para validar y ajustar rápidamente.',
+    insight: '👉 No se busca perfección, se busca información real para mejorar.',
+    tags: [
+      'Activación de campañas',
+      'Configuración de tracking',
+      'Testeo A/B',
+      'Optimización temprana',
+    ],
     color: 'var(--primary)',
+    icon: '🚀',
   },
   {
     number: '05',
     title: 'Optimización y Escala',
-    desc: 'Mejoramos y multiplicamos resultados.',
-    insight: '👉 Convertimos el sistema en una máquina de ventas.',
-    tags: ['Análisis de métricas', 'Optimización de conversiones', 'Escalado de anuncios', 'Automatización avanzada'],
+    desc: 'Analizamos datos, optimizamos lo que funciona y escalamos el sistema para multiplicar resultados.',
+    insight: '👉 Escalar sin datos es apostar. Escalar con datos es construir.',
+    tags: [
+      'Análisis de métricas (KPIs)',
+      'Optimización de conversión (CRO)',
+      'Escalado de campañas',
+      'Retargeting',
+      'Automatización avanzada',
+    ],
     color: 'var(--secondary)',
+    icon: '📈',
   },
 ] as const;
 
@@ -70,6 +104,15 @@ export const Process = () => {
               paso a paso, asegurándonos de que cada decisión de diseño o código
               tenga un impacto real en tus ventas.
             </p>
+
+            {/* Progress indicator */}
+            <div className="process__progress">
+              {STEPS.map((step) => (
+                <div key={step.number} className="process__progress-dot">
+                  <span className="process__progress-label">{step.number}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -88,13 +131,18 @@ export const Process = () => {
               {/* Línea colorida sutil corporativa en el tope */}
               <div
                 className="pc-card__top-glow"
-                style={{ background: step.color }}
+                style={{ background: `linear-gradient(90deg, ${step.color}, transparent)` }}
               />
 
               <div className="pc-card__inner">
                 <div className="pc-card__header">
-                  <span className="pc-card__num">{step.number}</span>
-                  <h3 className="pc-card__title">{step.title}</h3>
+                  <div className="pc-card__icon-wrapper">
+                    <span className="pc-card__icon">{step.icon}</span>
+                  </div>
+                  <div className="pc-card__header-text">
+                    <span className="pc-card__num">{step.number}</span>
+                    <h3 className="pc-card__title">{step.title}</h3>
+                  </div>
                 </div>
 
                 <p className="pc-card__desc">{step.desc}</p>
@@ -108,7 +156,11 @@ export const Process = () => {
                 </div>
 
                 <div className="pc-card__insight">
-                  {step.insight}
+                  <div className="pc-card__insight-bar" style={{ background: step.color }} />
+                  <div className="pc-card__insight-content">
+                    <span className="pc-card__insight-label">Insight clave</span>
+                    <p>{step.insight}</p>
+                  </div>
                 </div>
               </div>
             </motion.article>
