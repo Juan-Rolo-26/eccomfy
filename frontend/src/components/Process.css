@@ -1,23 +1,27 @@
 /* ══════════════════════════════════════════════════
-   PROCESS SECTION — Premium Redesign
+   PROCESS SECTION — Light Premium Theme
 ══════════════════════════════════════════════════ */
 
 .process {
   width: 100%;
-  padding: 12rem 5%;
-  background: linear-gradient(180deg, #fdfaf6, #f3efe6);
+  padding: 11rem 5%;
+  background: linear-gradient(180deg, #f5f5f0 0%, #eeeee8 100%);
   color: #111;
   position: relative;
   overflow: clip;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Subtle noise texture overlay */
+/* Ambient glow */
 .process::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-  background-size: 4px 4px;
+  top: 0;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(23, 119, 91, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
@@ -34,9 +38,9 @@
 
 /* ── LADO IZQUIERDO (STICKY) ── */
 .process__left {
-  flex: 0.8;
+  flex: 0.95;
   position: sticky;
-  top: 200px;
+  top: 160px;
   display: flex;
   flex-direction: column;
 }
@@ -48,27 +52,27 @@
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-widest);
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--primary);
   margin-bottom: 1.5rem;
   padding: 0.4rem 1rem;
-  background: rgba(23, 119, 91, 0.06);
-  border: 1px solid rgba(23, 119, 91, 0.12);
+  background: rgba(23, 119, 91, 0.08);
+  border: 1px solid rgba(23, 119, 91, 0.18);
   border-radius: 999px;
   width: fit-content;
 }
 
 .process__title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
   font-weight: var(--fw-extrabold);
-  line-height: var(--lh-heading);
+  line-height: 1.05;
   letter-spacing: var(--ls-tight);
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
   color: #111;
 }
 
 .process__title .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -76,26 +80,27 @@
 
 .process__subtitle {
   font-family: var(--font-body);
-  font-size: var(--text-lg);
-  color: rgba(17, 17, 17, 0.65);
-  line-height: var(--lh-relaxed);
-  max-width: 400px;
+  font-size: var(--text-base);
+  color: rgba(17, 17, 17, 0.52);
+  line-height: 1.8;
+  max-width: 90%;
   margin-bottom: 3rem;
 }
 
-/* Progress Indicator */
+/* Step counter pills */
 .process__progress {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .process__progress-dot {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: rgba(23, 119, 91, 0.06);
-  border: 1px solid rgba(23, 119, 91, 0.12);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,8 +108,8 @@
 }
 
 .process__progress-dot:hover {
-  background: rgba(23, 119, 91, 0.12);
-  border-color: rgba(23, 119, 91, 0.3);
+  background: rgba(23, 119, 91, 0.1);
+  border-color: rgba(23, 119, 91, 0.25);
   transform: translateY(-2px);
 }
 
@@ -112,165 +117,159 @@
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 700;
-  color: var(--primary);
-  letter-spacing: 0.02em;
+  color: rgba(17, 17, 17, 0.4);
+  letter-spacing: 0.04em;
 }
 
 /* ── LADO DERECHO (CARDS) ── */
 .process__right {
-  flex: 1.2;
+  flex: 1.25;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10rem;
+  gap: 0;
+  padding-bottom: 8rem;
 }
 
+/* ── CARD ── */
 .pc-card {
   position: sticky;
-  top: calc(140px + (var(--i, 0) * 24px));
-  margin-bottom: 8rem;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 28px;
+  top: calc(120px + (var(--i, 0) * 22px));
+  margin-bottom: 5rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow:
-    0 -10px 40px rgba(0, 0, 0, 0.03),
-    0 20px 60px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.4s ease,
-    box-shadow 0.4s ease;
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .pc-card:hover {
-  background: rgba(255, 255, 255, 1);
+  border-color: rgba(23, 119, 91, 0.15);
   transform: translateY(-6px);
-  box-shadow:
-    0 -15px 50px rgba(0, 0, 0, 0.04),
-    0 30px 80px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 .pc-card:last-child {
   margin-bottom: 0;
 }
 
-/* Accent top bar */
+/* Colored top accent bar */
 .pc-card__top-glow {
-  height: 4px;
+  height: 3px;
   width: 100%;
 }
 
 .pc-card__inner {
-  padding: 3.5rem 3.5rem 3rem;
+  padding: 3rem 3.5rem 2.8rem;
 }
 
-/* Card Header with Icon */
+/* ── CARD HEADER ── */
 .pc-card__header {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
 }
 
-.pc-card__icon-wrapper {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background: rgba(23, 119, 91, 0.06);
-  border: 1px solid rgba(23, 119, 91, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-}
-
-.pc-card:hover .pc-card__icon-wrapper {
-  background: rgba(23, 119, 91, 0.1);
-  border-color: rgba(23, 119, 91, 0.2);
-  transform: scale(1.05);
-}
-
-.pc-card__icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.pc-card__header-text {
+.pc-card__header-left {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
 }
 
 .pc-card__num {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--secondary);
+  color: var(--primary);
   opacity: 0.7;
 }
 
 .pc-card__title {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
   font-weight: var(--fw-bold);
   letter-spacing: var(--ls-tight);
-  color: #111;
+  color: #111111;
+  line-height: 1.15;
 }
 
+/* Large faded step number on the right */
+.pc-card__step-bg {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 6vw, 6rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── DESCRIPTION ── */
 .pc-card__desc {
   font-family: var(--font-body);
-  font-size: var(--text-base);
+  font-size: 1.35rem;
+  font-weight: 500;
   color: rgba(17, 17, 17, 0.65);
-  line-height: 1.75;
-  margin-bottom: 2rem;
-  max-width: 560px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
 }
 
-/* Tags */
+/* ── DIVIDER ── */
+.pc-card__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* ── TAGS ── */
 .pc-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+  gap: 0.55rem;
   margin-bottom: 2rem;
 }
 
 .pc-card__tag {
-  padding: 0.45rem 1.1rem;
+  padding: 0.4rem 1rem;
   border-radius: 100px;
-  border: 1px solid rgba(23, 119, 91, 0.12);
+  border: 1px solid rgba(23, 119, 91, 0.15);
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: var(--fw-medium);
   color: var(--primary);
-  background: rgba(23, 119, 91, 0.03);
-  transition: all 0.3s ease;
+  background: rgba(23, 119, 91, 0.05);
+  transition: all 0.25s ease;
 }
 
 .pc-card:hover .pc-card__tag {
-  background: rgba(23, 119, 91, 0.07);
-  border-color: rgba(23, 119, 91, 0.22);
+  background: rgba(23, 119, 91, 0.1);
+  border-color: rgba(23, 119, 91, 0.25);
 }
 
-/* Insight Box */
+/* ── INSIGHT BOX ── */
 .pc-card__insight {
   display: flex;
   gap: 1rem;
   padding: 1.2rem 1.5rem;
-  background: rgba(23, 119, 91, 0.03);
+  background: rgba(23, 119, 91, 0.04);
   border-radius: 14px;
-  border: 1px solid rgba(23, 119, 91, 0.08);
-  position: relative;
-  overflow: hidden;
+  border: 1px solid rgba(23, 119, 91, 0.1);
+  align-items: flex-start;
 }
 
 .pc-card__insight-bar {
-  width: 3px;
-  border-radius: 3px;
+  width: 2px;
+  min-height: 100%;
+  border-radius: 2px;
   flex-shrink: 0;
-  opacity: 0.6;
+  align-self: stretch;
+  opacity: 0.5;
 }
 
 .pc-card__insight-content {
@@ -292,8 +291,8 @@
 .pc-card__insight-content p {
   font-family: var(--font-body);
   font-size: var(--text-sm);
-  color: rgba(17, 17, 17, 0.7);
-  line-height: 1.6;
+  color: rgba(17, 17, 17, 0.58);
+  line-height: 1.65;
   font-style: italic;
   margin: 0;
 }
@@ -312,7 +311,6 @@
     top: 0;
     flex: none;
     max-width: 100%;
-    margin-bottom: 2rem;
   }
 
   .process__subtitle {
@@ -325,12 +323,12 @@
   }
 
   .pc-card {
-    top: calc(100px + (var(--i, 0) * 16px));
-    margin-bottom: 2rem;
+    top: calc(100px + (var(--i, 0) * 14px));
+    margin-bottom: 2.5rem;
   }
 
   .pc-card__inner {
-    padding: 2.5rem 2rem 2rem;
+    padding: 2.5rem 2.2rem 2.2rem;
   }
 }
 
@@ -340,41 +338,32 @@
   }
 
   .process__progress {
-    gap: 8px;
-  }
-
-  .process__progress-dot {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
+    gap: 7px;
   }
 
   .pc-card__header {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
 
-  .pc-card__icon-wrapper {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
+  .pc-card__step-bg {
+    display: none;
   }
 
   .pc-card__title {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
+  }
+
+  .pc-card__inner {
+    padding: 2rem 1.6rem 1.8rem;
   }
 
   .pc-card__desc {
     font-size: var(--text-sm);
   }
 
-  .pc-card__tags {
-    gap: 0.4rem;
-  }
-
   .pc-card__tag {
-    padding: 0.35rem 0.9rem;
+    padding: 0.35rem 0.85rem;
     font-size: 11px;
   }
 }

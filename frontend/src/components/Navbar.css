@@ -1,26 +1,29 @@
-/* ── FONDO SUPERIOR FLUIDO Y OSCURO ── */
+/* ══════════════════════════════════════════════════
+   NAVBAR — Premium, dark, centered logo
+══════════════════════════════════════════════════ */
+
 .nv {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 50;
+    padding: 1.4rem 5%;
     background: transparent;
-    transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        border-bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 1.25rem 4%;
+    transition: background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        padding 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        border-bottom 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Cuando scrollea se pone oscura sólida ── */
 .nv--scrolled {
-    background: rgba(3, 3, 3, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 1rem 4%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(4, 4, 4, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 1rem 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* ── Grid: links | logo | right — logo truly centered ── */
 .nv__inner {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -28,157 +31,143 @@
     width: 100%;
 }
 
-/* ── LADO IZQUIERDO: LINKS ── */
+/* ══════════════════════════════════════════════════
+   LEFT — Links
+══════════════════════════════════════════════════ */
 .nv__left {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 }
 
 .nv__desktop-links {
     display: none;
+    gap: 2.8rem;
 }
 
 @media (min-width: 1024px) {
     .nv__desktop-links {
         display: flex;
-        gap: 2.5rem;
     }
 }
 
 .nv__link {
     position: relative;
-    font-family: var(--font-body, system-ui, -apple-system, sans-serif);
-    font-size: 0.95rem;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: 0.01em;
     color: #fff;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem 0;
-    letter-spacing: 0.01em;
-    opacity: 0.6;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0.4rem 0;
+    opacity: 0.55;
+    transition: opacity 0.35s ease;
 }
 
 .nv__link:hover {
     opacity: 1;
 }
 
-.nv__link--active {
-    opacity: 1;
-    font-weight: 600;
-}
-
-/* ── LÍNEA INFERIOR ANIMADA (Framer Motion layoutId) ── */
-.nv__link-underline {
+/* Underline fluido */
+.nv__underline {
     position: absolute;
-    bottom: 0px;
+    bottom: -2px;
     left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #fff;
+    width: 0;
+    height: 1.5px;
+    background: #fff;
     border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── CENTRO: LOGO ── */
-.nv__center {
-    display: flex;
-    justify-content: center;
+.nv__link:hover .nv__underline {
+    width: 100%;
 }
 
-.nv__logo-container {
+/* ══════════════════════════════════════════════════
+   CENTER — Logo
+══════════════════════════════════════════════════ */
+.nv__logo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
+    gap: 0.55rem;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    position: relative;
 }
 
-.nv__logo-img {
-    height: 28px;
+.nv__logo img {
+    height: 40px;
     width: auto;
 }
 
-/* ── Texto "Eccomfy" ── */
-.nv__logo-text {
-    display: inline-flex;
-    align-items: center;
-    height: 100%;
-    font-family: var(--font-display, var(--font-body, system-ui));
-    font-size: 1.25rem;
+.nv__logo span {
+    font-family: var(--font-brand);
+    font-size: 1.1rem;
     font-weight: 700;
     color: #fff;
-    letter-spacing: 0.02em;
+    display: inline-block;
+    letter-spacing: 0.01em;
 }
 
-/* ── LADO DERECHO: CTA & HAMBURGESA ── */
+/* ══════════════════════════════════════════════════
+   RIGHT — CTA + Burger
+══════════════════════════════════════════════════ */
 .nv__right {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
     gap: 2.5rem;
 }
 
-/* ── CTA con underline animado ── */
+/* CTA: underline animation same as links */
 .nv__cta {
     display: none;
     position: relative;
-    font-family: var(--font-body, system-ui);
-    font-size: 0.95rem;
-    font-weight: 600;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-nav);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
     color: #fff;
     background: none;
     border: none;
     cursor: pointer;
-    text-decoration: none;
-    padding: 0.5rem 0;
-    opacity: 0.85;
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    letter-spacing: 0.01em;
+    padding: 0.4rem 0;
+    opacity: 0.55;
+    transition: opacity 0.35s ease;
 }
 
 .nv__cta:hover {
     opacity: 1;
 }
 
-.nv__cta-inner {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.nv__cta-text {
-    position: relative;
-}
-
-.nv__cta-icon {
-    display: inline-flex;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nv__cta:hover .nv__cta-icon {
-    transform: rotate(45deg) translate(1px, -1px);
-}
-
-/* ── Underline para el CTA ── */
 .nv__cta-underline {
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 0;
-    height: 2px;
-    background-color: #fff;
+    height: 1.5px;
+    background: #fff;
     border-radius: 2px;
-    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nv__cta:hover .nv__cta-underline {
     width: 100%;
+}
+
+.nv__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nv__cta:hover .nv__cta-icon {
+    transform: rotate(45deg) translate(2px, -2px);
 }
 
 @media (min-width: 1024px) {
@@ -187,40 +176,48 @@
     }
 }
 
-/* ── Hamburguesa minimalista elegante ── */
-.nv__burger-btn {
+/* ── Hamburger ── */
+.nv__burger {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
-    width: 28px;
-    height: 24px;
+    gap: 5px;
+    width: 26px;
+    height: 22px;
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 100;
     padding: 0;
 }
 
-.nv__burger-line {
+.nv__burger span {
     display: block;
     width: 100%;
     height: 1.5px;
-    background-color: #fff;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
     transform-origin: center;
 }
 
-.nv__burger-btn--open .nv__burger-line-1 {
-    transform: translateY(3.5px) rotate(45deg);
+.nv__burger.open span:nth-child(1) {
+    transform: translateY(3.25px) rotate(45deg);
 }
 
-.nv__burger-btn--open .nv__burger-line-2 {
-    transform: translateY(-4px) rotate(-45deg);
+.nv__burger.open span:nth-child(2) {
+    transform: translateY(-3.25px) rotate(-45deg);
 }
 
-/* ── MENÚ MÓVIL OVERLAY ── */
+@media (min-width: 1024px) {
+    .nv__burger {
+        display: none;
+    }
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE OVERLAY
+══════════════════════════════════════════════════ */
 .nv-mobile {
     position: fixed;
     inset: 0;
@@ -230,64 +227,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.nv-mobile__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
+    gap: 2.2rem;
 }
 
 .nv-mobile__link {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-family: var(--font-nav);
+    font-size: clamp(2.2rem, 7vw, 3.5rem);
     font-weight: 700;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.85);
     background: none;
     border: none;
     cursor: pointer;
     position: relative;
-    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nv-mobile__link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 3px;
-    background: #fff;
-    border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0.4rem 0;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .nv-mobile__link:hover {
-    color: var(--primary, #24c78f);
-    transform: scale(1.02);
-}
-
-.nv-mobile__link:hover::after {
-    width: 60%;
-    background: var(--primary, #24c78f);
-}
-
-.nv-mobile__link--cta {
-    color: var(--primary, #24c78f);
-    margin-top: 1rem;
-}
-
-@media (min-width: 1024px) {
-    .nv__burger-btn {
-        display: none;
-    }
-}
-
-@media (max-width: 1023px) {
-    .nv__burger-btn {
-        display: flex;
-    }
+    color: #fff;
+    transform: translateX(10px);
 }

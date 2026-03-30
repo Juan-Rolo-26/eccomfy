@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import './Faq.css';
 
 const FAQ_DATA = [
@@ -27,15 +27,19 @@ const FAQ_DATA = [
 ];
 
 export const Faq = () => {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const toggle = (index: number) => {
         setOpenIndex(current => current === index ? null : index);
     };
 
+    const formatNumber = (num: number) => String(num + 1).padStart(2, '0');
+
     return (
         <section id="faq" className="faq-section">
             <div className="faq-container">
+
+                {/* Header */}
                 <div className="faq-header">
                     <motion.span
                         className="faq-eyebrow"
@@ -53,53 +57,57 @@ export const Faq = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                     >
-                        Respuestas claras<br />
-                        <span className="faq-highlight">para decisiones seguras.</span>
+                        Respuestas claras para<br />
+                        <span className="faq-highlight">decisiones seguras.</span>
                     </motion.h2>
                 </div>
 
-                <div className="faq-list">
-                    {FAQ_DATA.map((item, index) => {
-                        const isOpen = openIndex === index;
+                {/* Accordion */}
+                <div className="faq-layout">
+                    <div className="faq-list">
+                        {FAQ_DATA.map((item, index) => {
+                            const isOpen = openIndex === index;
 
-                        return (
-                            <motion.div
-                                key={index}
-                                className={`faq-item ${isOpen ? 'faq-item--open' : ''}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
-                            >
-                                <button
-                                    className="faq-question"
-                                    onClick={() => toggle(index)}
-                                    aria-expanded={isOpen}
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={`faq-item ${isOpen ? 'faq-item--open' : ''}`}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: 0.2 + index * 0.07 }}
                                 >
-                                    <span>{item.question}</span>
-                                    <div className="faq-icon">
-                                        {isOpen ? <Minus size={20} /> : <Plus size={20} />}
-                                    </div>
-                                </button>
+                                    <button
+                                        className="faq-question"
+                                        onClick={() => toggle(index)}
+                                        aria-expanded={isOpen}
+                                    >
+                                        <span className="faq-number">{formatNumber(index)}</span>
+                                        <span className="faq-question-text">{item.question}</span>
+                                        <div className="faq-icon">
+                                            <Plus size={16} />
+                                        </div>
+                                    </button>
 
-                                <AnimatePresence initial={false}>
-                                    {isOpen && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                            className="faq-answer-wrapper"
-                                        >
-                                            <div className="faq-answer">
-                                                <p>{item.answer}</p>
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        );
-                    })}
+                                    <AnimatePresence initial={false}>
+                                        {isOpen && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                                className="faq-answer-wrapper"
+                                            >
+                                                <div className="faq-answer">
+                                                    <p>{item.answer}</p>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </section>

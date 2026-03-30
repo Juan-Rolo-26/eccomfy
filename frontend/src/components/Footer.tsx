@@ -85,9 +85,10 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     {
         title: 'Sociales',
         links: [
-            { label: 'Instagram', href: 'https://www.instagram.com/eccomfy', external: true },
-            { label: 'LinkedIn', href: 'https://www.linkedin.com/company/eccomfy', external: true },
-            { label: 'Email', href: 'mailto:eccomfyarg@gmail.com', external: true },
+            { label: 'Instagram', href: 'https://www.instagram.com/eccomfyarg', external: true },
+            { label: 'TikTok', href: 'https://www.tiktok.com/@eccomfy', external: true },
+            { label: 'Gmail', href: 'mailto:eccomfyarg@gmail.com', external: true },
+            { label: 'Teléfono', href: 'tel:+543513712759', external: true },
         ],
     },
 ];

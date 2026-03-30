@@ -86,7 +86,11 @@ export const Hero = () => {
                     animate="visible"
                     style={{ animation: 'none' }} /* desactiva heroFadeUp CSS */
                 >
-                    <motion.h1 className="hero-main-title" variants={itemVariants}>
+                    <motion.h1
+                        className="hero-main-title"
+                        variants={itemVariants}
+                        style={{ fontFamily: "'Neue Machina', sans-serif" }}
+                    >
                         Agencia Digital de Marketing
                     </motion.h1>
 

@@ -100,16 +100,18 @@ export const ServiceDetail = () => {
             {/* Impact Section */}
             <motion.section
                 className="sd-impact"
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-15%' }}
-                transition={{ duration: 0.7 }}
+                transition={{ duration: 0.6 }}
             >
                 <div className="sd-impact__icon">
-                    <TrendingUp size={28} strokeWidth={1.5} />
+                    <TrendingUp size={24} strokeWidth={1.5} />
                 </div>
-                <h2 className="sd-impact__title">Impacto en tu negocio</h2>
-                <p className="sd-impact__text">{service.impact}</p>
+                <div className="sd-impact__body">
+                    <h2 className="sd-impact__title">Impacto en tu negocio</h2>
+                    <p className="sd-impact__text">{service.impact}</p>
+                </div>
             </motion.section>
 
             {/* What's included */}
@@ -166,10 +168,10 @@ export const ServiceDetail = () => {
                         <motion.div
                             key={step}
                             className="sd-process__step"
-                            initial={{ opacity: 0, x: -40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: i * 0.12 }}
+                            transition={{ duration: 0.5, delay: i * 0.08 }}
                         >
                             <div className="sd-process__step-num">
                                 <span>{String(i + 1).padStart(2, '0')}</span>
@@ -186,13 +188,13 @@ export const ServiceDetail = () => {
             {/* Insight Section */}
             <motion.section
                 className="sd-insight"
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-10%' }}
-                transition={{ duration: 0.7 }}
+                transition={{ duration: 0.6 }}
             >
                 <div className="sd-insight__icon">
-                    <Lightbulb size={28} strokeWidth={1.5} />
+                    <Lightbulb size={24} strokeWidth={1.5} />
                 </div>
                 <blockquote className="sd-insight__quote">
                     &ldquo;{service.insight}&rdquo;

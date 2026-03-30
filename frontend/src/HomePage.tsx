@@ -4,6 +4,7 @@ import { ScrollRevealText } from './components/ScrollRevealText';
 import { VideoShowcase } from './components/VideoShowcase';
 import { Features } from './components/Features';
 import { Process } from './components/Process';
+import { Projects } from './components/Projects';
 import { Faq } from './components/Faq';
 import { Footer } from './components/Footer';
 import { StackingWrapper } from './components/StackingWrapper';
@@ -33,7 +34,11 @@ export const HomePage = () => {
                 <Process />
             </div>
 
-            <div style={{ position: 'relative', zIndex: 5, background: '#030303' }}>
+            <div style={{ position: 'relative', zIndex: 4, background: '#080808' }}>
+                <Projects />
+            </div>
+
+            <div style={{ position: 'relative', zIndex: 5 }}>
                 <Faq />
             </div>
 
