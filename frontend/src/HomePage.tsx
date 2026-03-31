@@ -3,9 +3,9 @@ import { Hero } from './components/Hero';
 import { ScrollRevealText } from './components/ScrollRevealText';
 import { VideoShowcase } from './components/VideoShowcase';
 import { Features } from './components/Features';
-import { Process } from './components/Process';
+
 import { Projects } from './components/Projects';
-import { Faq } from './components/Faq';
+import { About } from './components/About';
 import { Footer } from './components/Footer';
 import { StackingWrapper } from './components/StackingWrapper';
 
@@ -30,16 +30,13 @@ export const HomePage = () => {
                 <Features />
             </div>
 
-            <div style={{ position: 'relative', zIndex: 4, background: '#080808' }}>
-                <Process />
-            </div>
 
             <div style={{ position: 'relative', zIndex: 4, background: '#080808' }}>
                 <Projects />
             </div>
 
-            <div style={{ position: 'relative', zIndex: 5 }}>
-                <Faq />
+            <div style={{ position: 'relative', zIndex: 5, background: '#f5f5f0' }}>
+                <About />
             </div>
 
             <div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>

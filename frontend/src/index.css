@@ -1040,7 +1040,7 @@ button {
 .footer__shell {
   width: min(100%, 1920px);
   margin: 0 auto;
-  padding: 92px clamp(24px, 3.3vw, 56px) 30px;
+  padding: 48px clamp(24px, 3.3vw, 56px) 30px;
   overflow: hidden;
 }
 

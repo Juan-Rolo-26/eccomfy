@@ -1,0 +1,31 @@
+Unused files (21)
+src/App.tsx                          
+src/components/CircularReveal.tsx    
+src/components/CTA.tsx               
+src/components/Faq.tsx               
+src/components/Features.tsx          
+src/components/FloatingLines.jsx     
+src/components/Footer.tsx            
+src/components/GradientBackground.jsx
+src/components/Hero.tsx              
+src/components/Hyperspeed.jsx        
+src/components/HyperSpeedPresets.js  
+src/components/Projects.tsx          
+src/components/ScrollRevealText.tsx  
+src/components/ServiceDetail.tsx     
+src/components/StackingWrapper.tsx   
+src/components/VideoShowcase.tsx     
+src/components/WaveBackground.tsx    
+src/data/services.ts                 
+src/HomePage.tsx                     
+src/hooks/usePrefersReducedMotion.ts 
+src/main.jsx                         
+Unlisted dependencies (2)
+react-icons/si  src/App.jsx:10:8       
+tailwindcss     tailwind.config.js:1:10
+Unused exports (2)
+LogoLoop  src/components/LogoLoop.jsx:103:14
+Navbar    src/components/Navbar.tsx:15:14   
+Duplicate exports (1)
+LogoLoop|default  src/components/LogoLoop.jsx
+Configuration hints (2)

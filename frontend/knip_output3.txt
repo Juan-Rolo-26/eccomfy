@@ -1,0 +1,18 @@
+Unused files (12)
+src/components/CircularReveal.tsx    
+src/components/CTA.tsx               
+src/components/CurtainReveal.jsx     
+src/components/FloatingLines.jsx     
+src/components/GradientBackground.jsx
+src/components/HeroAnimated.jsx      
+src/components/Hyperspeed.jsx        
+src/components/HyperSpeedPresets.js  
+src/components/LogoLoop.jsx          
+src/components/RotatingText.jsx      
+src/components/WaveBackground.tsx    
+src/hooks/usePrefersReducedMotion.ts 
+Unlisted dependencies (1)
+tailwindcss  tailwind.config.js:1:10
+Unused exported types (1)
+ServiceData  interface  src/data/services.ts:9:18
+Configuration hints (1)

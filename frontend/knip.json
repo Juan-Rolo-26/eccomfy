@@ -1,0 +1,4 @@
+{
+  "entry": ["src/main.tsx", "tailwind.config.js"],
+  "project": ["src/**/*.{ts,tsx,js,jsx,css}"]
+}
