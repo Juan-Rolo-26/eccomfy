@@ -2,10 +2,10 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ScrollRevealText } from './components/ScrollRevealText';
 import { VideoShowcase } from './components/VideoShowcase';
+import { BrandDiagnostic } from './components/BrandDiagnostic';
 import { Features } from './components/Features';
 
 import { Projects } from './components/Projects';
-import { About } from './components/About';
 import { Footer } from './components/Footer';
 import { StackingWrapper } from './components/StackingWrapper';
 
@@ -26,20 +26,20 @@ export const HomePage = () => {
                 <VideoShowcase />
             </div>
 
+            <div style={{ position: 'relative', zIndex: 3, background: '#f2f0ea' }}>
+                <BrandDiagnostic />
+            </div>
+
             <div style={{ position: 'relative', zIndex: 3, background: '#080808' }}>
                 <Features />
             </div>
 
 
-            <div style={{ position: 'relative', zIndex: 4, background: '#080808' }}>
+            <div style={{ position: 'relative', zIndex: 4, background: 'transparent' }}>
                 <Projects />
             </div>
 
-            <div style={{ position: 'relative', zIndex: 5, background: '#f5f5f0' }}>
-                <About />
-            </div>
-
-            <div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>
+<div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>
                 <Footer />
             </div>
         </div>

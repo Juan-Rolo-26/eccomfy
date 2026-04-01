@@ -1,6 +1,5 @@
 import { Plus, Minus } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { SERVICES_DATA } from '../data/services';
 
 type ServiceId = (typeof SERVICES_DATA)[number]['id'];
@@ -47,9 +46,6 @@ export const Features = () => {
                                         </ul>
                                         <div className="service-detail">
                                             <p>{svc.desc}</p>
-                                            <Link to={`/servicios/${svc.id}`} className="service-link">
-                                                Más información
-                                            </Link>
                                         </div>
                                     </div>
                                 )}
