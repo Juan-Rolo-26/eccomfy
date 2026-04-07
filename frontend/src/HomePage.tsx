@@ -1,13 +1,11 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ScrollRevealText } from './components/ScrollRevealText';
-import { VideoShowcase } from './components/VideoShowcase';
-import { BrandDiagnostic } from './components/BrandDiagnostic';
 import { Features } from './components/Features';
-
 import { Projects } from './components/Projects';
 import { Footer } from './components/Footer';
 import { StackingWrapper } from './components/StackingWrapper';
+import { CalendlyButton } from './components/CalendlyButton';
 
 export const HomePage = () => {
     return (
@@ -22,12 +20,9 @@ export const HomePage = () => {
                 <ScrollRevealText />
             </div>
 
-            <div style={{ position: 'relative', zIndex: 3, marginTop: '-100vh' }}>
-                <VideoShowcase />
-            </div>
-
-            <div style={{ position: 'relative', zIndex: 3, background: '#f2f0ea' }}>
-                <BrandDiagnostic />
+            {/* Botón de consultoría gratuita — debajo del video/ecosistema */}
+            <div style={{ position: 'relative', zIndex: 3, background: '#f2f0ea', width: '100%', overflow: 'hidden' }}>
+                <CalendlyButton />
             </div>
 
             <div style={{ position: 'relative', zIndex: 3, background: '#080808' }}>
@@ -39,7 +34,7 @@ export const HomePage = () => {
                 <Projects />
             </div>
 
-<div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>
+            <div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>
                 <Footer />
             </div>
         </div>

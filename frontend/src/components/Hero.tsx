@@ -95,9 +95,9 @@ export const Hero = () => {
                     </motion.h1>
 
                     <motion.p className="hero-description" variants={itemVariants}>
-                        Desarrollamos ecosistemas digitales que convierten tráfico en
-                        oportunidades reales, transformando cada interacción en
-                        crecimiento medible para tu negocio.
+                        Desarrollamos ecosistemas digitales que convierten audiencias en
+                        alumnos comprometidos, transformando cada interacción en
+                        crecimiento medible para tu academia o curso online.
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={buttonsVariants}>
