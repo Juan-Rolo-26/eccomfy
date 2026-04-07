@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "concurrently -n backend,frontend -c blue,green \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
     "dev:backend": "npm --prefix backend run dev",
-    "dev:frontend": "npm --prefix frontend run dev"
+    "dev:frontend": "npm --prefix frontend run dev",
+    "postinstall": "npm install --prefix frontend",
+    "build": "npm run build --prefix frontend && cp -a frontend/dist ./dist"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
