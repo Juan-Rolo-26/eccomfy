@@ -86,7 +86,7 @@ export const Navbar = () => {
                     {/* ── RIGHT: CTA + Burger ── */}
                     <div className="nv__right">
                         <motion.button
-                            onClick={() => handleNavigate("#diagnostico")}
+                            onClick={() => window.open('https://calendly.com/eccomfy', '_blank')}
                             className="nv__cta"
                             initial={{ opacity: 0, y: -8 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -136,7 +136,10 @@ export const Navbar = () => {
                             </motion.button>
                         ))}
                         <motion.button
-                            onClick={() => handleNavigate("#diagnostico")}
+                            onClick={() => {
+                                setIsOpen(false);
+                                window.open('https://calendly.com/eccomfy', '_blank');
+                            }}
                             className="nv-mobile__link"
                             style={{ color: 'var(--secondary)', marginTop: '1rem' }}
                             initial={{ opacity: 0, y: 30 }}

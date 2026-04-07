@@ -344,8 +344,9 @@
     flex-direction: column;
     gap: 1.6rem;
     margin-bottom: 3rem;
-    text-align: left;
+    text-align: center;
     width: 100%;
+    align-items: center;
 }
 
 .project-modal-text p {
@@ -448,9 +449,29 @@
 
     .project-modal-body h2 {
         font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .project-modal-body {
+        align-items: center;
+        text-align: center;
+    }
+
+    .project-modal-text {
+        text-align: center;
+        align-items: center;
     }
 
     .project-modal-text p {
         font-size: 1.05rem;
+        text-align: center;
+    }
+
+    .project-modal-cta {
+        align-self: center;
+    }
+
+    .project-modal-link {
+        align-self: center;
     }
 }

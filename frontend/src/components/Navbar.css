@@ -31,6 +31,29 @@
     width: 100%;
 }
 
+@media (max-width: 1023px) {
+    .nv__inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .nv__left {
+        display: none;
+    }
+
+    .nv__logo {
+        flex: 1;
+        justify-content: flex-start;
+    }
+
+    .nv__right {
+        flex-shrink: 0;
+    }
+}
+
 /* ══════════════════════════════════════════════════
    LEFT — Links
 ══════════════════════════════════════════════════ */
