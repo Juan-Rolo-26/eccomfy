@@ -245,7 +245,7 @@ export const ServiceDetail = () => {
                     Cada uno de estos servicios cumple un rol dentro de un sistema más grande.
                     Cuando trabajan en conjunto, se convierten en un motor de crecimiento.
                 </p>
-                <a href="https://calendly.com/eccomfy" target="_blank" rel="noopener noreferrer" className="sd-cta__btn">
+                <a href="https://calendar.app.google/EoBKLEcB5YFkrNfB6" target="_blank" rel="noopener noreferrer" className="sd-cta__btn">
                     Empezar proyecto <ArrowUpRight size={16} strokeWidth={2.2} />
                 </a>
             </motion.section>

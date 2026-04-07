@@ -22,7 +22,7 @@ export const CalendlyButton = () => {
                 </p>
 
                 <a
-                    href="https://calendly.com/eccomfy"
+                    href="https://calendar.app.google/EoBKLEcB5YFkrNfB6"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="consult-cta"

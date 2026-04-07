@@ -86,7 +86,7 @@ export const Navbar = () => {
                     {/* ── RIGHT: CTA + Burger ── */}
                     <div className="nv__right">
                         <motion.button
-                            onClick={() => window.open('https://calendly.com/eccomfy', '_blank')}
+                            onClick={() => window.open('https://calendar.app.google/EoBKLEcB5YFkrNfB6', '_blank')}
                             className="nv__cta"
                             initial={{ opacity: 0, y: -8 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -138,7 +138,7 @@ export const Navbar = () => {
                         <motion.button
                             onClick={() => {
                                 setIsOpen(false);
-                                window.open('https://calendly.com/eccomfy', '_blank');
+                                window.open('https://calendar.app.google/EoBKLEcB5YFkrNfB6', '_blank');
                             }}
                             className="nv-mobile__link"
                             style={{ color: 'var(--secondary)', marginTop: '1rem' }}

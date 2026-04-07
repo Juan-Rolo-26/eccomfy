@@ -101,7 +101,7 @@ export const Hero = () => {
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={buttonsVariants}>
-                        <a href="https://calendly.com/eccomfy" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-primary">
+                        <a href="https://calendar.app.google/EoBKLEcB5YFkrNfB6" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-primary">
                             Hablemos de tu proyecto
                             <ArrowDownRight size={18} />
                         </a>

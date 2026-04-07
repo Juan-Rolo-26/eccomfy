@@ -98,7 +98,7 @@
 }
 
 html {
-  font-size: 96.5%;
+  font-size: 100%;
 }
 
 @media (max-width: 768px) {
@@ -589,7 +589,9 @@ button {
 
   .consult-cta {
     width: 100%;
-    padding: 1rem 1.5rem;
+    max-width: 300px;
+    padding: 0.9rem 1.2rem;
+    font-size: 0.92rem;
   }
 }
 
@@ -1701,6 +1703,25 @@ button {
     border-top: none;
   }
 
+  /* Centrar la última columna (Sociales) a lo ancho de las 2 columnas */
+  .footer__col:nth-child(5) {
+    grid-column: 1 / -1;
+    text-align: center;
+    border-left: none;
+    /* Eliminar borde separador si queda suelta */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__col:nth-child(5) .footer__col-title {
+    text-align: center;
+  }
+
+  .footer__col:nth-child(5) .footer__links {
+    align-items: center;
+  }
+
   .footer__col-title {
     text-align: left;
     font-size: 0.72rem;
@@ -1793,6 +1814,24 @@ button {
     border-top: none;
   }
 
+  /* Centrar la última columna (Sociales) a lo ancho de las 2 columnas */
+  .footer__col:nth-child(5) {
+    grid-column: 1 / -1;
+    text-align: center;
+    border-left: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__col:nth-child(5) .footer__col-title {
+    text-align: center;
+  }
+
+  .footer__col:nth-child(5) .footer__links {
+    align-items: center;
+  }
+
   .footer__col-title {
     margin-bottom: 12px;
     font-size: 0.68rem;
@@ -1822,6 +1861,18 @@ button {
   .footer__bottom {
     align-items: center;
     text-align: center;
+  }
+
+  .hero-btn {
+    max-width: 260px;
+    height: 48px;
+    padding: 0 18px;
+    font-size: 0.82rem;
+  }
+
+  .btn-large {
+    padding: 0.65rem 1.4rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1931,7 +1982,17 @@ button {
 
   .hero-btn {
     width: 100%;
-    max-width: 320px;
+    max-width: 280px;
+    height: 52px;
+    padding: 0 22px;
+    font-size: 0.88rem;
+    gap: 7px;
+  }
+
+  .btn-large {
+    padding: 0.75rem 1.6rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
 
   .scroll-indicator {

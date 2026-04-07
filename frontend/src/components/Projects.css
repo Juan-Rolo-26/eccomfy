@@ -246,9 +246,9 @@
 }
 
 .project-modal-close {
-    position: sticky;
-    top: 0;
-    float: right;
+    position: absolute;
+    top: 24px;
+    right: 24px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 50%;
@@ -443,8 +443,13 @@
     .project-modal-content {
         width: 100%;
         border-radius: 20px 20px 0 0;
-        padding: 2rem 1.5rem;
+        padding: 4rem 1.5rem 2rem;
         max-height: 92vh;
+    }
+
+    .project-modal-close {
+        top: 20px;
+        right: 20px;
     }
 
     .project-modal-body h2 {
