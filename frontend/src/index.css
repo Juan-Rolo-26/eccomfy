@@ -98,8 +98,7 @@
 }
 
 html {
-  font-size: 144%;
-  /* Aumenta el tamaño tipográfico global otro 20% adicional (144% total) */
+  font-size: 100%;
 }
 
 body {
