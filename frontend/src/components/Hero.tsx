@@ -95,14 +95,12 @@ export const Hero = () => {
                     </motion.h1>
 
                     <motion.p className="hero-description" variants={itemVariants}>
-                        Desarrollamos ecosistemas digitales que convierten audiencias en
-                        alumnos comprometidos, transformando cada interacción en
-                        crecimiento medible para tu academia o curso online.
+                        Somos una Agencia de Marketing Digital, desarollamos ecosistemas digitales para marcas especialisadas en la educacion digital.  
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={buttonsVariants}>
                         <a href="https://calendar.app.google/EoBKLEcB5YFkrNfB6" target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn-primary">
-                            Hablemos de tu proyecto
+                            Contanos tu Proyecto
                             <ArrowDownRight size={18} />
                         </a>
 
@@ -124,7 +122,7 @@ export const Hero = () => {
                 onClick={handleScroll}
                 aria-label="Ir hacia abajo"
             >
-                <span>Scroll</span>
+                <span>Continua</span>
                 <ChevronDown size={18} strokeWidth={1.8} />
             </button>
         </section>

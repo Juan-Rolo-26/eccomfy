@@ -14,7 +14,7 @@ import img3 from '../assets/crecimiento.png';
 const MotionSpan = motion.span;
 
 const PARAGRAPH =
-    'Más que una simple agencia, somos arquitectos de tu propio ecosistema de ventas digital. Construimos plataformas sólidas, automatizaciones fluidas y herramientas inteligentes que convierten cada clic en una oportunidad, logrando multiplicar tus resultados de manera medible e imparable.';
+    "En eccomfy no somos una simple Agencia, somos arquitectos de tu propio ecosistema de ventas digital. Construimos ecosistemas digitales con las mejores herramientas que convierten cada clic en una oportunidad. Nos especializamos en la Educacion Digital";
 
 const IMAGES = [
     { id: 'img1', src: img1, alt: 'Ecosistema de ventas' },
@@ -101,7 +101,7 @@ export const ScrollRevealText = () => {
     }
 
     return (
-        <div ref={container} style={{ minHeight: '600vh', position: 'relative' }}>
+        <div ref={container} style={{ minHeight: '600vh', position: 'relative', background: '#f2f0ea' }}>
             <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
                 <section id="nosotros" className="srt" style={{ width: '100%', height: '100%' }}>
                     <div className="srt__inner">

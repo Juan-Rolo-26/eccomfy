@@ -5,7 +5,7 @@ import { SERVICES_DATA } from '../data/services';
 type ServiceId = (typeof SERVICES_DATA)[number]['id'];
 
 export const Features = () => {
-    const [openId, setOpenId] = useState<ServiceId | null>('branding');
+    const [openId, setOpenId] = useState<ServiceId | null>(null);
 
     const toggle = (id: ServiceId) => setOpenId((current) => (current === id ? null : id));
 

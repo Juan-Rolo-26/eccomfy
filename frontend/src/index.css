@@ -99,11 +99,13 @@
 
 html {
   font-size: 100%;
+  zoom: 90%;
 }
 
 @media (max-width: 768px) {
   html {
     font-size: 108%;
+    zoom: 100%;
   }
 }
 
@@ -581,6 +583,8 @@ button {
 
   .consult-title {
     font-size: clamp(2rem, 9vw, 3rem);
+    width: 100%;
+    max-width: none;
   }
 
   .consult-sub {
@@ -666,6 +670,8 @@ button {
   .services-title {
     font-size: clamp(2.2rem, 9vw, 3rem);
     text-align: center;
+    width: 100%;
+    max-width: none;
   }
 }
 
@@ -713,6 +719,15 @@ button {
   color: #ffffff;
   max-width: 700px;
   line-height: var(--lh-snug);
+}
+
+@media (max-width: 768px) {
+  .wave-tagline {
+    max-width: none;
+    width: 100%;
+    font-size: clamp(var(--text-xl), 6vw, var(--text-3xl));
+    text-align: center;
+  }
 }
 
 .wave-tagline span {
@@ -1188,6 +1203,7 @@ button {
 
   .srt__text {
     width: 100%;
+    max-width: none;
     font-size: clamp(1.25rem, 5vw, 1.75rem);
     line-height: 1.5;
     text-align: center;
@@ -1965,7 +1981,7 @@ button {
   }
 
   .hero-description {
-    max-width: 95%;
+    max-width: 100%;
     width: 100%;
     font-size: 1.15rem;
     line-height: 1.6;

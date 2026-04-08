@@ -22,7 +22,7 @@ export interface ServiceData {
 export const SERVICES_DATA: ServiceData[] = [
     {
         id: 'branding',
-        num: '02',
+        num: '01',
         title: 'Branding',
         items: [
             'Diseño de identidad visual completa (Logo, colores y tipografía).',
@@ -47,7 +47,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'estrategia',
-        num: '03',
+        num: '02',
         title: 'Estrategia de Marketing',
         items: [
             'Auditoría de mercado y análisis profundo de competencia.',
@@ -72,7 +72,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'metaads',
-        num: '04',
+        num: '03',
         title: 'Campañas de Meta',
         items: [
             'Gestión de anuncios en Instagram, Facebook y WhatsApp.',
@@ -97,7 +97,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'community',
-        num: '05',
+        num: '04',
         title: 'Community Manager',
         items: [
             'Creación de contenido estratégico (Reels, Stories y Feed).',
@@ -122,7 +122,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'seo',
-        num: '06',
+        num: '05',
         title: 'SEM y SEO',
         items: [
             'Posicionamiento orgánico (SEO) para dominar Google.',
@@ -147,7 +147,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'web',
-        num: '07',
+        num: '06',
         title: 'Desarrollo Web',
         items: [
             'Landing Pages y E-commerce optimizados para vender.',
@@ -172,7 +172,7 @@ export const SERVICES_DATA: ServiceData[] = [
     },
     {
         id: 'ia',
-        num: '08',
+        num: '07',
         title: 'Automatizaciones e IA',
         items: [
             'Asistentes virtuales 24/7 para ventas y atención al cliente.',

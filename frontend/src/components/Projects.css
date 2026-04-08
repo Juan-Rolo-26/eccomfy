@@ -245,12 +245,24 @@
     border-radius: 10px;
 }
 
-.project-modal-close {
-    position: absolute;
+.project-modal-close-wrapper {
+    position: sticky;
     top: 24px;
-    right: 24px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 50;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -2rem;
+    margin-right: -2rem;
+    margin-bottom: -44px;
+    pointer-events: none;
+}
+
+.project-modal-close {
+    pointer-events: auto;
+    background: rgba(14, 14, 14, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     width: 44px;
     height: 44px;
@@ -259,13 +271,14 @@
     justify-content: center;
     cursor: pointer;
     z-index: 10;
-    color: rgba(255, 255, 255, 0.6);
-    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.2s ease;
 }
 
 .project-modal-close:hover {
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.9);
     color: #fff;
+    border-color: rgba(255, 255, 255, 0.4);
     transform: scale(1.08);
 }
 
@@ -447,9 +460,11 @@
         max-height: 92vh;
     }
 
-    .project-modal-close {
+    .project-modal-close-wrapper {
         top: 20px;
-        right: 20px;
+        margin-top: -44px;
+        margin-right: -4px;
+        margin-bottom: -44px;
     }
 
     .project-modal-body h2 {
