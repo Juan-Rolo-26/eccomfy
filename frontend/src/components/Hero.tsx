@@ -1,7 +1,7 @@
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import heroPoster from '../assets/hero.png';
-import heroVideo from '../assets/videohero.mp4';
+import heroVideo from '../assets/videohero.mov';
 
 // Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
 const EASE_CINEMATIC: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -72,7 +72,7 @@ export const Hero = () => {
                 poster={heroPoster}
                 aria-hidden="true"
             >
-                <source src={heroVideo} type="video/mp4" />
+                <source src={heroVideo} />
             </video>
             <div className="hero-overlay" />
             <div className="hero-noise" />
@@ -95,7 +95,7 @@ export const Hero = () => {
                     </motion.h1>
 
                     <motion.p className="hero-description" variants={itemVariants}>
-                        Somos una Agencia de Marketing Digital, desarollamos ecosistemas digitales para marcas especialisadas en la educacion digital.  
+                        Somos una Agencia de Marketing Digital, desarollamos ecosistemas digitales para marcas especialisadas en la educacion digital.
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={buttonsVariants}>
