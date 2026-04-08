@@ -8,7 +8,6 @@ export default defineConfig({
     react(),
     prerender({
       routes: [
-        '/',
         '/servicios',
         '/servicios/meta-ads',
         '/servicios/seo',
