@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import prerender from "@prerenderer/rollup-plugin";
-import PuppeteerRenderer from "@prerenderer/renderer-puppeteer";
+import JSDOMRenderer from "@prerenderer/renderer-jsdom";
 
 export default defineConfig({
   plugins: [
@@ -26,7 +26,7 @@ export default defineConfig({
         '/blog/diferencia-agencia-freelancer-marketing',
         '/blog/como-generar-leads-calificados-para-servicios',
       ],
-      renderer: new PuppeteerRenderer({
+      renderer: new JSDOMRenderer({
         renderAfterTime: 3000,
       }),
     }),
