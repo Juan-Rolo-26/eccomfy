@@ -195,4 +195,29 @@ export const SERVICES_DATA: ServiceData[] = [
         insight:
             'Un negocio que depende de la memoria o el click manual de un humano está destinado a estancarse. Un negocio automatizado escala sin fricciones ni fatiga.',
     },
+    {
+        id: 'marcas-personales',
+        num: '08',
+        title: 'Marcas Personales',
+        items: [
+            'Estrategia de posicionamiento para profesionales expertos.',
+            'Desarrollo de ecosistemas digitales para monetizar conocimiento.',
+            'Creación de autoridad y confianza en nichos específicos.',
+        ],
+        desc: 'Transformamos tu experiencia de +10 años en un negocio digital sólido.',
+        image: serviceBranding, // Reusing branding image as it fits personal branding
+        fullDescription:
+            'Desarrollamos marcas personales y ecosistemas digitales para que profesionales con más de 10 años de experiencia puedan resolver problemas reales de su nicho mediante un negocio digital escalable. No se trata solo de tener presencia en redes, sino de construir una máquina de ventas basada en tu autoridad y conocimiento.',
+        impact:
+            'Una marca personal bien posicionada te permite dejar de vender tu tiempo y empezar a vender soluciones de alto valor, incrementando tu rentabilidad y liberando tu agenda mientras impactas a más personas.',
+        process: [
+            'Identificación del ángulo de autoridad y propuesta única de valor',
+            'Diseño del ecosistema digital (Lead Magnet, Funnel, Oferta)',
+            'Construcción de activos digitales y automatización de captación',
+            'Estrategia de contenido enfocada en conversión y autoridad',
+            'Escalamiento del negocio digital mediante tráfico pago y orgánico',
+        ],
+        insight:
+            'Tu conocimiento es un activo. La marca personal es el vehículo que lo transforma en un negocio predecible y escalable.',
+    },
 ];

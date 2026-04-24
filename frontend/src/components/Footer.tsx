@@ -49,7 +49,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         ],
     },
     {
-        title: 'Servicios',
+        title: 'Servicios Digitales',
         links: [
             { label: 'IA y Automatizaciones', href: '#servicios' },
             { label: 'Desarrollo Web', href: '#servicios' },
@@ -58,6 +58,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
             { label: 'Meta Ads', href: '#servicios' },
             { label: 'Estrategia de Marketing', href: '#servicios' },
             { label: 'Community Manager', href: '#servicios' },
+            { label: 'Marcas Personales', href: '#servicios' },
         ],
     },
     {
@@ -351,7 +352,7 @@ export const Footer = () => {
 
                     <div className="footer__bottom">
                         <p className="footer__copy">
-                            &copy; {new Date().getFullYear()} Eccomfy. Diseñamos ecosistemas digitales que convierten.
+                            &copy; {new Date().getFullYear()} Eccomfy. Diseñamos ecosistemas digitales de autoridad para Marcas Personales.
                         </p>
 
                         <button type="button" className="footer__top" onClick={handleBackToTop}>

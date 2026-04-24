@@ -14,7 +14,7 @@ import img3 from '../assets/crecimiento.png';
 const MotionSpan = motion.span;
 
 const PARAGRAPH =
-    "En eccomfy no somos una simple Agencia, somos arquitectos de tu propio ecosistema de ventas digital. Construimos ecosistemas digitales con las mejores herramientas que convierten cada clic en una oportunidad. Nos especializamos en la Educacion Digital";
+    "En Eccomfy no somos una simple agencia, somos arquitectos de tu marca personal. Diseñamos ecosistemas digitales para profesionales expertos con +10 años de trayectoria, permitiéndoles desarrollar su propio negocio digital a través de su experiencia y vender sus productos mediante su marca personal.";
 
 const IMAGES = [
     { id: 'img1', src: img1, alt: 'Ecosistema de ventas' },

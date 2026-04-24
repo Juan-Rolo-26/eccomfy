@@ -32,7 +32,7 @@ const homeSchema = [
         },
         "openingHours": "Mo-Fr 09:00-18:00",
         "areaServed": ["Córdoba", "Argentina", "Latinoamérica"],
-        "serviceType": ["Marketing Digital", "Meta Ads", "Google Ads", "SEO", "Desarrollo Web", "Community Management", "Automatizaciones", "Branding"],
+        "serviceType": ["Marketing Digital", "Meta Ads", "Google Ads", "SEO", "Desarrollo Web", "Community Management", "Automatizaciones", "Branding", "Marcas Personales"],
         "founder": [
             { "@type": "Person", "name": "Juan", "jobTitle": "CEO y Cofundador" },
             { "@type": "Person", "name": "Fran", "jobTitle": "Cofundador" }

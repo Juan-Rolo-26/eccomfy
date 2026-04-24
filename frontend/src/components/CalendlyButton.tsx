@@ -14,11 +14,11 @@ export const CalendlyButton = () => {
                 <span className="consult-eyebrow">Sin compromisos · 30 min</span>
 
                 <h2 className="consult-title">
-                    Conocé el potencial real <span className="consult-title-accent">de tu marca</span>
+                    Transformamos tu experiencia en un <span className="consult-title-accent">Negocio Digital</span>
                 </h2>
 
                 <p className="consult-sub">
-                    En una llamada de 30 minutos te mostramos un análisis claro de tu situación actual y las oportunidades que podés aprovechar hoy mismo.
+                    Especializados en profesionales con +10 años de trayectoria. Agendá una llamada de 30 min, contanos tu proyecto y descubrí el potencial de tu Marca Personal.
                 </p>
 
                 <a
@@ -29,7 +29,7 @@ export const CalendlyButton = () => {
                     id="btn-agendar-consultoria"
                 >
                     <Calendar size={22} strokeWidth={2} className="consult-cta-icon" />
-                    <span className="consult-cta-text">Agendar consultoría gratuita</span>
+                    <span className="consult-cta-text">Contanos tu proyecto</span>
                 </a>
             </div>
         </section>
