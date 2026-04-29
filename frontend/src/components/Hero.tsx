@@ -95,7 +95,7 @@ export const Hero = () => {
                     </motion.h1>
 
                     <motion.p className="hero-description" variants={itemVariants}>
-                        Somos una Agencia de Marketing Digital, desarollamos marcas personales y ecosistemas digitales para que profesionales con +10 años de experiencia puedan resolver un problema de su nicho medinate un negocio digital.
+                        Somos una Agencia de Marketing Digital. Desarrollamos marcas personales y ecosistemas digitales para que profesionales con +10 años de experiencia puedan resolver un problema de su nicho mediante un negocio digital.
                     </motion.p>
 
                     <motion.div className="hero-actions" variants={buttonsVariants}>

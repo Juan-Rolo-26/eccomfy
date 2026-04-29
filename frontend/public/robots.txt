@@ -1,4 +1,16 @@
+# Eccomfy - Agencia de Marketing Digital
+# https://eccomfyarg.com
+
 User-agent: *
 Allow: /
+Disallow: /assets/
+Disallow: /*.js$
+Disallow: /*.css$
 
+# Sitemap
 Sitemap: https://eccomfyarg.com/sitemap.xml
+
+# Googlebot specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1

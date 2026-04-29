@@ -8,10 +8,18 @@ export default defineConfig({
     react(),
     prerender({
       routes: [
+        '/',
         '/servicios',
         '/servicios/meta-ads',
         '/servicios/seo',
         '/servicios/desarrollo-web',
+        '/servicios/branding',
+        '/servicios/estrategia',
+        '/servicios/metaads',
+        '/servicios/community',
+        '/servicios/web',
+        '/servicios/ia',
+        '/servicios/marcas-personales',
         '/nosotros',
         '/contacto',
         '/casos-de-exito',

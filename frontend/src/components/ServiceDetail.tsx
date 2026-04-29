@@ -3,7 +3,29 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Check, Zap, Target, TrendingUp, Lightbulb } from 'lucide-react';
 import { SERVICES_DATA } from '../data/services';
+import { SEOHead } from './SEOHead';
 import './ServiceDetail.css';
+
+const getServiceSchema = (service: typeof SERVICES_DATA[number]) => ({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.fullDescription,
+    "provider": {
+        "@type": "Organization",
+        "name": "Ecomfy",
+        "url": "https://eccomfyarg.com",
+        "logo": "https://eccomfyarg.com/images/logo-ecomfy.png",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Córdoba",
+            "addressRegion": "Córdoba",
+            "addressCountry": "AR"
+        }
+    },
+    "areaServed": ["Córdoba", "Argentina", "Latinoamérica"],
+    "url": `https://eccomfyarg.com/servicios/${service.id}`
+});
 
 export const ServiceDetail = () => {
     const { serviceId } = useParams<{ serviceId: string }>();
@@ -31,7 +53,12 @@ export const ServiceDetail = () => {
 
     return (
         <div className="sd">
-            {/* Back Button */}
+            <SEOHead
+                title={`${service.title} | Servicio de Marketing Digital | Ecomfy · Córdoba`}
+                description={service.desc + ' ' + service.fullDescription.substring(0, 120) + '...'}
+                canonical={`https://eccomfyarg.com/servicios/${service.id}`}
+                schema={getServiceSchema(service)}
+            />            {/* Back Button */}
             <motion.div
                 className="sd-back"
                 initial={{ opacity: 0, x: -20 }}

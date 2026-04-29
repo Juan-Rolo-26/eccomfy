@@ -155,7 +155,7 @@ export const Projects = () => {
                             <div className="project-card__visual">
                                 <img
                                     src={project.image}
-                                    alt={project.name}
+                                    alt={`Sitio web de ${project.name} diseñado por Ecomfy - ${project.title}`}
                                     className="project-card__image"
                                 />
                                 <div className="project-card__overlay" />
@@ -221,7 +221,7 @@ export const Projects = () => {
 
                                 <img
                                     src={selectedProject.image}
-                                    alt={selectedProject.name}
+                                    alt={`Proyecto ${selectedProject.name} por Ecomfy - ${selectedProject.title}`}
                                     className="project-modal-img"
                                 />
                                 <div className="project-modal-text">
