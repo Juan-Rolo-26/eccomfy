@@ -1,12 +1,29 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const PARAGRAPH = "En Eccomfy no somos una simple agencia, somos arquitectos de tu marca personal. Diseñamos ecosistemas digitales para profesionales expertos con +10 años de trayectoria, permitiéndoles desarrollar su propio negocio digital a través de su experiencia y vender sus productos mediante su marca personal.";
 
+const RevealWord = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
+    const opacity = useTransform(progress, range, [0.2, 1]);
+    return (
+        <motion.span style={{ opacity, display: 'inline-block', marginRight: '5px' }}>
+            {children}
+        </motion.span>
+    );
+};
+
 export const ScrollRevealText = () => {
+    const containerRef = useRef<HTMLElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start 80%", "center center"]
+    });
+
+    const words = PARAGRAPH.split(" ");
 
     const togglePlay = () => {
         if (videoRef.current) {
@@ -39,6 +56,7 @@ export const ScrollRevealText = () => {
     return (
         <section
             id="nosotros"
+            ref={containerRef}
             style={{
                 backgroundColor: '#f2f0ea',
                 padding: '6rem 4%',
@@ -99,11 +117,20 @@ export const ScrollRevealText = () => {
                         fontSize: '1.25rem',
                         lineHeight: 1.6,
                         color: '#333333',
-                        opacity: 0.85,
                         margin: 0,
-                        maxWidth: '600px'
+                        maxWidth: '600px',
+                        display: 'flex',
+                        flexWrap: 'wrap'
                     }}>
-                        {PARAGRAPH}
+                        {words.map((word, i) => {
+                            const start = i / words.length;
+                            const end = start + (1 / words.length);
+                            return (
+                                <RevealWord key={i} progress={scrollYProgress} range={[start, end]}>
+                                    {word}
+                                </RevealWord>
+                            );
+                        })}
                     </p>
                 </motion.div>
 
@@ -139,9 +166,10 @@ export const ScrollRevealText = () => {
                     >
                         <video
                             ref={videoRef}
-                            src="/reel-video.mp4"
+                            src="/reel-video.mp4#t=0.001"
                             loop
                             playsInline
+                            preload="auto"
                             style={{
                                 width: '100%',
                                 height: '100%',
