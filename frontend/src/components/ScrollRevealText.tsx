@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const PARAGRAPH = "En Eccomfy no somos una simple agencia, somos arquitectos de tu marca personal. Diseñamos ecosistemas digitales para profesionales expertos con +10 años de trayectoria, permitiéndoles desarrollar su propio negocio digital a través de su experiencia y vender sus productos mediante su marca personal.";
@@ -14,9 +14,6 @@ const RevealWord = ({ children, progress, range }: { children: React.ReactNode, 
 
 export const ScrollRevealText = () => {
     const containerRef = useRef<HTMLElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -24,34 +21,6 @@ export const ScrollRevealText = () => {
     });
 
     const words = PARAGRAPH.split(" ");
-
-    const togglePlay = () => {
-        if (videoRef.current) {
-            if (isPlaying) {
-                videoRef.current.pause();
-            } else {
-                videoRef.current.play();
-            }
-            setIsPlaying(!isPlaying);
-        }
-    };
-
-    // Auto-pause if it scrolls completely out of view (optional polish)
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (!entry.isIntersecting && isPlaying && videoRef.current) {
-                    videoRef.current.pause();
-                    setIsPlaying(false);
-                }
-            },
-            { threshold: 0.1 }
-        );
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
-        return () => observer.disconnect();
-    }, [isPlaying]);
 
     return (
         <section
@@ -134,7 +103,7 @@ export const ScrollRevealText = () => {
                     </p>
                 </motion.div>
 
-                {/* Video Side */}
+                {/* Video Side — YouTube Shorts Embed */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -148,9 +117,6 @@ export const ScrollRevealText = () => {
                     }}
                 >
                     <div
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                        onClick={togglePlay}
                         style={{
                             position: 'relative',
                             width: '100%',
@@ -159,73 +125,26 @@ export const ScrollRevealText = () => {
                             borderRadius: '24px',
                             overflow: 'hidden',
                             boxShadow: '0 25px 50px -12px rgba(23, 119, 91, 0.25), 0 0 0 1px rgba(0,0,0,0.05)',
-                            cursor: 'pointer',
                             backgroundColor: '#000',
-                            transform: 'translateZ(0)' // Hardware acceleration
+                            transform: 'translateZ(0)'
                         }}
                     >
-                        <video
-                            ref={videoRef}
-                            src="/reel-video.mp4#t=0.001"
-                            loop
-                            playsInline
-                            preload="auto"
+                        <iframe
+                            src="https://www.youtube.com/embed/biqO5xB9pmU?autoplay=0&loop=1&playlist=biqO5xB9pmU&rel=0&modestbranding=1&showinfo=0"
+                            title="Eccomfy — Reel de marca personal"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
                             style={{
                                 width: '100%',
                                 height: '100%',
-                                objectFit: 'cover',
-                                display: 'block',
-                                transition: 'transform 0.5s ease',
-                                transform: (isHovered && !isPlaying) ? 'scale(1.02)' : 'scale(1)'
+                                border: 'none',
+                                display: 'block'
                             }}
                         />
-
-                        {/* Custom Play/Pause Overlay */}
-                        <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            backgroundColor: isPlaying ? 'transparent' : 'rgba(0, 0, 0, 0.3)',
-                            transition: 'background-color 0.4s ease'
-                        }}>
-                            <motion.div
-                                initial={false}
-                                animate={{
-                                    opacity: isPlaying && !isHovered ? 0 : 1,
-                                    scale: isPlaying ? 0.9 : 1
-                                }}
-                                transition={{ duration: 0.2 }}
-                                style={{
-                                    width: '72px',
-                                    height: '72px',
-                                    borderRadius: '50%',
-                                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                                    backdropFilter: 'blur(8px)',
-                                    border: '1px solid rgba(255, 255, 255, 0.4)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)'
-                                }}
-                            >
-                                {isPlaying ? (
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <rect x="6" y="4" width="4" height="16" rx="1" />
-                                        <rect x="14" y="4" width="4" height="16" rx="1" />
-                                    </svg>
-                                ) : (
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style={{ marginLeft: '4px' }}>
-                                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z" />
-                                    </svg>
-                                )}
-                            </motion.div>
-                        </div>
                     </div>
                 </motion.div>
             </div>
         </section>
     );
 };
+
