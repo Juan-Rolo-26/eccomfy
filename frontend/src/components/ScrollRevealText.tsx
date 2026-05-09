@@ -130,9 +130,9 @@ export const ScrollRevealText = () => {
                         }}
                     >
                         <iframe
-                            src="https://www.youtube.com/embed/biqO5xB9pmU?autoplay=0&loop=1&playlist=biqO5xB9pmU&rel=0&modestbranding=1&showinfo=0"
+                            src="https://drive.google.com/file/d/1odINo2m1ajHo2eLPaQMCKQN1dY1yLdCO/preview"
                             title="Eccomfy — Reel de marca personal"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allow="autoplay; fullscreen"
                             allowFullScreen
                             style={{
                                 width: '100%',
