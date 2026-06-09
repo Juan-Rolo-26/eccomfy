@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowUp, ArrowUpRight, X } from 'lucide-react';
 
 type LegalDocKey = 'terms' | 'privacy' | 'cookies';
@@ -49,32 +50,29 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         ],
     },
     {
-        title: 'Servicios Digitales',
+        title: 'Servicios de Software',
         links: [
-            { label: 'IA y Automatizaciones', href: '#servicios' },
+            { label: 'Software a Medida', href: '#servicios' },
+            { label: 'Apps Móviles', href: '#servicios' },
+            { label: 'Inteligencia Artificial', href: '#servicios' },
             { label: 'Desarrollo Web', href: '#servicios' },
-            { label: 'SEO & SEM', href: '#servicios' },
-            { label: 'Branding', href: '#servicios' },
-            { label: 'Meta Ads', href: '#servicios' },
-            { label: 'Estrategia de Marketing', href: '#servicios' },
-            { label: 'Community Manager', href: '#servicios' },
-            { label: 'Marcas Personales', href: '#servicios' },
         ],
     },
     {
         title: 'Proceso',
         links: [
-            { label: 'Descubrimiento', href: '#proceso' },
-            { label: 'Estrategia', href: '#proceso' },
-            { label: 'Diseño', href: '#proceso' },
-            { label: 'Desarrollo', href: '#proceso' },
-            { label: 'Escalado', href: '#proceso' },
+            { label: 'Descubrimiento', href: '#nosotros' },
+            { label: 'Estrategia', href: '#nosotros' },
+            { label: 'Diseño UX/UI', href: '#servicios' },
+            { label: 'Desarrollo', href: '#servicios' },
+            { label: 'Escalado', href: '#servicios' },
         ],
     },
     {
         title: 'Empresa',
         meta: [
             { label: 'Córdoba, Argentina', href: 'https://maps.google.com/?q=Cordoba+Argentina', external: true },
+            { label: '+54 351 371-2759', href: 'tel:+543513712759', external: true },
             { label: 'eccomfyarg@gmail.com', href: 'mailto:eccomfyarg@gmail.com', external: true },
         ],
         links: [
@@ -84,12 +82,12 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         ],
     },
     {
-        title: 'Sociales',
+        title: 'Redes Sociales',
         links: [
             { label: 'Instagram', href: 'https://www.instagram.com/eccomfyarg', external: true },
             { label: 'TikTok', href: 'https://www.tiktok.com/@eccomfy', external: true },
-            { label: 'Gmail', href: 'mailto:eccomfyarg@gmail.com', external: true },
-            { label: 'Teléfono', href: 'tel:+543513712759', external: true },
+            { label: 'Contacto por email', href: 'mailto:eccomfyarg@gmail.com', external: true },
+            { label: 'Llamar ahora', href: 'tel:+543513712759', external: true },
         ],
     },
 ];
@@ -292,7 +290,7 @@ export const Footer = () => {
             <footer id="contacto" className="footer">
                 <div className="footer__shell">
                     <header className="footer__hero">
-                        <span className="footer__eyebrow">Agencia Digital de Marketing · Córdoba, Argentina</span>
+                        <span className="footer__eyebrow">Agencia de Software · Córdoba, Argentina</span>
                         <h2 className="footer__wordmark">ECCOMFY</h2>
                     </header>
 
@@ -352,7 +350,7 @@ export const Footer = () => {
 
                     <div className="footer__bottom">
                         <p className="footer__copy">
-                            &copy; {new Date().getFullYear()} Eccomfy. Diseñamos ecosistemas digitales de autoridad para Marcas Personales.
+                            &copy; {new Date().getFullYear()} Eccomfy Software. Construimos infraestructura digital escalable.
                         </p>
 
                         <button type="button" className="footer__top" onClick={handleBackToTop}>
@@ -363,7 +361,7 @@ export const Footer = () => {
                 </div>
             </footer>
 
-            {activeDocument && (
+            {activeDocument && createPortal(
                 <div
                     className="legal-modal-backdrop"
                     role="presentation"
@@ -424,7 +422,8 @@ export const Footer = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );

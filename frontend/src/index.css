@@ -98,13 +98,16 @@
 }
 
 html {
-  font-size: 100%;
-  zoom: 90%;
+  font-size: 105%;
+  zoom: 100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
   html {
-    font-size: 108%;
+    font-size: 100%;
+    /* Better base for mobile */
     zoom: 100%;
   }
 }
@@ -117,6 +120,7 @@ body {
   color: var(--nav-text, #fff);
   line-height: var(--lh-body);
   overflow-x: hidden;
+  width: 100%;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -167,6 +171,148 @@ button {
 }
 
 
+
+/* ══════════════════════════════════════════════════
+   Brand Carousel (Hero bottom strip)
+══════════════════════════════════════════════════ */
+
+.brand-carousel-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0 0.5rem;
+}
+
+.brand-carousel-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: #ffffff;
+  /* Alto contraste */
+  opacity: 0.9;
+  margin: 0;
+}
+
+.brand-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  /* fade lateral sutil */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%);
+}
+
+.brand-carousel-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: brand-marquee 28s linear infinite;
+}
+
+.brand-carousel-viewport:hover .brand-carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.3333%);
+  }
+}
+
+/* Pill / botón de marca */
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1.6rem 0.75rem 0.8rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.brand-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(62, 178, 144, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.brand-pill:active {
+  transform: translateY(0px);
+}
+
+/* Logo de la marca (imagen real) */
+.brand-pill-logo {
+  height: 48px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  /* Fondo blanco exclusivo para el logo */
+  background-color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-pill:hover .brand-pill-logo {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Avatar circular con iniciales (fallback sin logo) */
+.brand-pill-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: var(--fw-bold);
+  color: #fff;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.brand-pill-name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+/* Responsivo: en mobile el label se oculta */
+@media (max-width: 480px) {
+  .brand-carousel-label {
+    display: none;
+  }
+}
 
 /* Hero Section */
 .hero {
@@ -224,8 +370,19 @@ button {
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 20px;
   /* heroFadeUp desactivado: Framer Motion maneja la entrada con stagger */
+}
+
+.hero-brand-divider {
+  width: 100%;
+  max-width: 520px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform-origin: center;
+  margin-top: 8px;
 }
 
 .hero-topline {
@@ -254,13 +411,14 @@ button {
   margin: 0;
   max-width: 100%;
   font-family: 'Neue Machina', sans-serif;
-  font-size: clamp(4rem, 8vw, 8rem);
+  font-size: clamp(3rem, 6.5vw, 6rem);
   line-height: var(--lh-tight);
   font-weight: var(--fw-bold);
   /* Usamos bold, no extrabold para que no se estire */
   letter-spacing: var(--ls-tighter);
   color: #ffffff;
   text-wrap: pretty;
+  text-align: center;
 }
 
 .hero-main-title span {
@@ -268,18 +426,20 @@ button {
 }
 
 .hero-description {
-  max-width: 75%;
+  max-width: 85%;
   margin: 0;
   font-family: var(--font-body);
-  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
   font-weight: var(--fw-regular);
   line-height: var(--lh-body);
   color: rgba(255, 255, 255, 0.72);
+  text-align: center;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   margin-top: 10px;
 }
@@ -422,180 +582,227 @@ button {
 }
 
 /* ══════════════════════════════════════════════════
-   Consultoría Gratuita Section
+   CTA — Rediseño V2 (light premium)
 ══════════════════════════════════════════════════ */
 
-/* CONTENEDOR PRINCIPAL: ancho completo con técnica de margen negativo */
-.consult-section-container {
-  width: 100%;
+.cta-v2-section {
   position: relative;
-  background-color: #f2f0ea;
-  overflow: hidden;
-  padding: 120px 0;
-  box-sizing: border-box;
-}
-
-/* Fondo decorativo */
-.consult-background {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Glows */
-.consult-glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  filter: blur(140px);
-  opacity: 0;
-}
-
-.consult-glow--left {
-  top: -150px;
-  left: -200px;
-  background-color: #17775b;
-}
-
-.consult-glow--right {
-  bottom: -150px;
-  right: -200px;
-  background-color: #3eb290;
-}
-
-/* CONTENEDOR DE CONTENIDO: centrado con ancho controlado */
-.consult-content {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 4%;
-  text-align: center;
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.6rem;
-}
-
-.consult-eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #17775b;
-  padding: 0.35rem 1rem;
-  border: 1px solid rgba(23, 119, 91, 0.3);
-  background: rgba(23, 119, 91, 0.08);
-  border-radius: 999px;
-}
-
-.consult-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.5vw, 4rem);
-  font-weight: var(--fw-bold);
-  color: #0d1f1a;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin: 0;
-}
-
-.consult-title-accent {
-  color: #17775b;
-}
-
-.consult-sub {
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-regular);
-  line-height: 1.65;
-  color: rgba(0, 0, 0, 0.5);
-  max-width: 660px;
-  margin: 0 auto;
-}
-
-/* BOTÓN CTA */
-.consult-cta {
+  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 1.1rem 3rem;
-  background-color: #17775b;
-  color: #ffffff;
-  font-family: var(--font-body);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.02em;
-  text-decoration: none;
+  background: transparent;
+  overflow: hidden;
+  padding: 110px 4% 120px;
+  box-sizing: border-box;
+}
+
+/* Sin grilla ni blobs — fondo blanco plano */
+
+
+
+
+/* Contenido centrado */
+.cta-v2-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.8rem;
+  max-width: 780px;
+  width: 100%;
+}
+
+/* Chip de estado */
+.cta-v2-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.38rem 1rem 0.38rem 0.75rem;
+  border: 1px solid rgba(23, 119, 91, 0.3);
   border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(23, 119, 91, 0.28);
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid transparent;
-  margin-top: 0.4rem;
-}
-
-.consult-cta:hover {
-  background-color: #166534;
-  transform: translateY(-3px);
-  box-shadow: 0 16px 44px rgba(23, 119, 91, 0.4);
-}
-
-.consult-cta:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow: 0 6px 18px rgba(23, 119, 91, 0.2);
-}
-
-.consult-cta-icon {
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.consult-cta:hover .consult-cta-icon {
-  transform: rotate(-10deg) scale(1.15);
-}
-
-.consult-note {
+  background: rgba(23, 119, 91, 0.07);
+  backdrop-filter: blur(8px);
   font-family: var(--font-body);
   font-size: var(--text-xs);
   font-weight: var(--fw-medium);
-  color: rgba(0, 0, 0, 0.32);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  color: #17775b;
+}
+
+.cta-v2-chip-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3eb290;
+  box-shadow: 0 0 0 3px rgba(62, 178, 144, 0.25);
+  animation: cta-pulse 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes cta-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(62, 178, 144, 0.25);
+  }
+
+  50% {
+    box-shadow: 0 0 0 7px rgba(62, 178, 144, 0.08);
+  }
+}
+
+/* Título principal */
+.cta-v2-title {
+  margin: 0;
+  font-family: 'Neue Machina', sans-serif;
+  font-size: clamp(3rem, 7vw, 6.2rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: #0a1a14;
+}
+
+.cta-v2-title-em {
+  background: linear-gradient(135deg, #17775b 0%, #3eb290 60%, #17775b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Descripción */
+.cta-v2-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: var(--fw-regular);
+  line-height: 1.7;
+  color: rgba(10, 26, 20, 0.5);
+  max-width: 520px;
+  margin: 0;
+}
+
+.cta-v2-br {
+  display: block;
+}
+
+/* Botón CTA — premium verde */
+.cta-v2-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #17775b 0%, #3eb290 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  padding: 1.1rem 1.4rem 1.1rem 2.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow:
+    0 4px 0px #0f5440,
+    0 8px 28px rgba(23, 119, 91, 0.3),
+    0 2px 8px rgba(23, 119, 91, 0.15);
+  margin-top: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer al hover */
+.cta-v2-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+}
+
+.cta-v2-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.cta-v2-btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-v2-btn-icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.cta-v2-btn:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 6px 0px #0f5440,
+    0 16px 40px rgba(23, 119, 91, 0.38),
+    0 4px 16px rgba(23, 119, 91, 0.2);
+}
+
+.cta-v2-btn:hover .cta-v2-btn-icon {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(12deg) scale(1.1);
+}
+
+.cta-v2-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 2px 0px #0f5440,
+    0 6px 18px rgba(23, 119, 91, 0.25);
+}
+
+/* Nota de urgencia */
+.cta-v2-note {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-medium);
+  color: rgba(10, 26, 20, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   margin: 0;
 }
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .consult-section-container {
-    padding: 80px 0;
+  .cta-v2-section {
+    padding: 80px 6% 90px;
+    min-height: unset;
   }
 
-  .consult-content {
-    padding: 0 24px;
+  .cta-v2-title {
+    font-size: clamp(2rem, 9vw, 3.2rem);
+    line-height: 1.05;
   }
 
-  .consult-title {
-    font-size: clamp(2rem, 9vw, 3rem);
-    width: 100%;
-    max-width: none;
-  }
-
-  .consult-sub {
+  .cta-v2-sub {
     font-size: var(--text-base);
   }
 
-  .consult-cta {
-    width: 100%;
-    max-width: 300px;
-    padding: 0.9rem 1.2rem;
-    font-size: 0.92rem;
+  .cta-v2-br {
+    display: none;
+  }
+
+  .cta-v2-btn-icon {
+    width: 46px;
+    height: 46px;
   }
 }
 
@@ -668,7 +875,7 @@ button {
   }
 
   .services-title {
-    font-size: clamp(2.2rem, 9vw, 3rem);
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
     text-align: center;
     width: 100%;
     max-width: none;
@@ -1383,7 +1590,7 @@ button {
   margin: 0 0 22px;
   color: var(--secondary);
   font-family: var(--font-display);
-  font-size: var(--text-base);
+  font-size: 1.3rem;
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-tight);
 }
@@ -1393,7 +1600,7 @@ button {
   max-width: 24ch;
   color: rgba(255, 255, 255, 0.35);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: 1.1rem;
   font-weight: var(--fw-regular);
   line-height: var(--lh-body);
 }
@@ -1409,7 +1616,7 @@ button {
   color: rgba(255, 255, 255, 0.72);
   text-decoration: none;
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: 1.1rem;
   font-weight: var(--fw-medium);
   line-height: var(--lh-body);
   transition: color 0.25s ease;
@@ -1438,7 +1645,7 @@ button {
   border: none;
   padding: 0;
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: 1.1rem;
   font-weight: var(--fw-regular);
   line-height: var(--lh-snug);
   text-align: left;
@@ -1479,7 +1686,7 @@ button {
   margin: 0;
   color: rgba(255, 255, 255, 0.2);
   font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: 1rem;
   font-weight: var(--fw-regular);
   line-height: var(--lh-body);
 }
@@ -1740,7 +1947,7 @@ button {
 
   .footer__col-title {
     text-align: left;
-    font-size: 0.72rem;
+    font-size: 1.05rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--secondary);
@@ -1754,7 +1961,7 @@ button {
   }
 
   .footer__meta-link {
-    font-size: 0.88rem;
+    font-size: 1.05rem;
   }
 
   .footer__links {
@@ -1763,7 +1970,7 @@ button {
   }
 
   .footer__link {
-    font-size: 0.88rem;
+    font-size: 1.05rem;
   }
 
   .footer__bottom {
@@ -1850,7 +2057,7 @@ button {
 
   .footer__col-title {
     margin-bottom: 12px;
-    font-size: 0.68rem;
+    font-size: 0.95rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: left;
@@ -1862,7 +2069,7 @@ button {
   }
 
   .footer__meta-link {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .footer__links {
@@ -1871,7 +2078,7 @@ button {
   }
 
   .footer__link {
-    font-size: 0.85rem;
+    font-size: 1rem;
   }
 
   .footer__bottom {
@@ -1962,7 +2169,9 @@ button {
 
   .hero-container {
     min-height: 100svh;
-    padding: 108px 24px 84px;
+    padding: 100px 5% 60px;
+    justify-content: center;
+    box-sizing: border-box;
   }
 
   .hero-content {
@@ -1975,18 +2184,19 @@ button {
 
   .hero-main-title {
     max-width: none;
-    font-size: clamp(3.2rem, 12.5vw, 5.5rem);
-    line-height: 0.95;
+    font-size: clamp(2.4rem, 10vw, 4rem);
+    line-height: 1.05;
     text-align: center;
   }
 
   .hero-description {
     max-width: 100%;
     width: 100%;
-    font-size: 1.15rem;
-    line-height: 1.6;
+    font-size: 1.05rem;
+    line-height: 1.5;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
+    padding: 0 10px;
   }
 
   .hero-actions {
@@ -1998,11 +2208,11 @@ button {
 
   .hero-btn {
     width: 100%;
-    max-width: 280px;
-    height: 52px;
-    padding: 0 22px;
-    font-size: 0.88rem;
-    gap: 7px;
+    max-width: 320px;
+    height: 56px;
+    padding: 0 20px;
+    font-size: 0.95rem;
+    gap: 8px;
   }
 
   .btn-large {

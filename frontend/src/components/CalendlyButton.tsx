@@ -1,36 +1,42 @@
-import { Calendar } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const CalendlyButton = () => {
     return (
-        <section className="consult-section-container">
-            {/* Fondo con resplandores ambientales integrados */}
-            <div className="consult-background">
-                <div className="consult-glow consult-glow--left" />
-                <div className="consult-glow consult-glow--right" />
-            </div>
+        <section className="cta-v2-section">
+            {/* Contenido central */}
+            <div className="cta-v2-inner">
+                {/* Chip */}
+                <div className="cta-v2-chip">
+                    <span className="cta-v2-chip-dot" />
+                    <span>Sin compromisos · 30 min</span>
+                </div>
 
-            {/* Contenedor central de contenido */}
-            <div className="consult-content">
-                <span className="consult-eyebrow">Sin compromisos · 30 min</span>
-
-                <h2 className="consult-title">
-                    Transformamos tu experiencia en un <span className="consult-title-accent">Negocio Digital</span>
+                {/* Título */}
+                <h2 className="cta-v2-title">
+                    Tu próximo paso<br />
+                    <span className="cta-v2-title-em">empieza hoy</span>
                 </h2>
 
-                <p className="consult-sub">
-                    Especializados en profesionales con +10 años de trayectoria. Agendá una llamada de 30 min, contanos tu proyecto y descubrí el potencial de tu Marca Personal.
+                {/* Sub */}
+                <p className="cta-v2-sub">
+                    Agendá una llamada. Contanos tu negocio.<br className="cta-v2-br" />
+                    Descubrí cómo escalar tu marca personal.
                 </p>
 
+                {/* Botón */}
                 <a
-                    href="https://calendar.app.google/EoBKLEcB5YFkrNfB6"
+                    href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20un%20proyecto%20de%20software%20y%20me%20gustaría%20consultarles."
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="consult-cta"
+                    className="cta-v2-btn"
                     id="btn-agendar-consultoria"
                 >
-                    <Calendar size={22} strokeWidth={2} className="consult-cta-icon" />
-                    <span className="consult-cta-text">Contanos tu proyecto</span>
+                    <span className="cta-v2-btn-text">Contanos tu proyecto</span>
+                    <span className="cta-v2-btn-icon">
+                        <ArrowUpRight size={20} strokeWidth={2.5} />
+                    </span>
                 </a>
+
             </div>
         </section>
     );

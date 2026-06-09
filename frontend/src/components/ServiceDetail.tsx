@@ -102,7 +102,9 @@ export const ServiceDetail = () => {
                     </motion.p>
 
                     <motion.a
-                        href="#contacto"
+                        href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20quiero%20hacer%20una%20consulta%20sobre%20sus%20servicios%20de%20software."
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="sd-hero__cta"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -272,8 +274,8 @@ export const ServiceDetail = () => {
                     Cada uno de estos servicios cumple un rol dentro de un sistema más grande.
                     Cuando trabajan en conjunto, se convierten en un motor de crecimiento.
                 </p>
-                <a href="https://calendar.app.google/EoBKLEcB5YFkrNfB6" target="_blank" rel="noopener noreferrer" className="sd-cta__btn">
-                    Empezar proyecto <ArrowUpRight size={16} strokeWidth={2.2} />
+                <a href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20quiero%20hacer%20una%20consulta%20sobre%20sus%20servicios%20de%20software." target="_blank" rel="noopener noreferrer" className="sd-cta__btn">
+                    Contanos tu proyecto <ArrowUpRight size={16} strokeWidth={2.2} />
                 </a>
             </motion.section>
         </div>

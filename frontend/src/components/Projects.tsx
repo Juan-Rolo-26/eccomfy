@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, X, ExternalLink } from 'lucide-react';
 import './Projects.css';
@@ -26,8 +26,8 @@ const PROJECTS_DATA: Project[] = [
         image: imgMagna,
         url: 'https://magnamkt.com',
         story: [
-            'Trabajar con MagnaMKT fue sumergirnos en el mundo de una marca que ya tenía una visión clara sobre el crecimiento, el marketing y el posicionamiento digital. Desde el inicio, entendimos que no se trataba simplemente de hacer una web "linda", sino de construir una presencia que estuviera a la altura del nivel de estrategia que la marca quería transmitir.',
-            'MagnaMKT necesitaba una imagen digital sólida, moderna y convincente. Una web capaz de reflejar no solo sus servicios, sino también la sensación de profesionalismo, claridad y ambición que hay detrás de una agencia que ayuda a otras marcas a crecer.',
+            'Trabajar con MagnaMKT fue sumergirnos en el mundo de una marca que ya tenía una visión clara sobre el crecimiento, el software y la infraestructura digital. Desde el inicio, entendimos que no se trataba simplemente de hacer una web "linda", sino de construir una plataforma que estuviera a la altura del nivel de complejidad tecnológica que la marca necesitaba.',
+            'MagnaMKT necesitaba un ecosistema sólido, escalable y convincente. Un sistema capaz de reflejar no solo sus servicios, sino también la sensación de innovación, seguridad y robustez que hay detrás de una agencia de desarrollo.',
             'Fue un proyecto donde nos enfocamos mucho en la estructura del mensaje, en la forma en la que los servicios debían presentarse y en cómo hacer que todo el sitio respirara una identidad más premium y confiable.',
             'Con MagnaMKT, el trabajo fue transformar una propuesta de valor potente en una presencia digital a la altura. Y eso, para nosotros, es una de las partes más lindas de lo que hacemos.',
         ],
@@ -97,6 +97,17 @@ const PROJECTS_DATA: Project[] = [
 export const Projects = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
+    // Escucha el evento disparado por BrandCarousel en el Hero
+    useEffect(() => {
+        const handleOpenProject = (e: Event) => {
+            const name = (e as CustomEvent<{ name: string }>).detail.name;
+            const found = PROJECTS_DATA.find(p => p.name === name);
+            if (found) setSelectedProject(found);
+        };
+        window.addEventListener('open-project', handleOpenProject);
+        return () => window.removeEventListener('open-project', handleOpenProject);
+    }, []);
+
     if (selectedProject) {
         document.body.style.overflow = 'hidden';
     } else {
@@ -104,7 +115,11 @@ export const Projects = () => {
     }
 
     return (
-        <section className="projects-section" id="proyectos">
+        <section
+            className="projects-section"
+            id="proyectos"
+            aria-label="Portfolio de proyectos de software de Eccomfy — Córdoba, Argentina"
+        >
             <div className="projects-container">
 
                 {/* Intro */}
@@ -125,8 +140,9 @@ export const Projects = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                     >
-                        Historias que construimos<br />
-                        <span className="projects-gradient-text">junto a cada marca.</span>
+                        Proyectos de software que{' '}
+                        <br />
+                        <span className="projects-gradient-text">transformaron PyMEs.</span>
                     </motion.h2>
                     <motion.p
                         className="projects-intro__desc"
@@ -135,8 +151,9 @@ export const Projects = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                        En Eccomfy entendemos cada proyecto como algo mucho más grande que una simple página web.
-                        Detrás de cada marca hay una historia, una visión y personas que buscan crecer.
+                        En Eccomfy, agencia de software para PyMEs en Córdoba y Argentina, cada
+                        proyecto es mucho más que código. Detrás de cada sistema, app o landing
+                        page hay un negocio real escalando con tecnología accesible y efectiva.
                     </motion.p>
                 </div>
 
@@ -155,8 +172,12 @@ export const Projects = () => {
                             <div className="project-card__visual">
                                 <img
                                     src={project.image}
-                                    alt={`Sitio web de ${project.name} diseñado por Ecomfy - ${project.title}`}
+                                    alt={`Proyecto de software "${project.name}" - ${project.title} | Eccomfy agencia de software para PyMEs en Córdoba, Argentina`}
                                     className="project-card__image"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width={800}
+                                    height={500}
                                 />
                                 <div className="project-card__overlay" />
 
@@ -221,8 +242,12 @@ export const Projects = () => {
 
                                 <img
                                     src={selectedProject.image}
-                                    alt={`Proyecto ${selectedProject.name} por Ecomfy - ${selectedProject.title}`}
+                                    alt={`Proyecto de software "${selectedProject.title}" para ${selectedProject.name} desarrollado por Eccomfy — agencia de software para PyMEs en Córdoba, Argentina`}
                                     className="project-modal-img"
+                                    loading="lazy"
+                                    decoding="async"
+                                    width={960}
+                                    height={600}
                                 />
                                 <div className="project-modal-text">
                                     {selectedProject.story.map((paragraph, i) => (

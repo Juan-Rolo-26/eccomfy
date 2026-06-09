@@ -1,16 +1,28 @@
-# Eccomfy - Agencia de Marketing Digital
+# Eccomfy — Agencia de Software para PyMEs en Córdoba, Argentina
 # https://eccomfyarg.com
+# Última actualización: 2026-06-09
+
+# ──────────────────────────────────────────────────────────────
+# IMPORTANTE: No bloquear /assets/ ni JS/CSS
+# Googlebot necesita renderizar el JavaScript del SPA
+# para indexar el contenido correctamente.
+# ──────────────────────────────────────────────────────────────
 
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /*.js$
-Disallow: /*.css$
+
+# Páginas que NO necesitamos indexar (si existen en el futuro)
+# Disallow: /admin/
+# Disallow: /api/
+# Disallow: /private/
 
 # Sitemap
 Sitemap: https://eccomfyarg.com/sitemap.xml
 
-# Googlebot specific
+# Configuración especial para Googlebot
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+
+# AdsBot — necesario para que las campañas de Google Ads funcionen
+User-agent: AdsBot-Google
+Allow: /

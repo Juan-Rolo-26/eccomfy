@@ -75,10 +75,12 @@ export const Navbar = () => {
                     >
                         <motion.img
                             src={logo}
-                            alt="Eccomfy"
+                            alt="Eccomfy — Agencia de Software para PyMEs en Córdoba, Argentina"
                             animate={{ scale: 1 }}
                             whileHover={{ scale: 1.08 }}
                             transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
+                            width={32}
+                            height={32}
                         />
                         <span>Eccomfy</span>
                     </motion.button>
@@ -86,13 +88,13 @@ export const Navbar = () => {
                     {/* ── RIGHT: CTA + Burger ── */}
                     <div className="nv__right">
                         <motion.button
-                            onClick={() => window.open('https://calendar.app.google/EoBKLEcB5YFkrNfB6', '_blank')}
+                            onClick={() => window.open('https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20un%20proyecto%20de%20software%20y%20me%20gustaría%20consultarles.', '_blank')}
                             className="nv__cta"
                             initial={{ opacity: 0, y: -8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            Empezar proyecto
+                            Contanos tu proyecto
                             <span className="nv__cta-icon">
                                 <ArrowUpRight size={16} strokeWidth={2.2} />
                             </span>
@@ -138,7 +140,7 @@ export const Navbar = () => {
                         <motion.button
                             onClick={() => {
                                 setIsOpen(false);
-                                window.open('https://calendar.app.google/EoBKLEcB5YFkrNfB6', '_blank');
+                                window.open('https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20un%20proyecto%20de%20software%20y%20me%20gustaría%20consultarles.', '_blank');
                             }}
                             className="nv-mobile__link"
                             style={{ color: 'var(--secondary)', marginTop: '1rem' }}
@@ -147,7 +149,7 @@ export const Navbar = () => {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ delay: 0.5, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            Empezar proyecto
+                            Contanos tu proyecto
                         </motion.button>
                     </motion.div>
                 )}

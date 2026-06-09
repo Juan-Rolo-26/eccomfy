@@ -1,11 +1,11 @@
-# Eccomfy - Agencia de Marketing Digital
+# Eccomfy — Agencia de Software para PyMEs
 # https://eccomfyarg.com
 
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /*.js$
-Disallow: /*.css$
+
+# No bloquear assets: Googlebot necesita CSS y JS para renderizar el SPA correctamente
+# Disallow: /assets/  ← ELIMINADO: bloqueaba el renderizado
 
 # Sitemap
 Sitemap: https://eccomfyarg.com/sitemap.xml
@@ -13,4 +13,10 @@ Sitemap: https://eccomfyarg.com/sitemap.xml
 # Googlebot specific
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+
+# AdsBot
+User-agent: AdsBot-Google
+Allow: /
+
+# No indexar páginas de admin o privadas si existen
+# Disallow: /admin/

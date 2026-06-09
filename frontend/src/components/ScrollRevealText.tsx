@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const PARAGRAPH = "En Eccomfy no somos una simple agencia, somos arquitectos de tu marca personal. Diseñamos ecosistemas digitales para profesionales expertos con +10 años de trayectoria, permitiéndoles desarrollar su propio negocio digital a través de su experiencia y vender sus productos mediante su marca personal.";
+const PARAGRAPH = "En Eccomfy no somos una simple agencia de software, somos los arquitectos de tu infraestructura tecnológica. Desarrollamos software a medida, aplicaciones móviles de alto rendimiento y sistemas escalables para PyMEs en Córdoba y Argentina que buscan automatizar sus procesos, crecer con inteligencia artificial e innovar en su industria.";
 
 const RevealWord = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
     const opacity = useTransform(progress, range, [0.2, 1]);
@@ -79,7 +79,9 @@ export const ScrollRevealText = () => {
                         lineHeight: 1.1,
                         margin: 0
                     }}>
-                        Arquitectos de tu <span style={{ color: '#17775b' }}>marca personal</span>
+                        Arquitectos de tu{' '}
+                        <span style={{ color: '#17775b' }}>infraestructura digital</span>
+                        {' '}en Córdoba
                     </h2>
                     <p style={{
                         fontFamily: 'var(--font-body, sans-serif)',
