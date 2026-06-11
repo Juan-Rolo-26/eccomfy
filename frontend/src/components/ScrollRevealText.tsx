@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const PARAGRAPH = "En Eccomfy no somos una simple agencia de software, somos los arquitectos de tu infraestructura tecnológica. Desarrollamos software a medida, aplicaciones móviles de alto rendimiento y sistemas escalables para PyMEs en Córdoba y Argentina que buscan automatizar sus procesos, crecer con inteligencia artificial e innovar en su industria.";
+const PARAGRAPH = "En Eccomfy ayudamos a empresas, emprendedores y organizaciones a transformar desafíos en oportunidades mediante tecnología. Nuestro enfoque combina estrategia, diseño y desarrollo para crear soluciones digitales que no solo funcionan, sino que generan impacto real en el negocio. Trabajamos con tecnologías modernas y metodologías ágiles para entregar proyectos escalables, seguros y preparados para el crecimiento futuro.";
 
 const RevealWord = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
     const opacity = useTransform(progress, range, [0.2, 1]);
@@ -69,7 +69,7 @@ export const ScrollRevealText = () => {
                         borderRadius: '999px',
                         alignSelf: 'flex-start'
                     }}>
-                        Nuestra filosofía
+                        SOBRE NOSOTROS
                     </span>
                     <h2 style={{
                         fontFamily: 'var(--font-display, sans-serif)',
@@ -79,9 +79,7 @@ export const ScrollRevealText = () => {
                         lineHeight: 1.1,
                         margin: 0
                     }}>
-                        Arquitectos de tu{' '}
-                        <span style={{ color: '#17775b' }}>infraestructura digital</span>
-                        {' '}en Córdoba
+                        Socios tecnologicos de tu <span style={{ color: '#17775b' }}>Pyme</span>
                     </h2>
                     <p style={{
                         fontFamily: 'var(--font-body, sans-serif)',

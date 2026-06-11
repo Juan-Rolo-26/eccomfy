@@ -31,7 +31,7 @@ export const Features = () => {
                         className="services-label"
                         aria-hidden="true"
                     >
-                        Productos & Servicios
+                        SERVICIOS
                     </span>
 
                     {/*
@@ -39,8 +39,8 @@ export const Features = () => {
                      * "soluciones digitales" + "impulsan tu negocio" = intención comercial clara
                      */}
                     <h2 className="services-title" itemProp="name">
-                        Soluciones digitales que{' '}
-                        <span>impulsan tu negocio.</span>
+                        Soluciones tecnológicas diseñadas para{' '}
+                        <span>crecer junto a tu empresa.</span>
                     </h2>
 
                     {/* Descripción de sección — señal de contenido relevante */}
@@ -103,21 +103,27 @@ export const Features = () => {
                                     <div
                                         id={panelId}
                                         className="service-body"
+                                        style={{ display: 'block', paddingBottom: '2.5rem' }}
                                         role="region"
                                         aria-labelledby={headerId}
                                     >
-                                        <ul
-                                            className="service-bullets"
-                                            aria-label={`Características de ${svc.title}`}
-                                        >
-                                            {svc.items.map((item) => (
-                                                <li key={item} itemProp="description">
-                                                    {item}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        {svc.items.length > 0 && (
+                                            <ul
+                                                className="service-bullets"
+                                                aria-label={`Características de ${svc.title}`}
+                                                style={{ marginBottom: '1.5rem' }}
+                                            >
+                                                {svc.items.map((item) => (
+                                                    <li key={item} itemProp="description">
+                                                        {item}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                         <div className="service-detail">
-                                            <p itemProp="description">{svc.desc}</p>
+                                            <p itemProp="description" style={{ maxWidth: '800px', fontSize: '1.15rem', lineHeight: '1.8', color: 'rgba(255,255,255,0.8)', whiteSpace: 'pre-line' }}>
+                                                {svc.desc}
+                                            </p>
                                         </div>
                                     </div>
                                 )}

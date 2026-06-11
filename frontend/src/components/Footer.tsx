@@ -73,7 +73,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         meta: [
             { label: 'Córdoba, Argentina', href: 'https://maps.google.com/?q=Cordoba+Argentina', external: true },
             { label: '+54 351 371-2759', href: 'tel:+543513712759', external: true },
-            { label: 'eccomfyarg@gmail.com', href: 'mailto:eccomfyarg@gmail.com', external: true },
+            { label: 'contacto@eccomfyarg.com', href: 'mailto:contacto@eccomfyarg.com', external: true },
         ],
         links: [
             { label: 'Términos y Condiciones', legal: 'terms' },
@@ -86,7 +86,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
         links: [
             { label: 'Instagram', href: 'https://www.instagram.com/eccomfyarg', external: true },
             { label: 'TikTok', href: 'https://www.tiktok.com/@eccomfy', external: true },
-            { label: 'Contacto por email', href: 'mailto:eccomfyarg@gmail.com', external: true },
+            { label: 'Contacto por email', href: 'mailto:contacto@eccomfyarg.com', external: true },
             { label: 'Llamar ahora', href: 'tel:+543513712759', external: true },
         ],
     },
@@ -290,7 +290,7 @@ export const Footer = () => {
             <footer id="contacto" className="footer">
                 <div className="footer__shell">
                     <header className="footer__hero">
-                        <span className="footer__eyebrow">Agencia de Software · Córdoba, Argentina</span>
+                        <span className="footer__eyebrow">Agencia de Software · Argentina</span>
                         <h2 className="footer__wordmark">ECCOMFY</h2>
                     </header>
 
@@ -348,9 +348,11 @@ export const Footer = () => {
                         ))}
                     </div>
 
-                    <div className="footer__bottom">
-                        <p className="footer__copy">
-                            &copy; {new Date().getFullYear()} Eccomfy Software. Construimos infraestructura digital escalable.
+                    <div className="footer__bottom" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
+                        <p className="footer__copy" style={{ maxWidth: '800px', lineHeight: '1.6' }}>
+                            Software Factory especializada en desarrollo web, software personalizado, inteligencia artificial y automatización de procesos. <br />
+                            Creamos tecnología que genera resultados. <br />
+                            &copy; {new Date().getFullYear()} ECCOMFY. Argentina.
                         </p>
 
                         <button type="button" className="footer__top" onClick={handleBackToTop}>

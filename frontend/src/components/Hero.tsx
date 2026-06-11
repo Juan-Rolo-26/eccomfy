@@ -2,7 +2,7 @@ import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import heroPoster from '../assets/hero.png';
-import heroVideo from '../assets/videohero.mov';
+import heroVideo from '../assets/Video_hero.mp4';
 import { BrandCarousel } from './BrandCarousel';
 
 // Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
@@ -144,8 +144,8 @@ export const Hero = () => {
                         variants={itemVariants}
                         style={{ fontFamily: "'Neue Machina', sans-serif" }}
                     >
-                        Desarrollo de Software{' '}
-                        <span className="hero-title-highlight">para PyMEs</span>
+                        Desarrollo de Software {' '}
+                        <span className="hero-title-highlight">a medida</span>
                     </motion.h1>
 
                     {/*
