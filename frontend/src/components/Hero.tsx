@@ -1,8 +1,7 @@
+import { useState, useEffect, useRef } from "react";
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import heroPoster from '../assets/hero.png';
-import heroVideo from '../assets/Video_hero.mp4';
 import { BrandCarousel } from './BrandCarousel';
 
 // Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
@@ -50,11 +49,19 @@ const buttonsVariants = {
 
 
 export const Hero = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
     /**
      * ── SEO: Preload del video hero en el head para mejorar LCP.
      * El video es el elemento LCP más probable — cargarlo early reduce el tiempo.
      */
     useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(error => {
+                console.error("Autoplay prevents", error);
+            });
+        }
+
         // Preload del poster (imagen de inicio) para LCP inmediato
         const linkPoster = document.createElement('link');
         linkPoster.rel = 'preload';
@@ -105,21 +112,17 @@ export const Hero = () => {
              * aria-hidden="true": los bots no indexan video decorativo (correcto)
              * ────────────────────────────────────────────────────────────── */}
             <video
+                ref={videoRef}
                 className="hero-video-bg"
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={heroPoster}
                 aria-hidden="true"
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore — fetchpriority es válido en HTML5 moderno
-                fetchpriority="high"
-            >
-                <source src={heroVideo} type="video/mp4" />
-                {/* Fallback: si el navegador no soporta video */}
-            </video>
+                src="/Video_hero.mp4"
+            />
             <div className="hero-overlay" />
             <div className="hero-noise" />
 

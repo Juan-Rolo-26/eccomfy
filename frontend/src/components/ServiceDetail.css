@@ -650,37 +650,82 @@
         grid-template-columns: 1fr;
         padding: 7rem 5% 4rem;
         gap: 2.5rem;
+        text-align: center;
+    }
+
+    .sd-hero__content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .sd-hero__cta {
+        align-self: center;
     }
 
     .sd-hero__image {
         aspect-ratio: 16/9;
+        order: -1;
     }
 
     .sd-impact {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         padding: 3rem 5%;
     }
 
     .sd-includes {
         padding: 3.5rem 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sd-includes__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .sd-includes__grid {
         grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .sd-includes__item {
+        justify-content: center;
+        text-align: center;
     }
 
     .sd-process {
         padding: 3.5rem 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .sd-process__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .sd-process__timeline {
         grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .sd-process__step {
+        align-items: center;
+        text-align: center;
     }
 
     .sd-insight {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         padding: 3rem 5%;
     }
 
@@ -699,10 +744,18 @@
     .sd-nav__inner {
         flex-direction: column;
         gap: 1rem;
+        align-items: center;
+    }
+
+    .sd-nav__link {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
     }
 
     .sd-nav__link--next {
-        text-align: left;
+        text-align: center;
+        flex-direction: row-reverse;
     }
 
     .sd-cta {

@@ -348,8 +348,8 @@ export const Footer = () => {
                         ))}
                     </div>
 
-                    <div className="footer__bottom" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '1rem' }}>
-                        <p className="footer__copy" style={{ maxWidth: '800px', lineHeight: '1.6' }}>
+                    <div className="footer__bottom" style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.25rem' }}>
+                        <p className="footer__copy" style={{ maxWidth: '800px', lineHeight: '1.6', textAlign: 'center' }}>
                             Software Factory especializada en desarrollo web, software personalizado, inteligencia artificial y automatización de procesos. <br />
                             Creamos tecnología que genera resultados. <br />
                             &copy; {new Date().getFullYear()} ECCOMFY. Argentina.
