@@ -3,6 +3,7 @@ import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import heroPoster from '../assets/hero.png';
+import heroVideo from '../assets/video_hero.mp4';
 import { BrandCarousel } from './BrandCarousel';
 
 // Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
@@ -126,7 +127,7 @@ export const Hero = () => {
                 preload="auto"
                 poster={heroPoster}
                 aria-hidden="true"
-                src="/Video_hero.mp4"
+                src={heroVideo}
             />
             <div className="hero-overlay" />
             <div className="hero-noise" />
