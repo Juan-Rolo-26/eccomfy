@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import './Navbar.css';
 
 const navLinks = [
-    { name: "Servicios", href: "#servicios" },
-    { name: "Proyectos", href: "#proyectos" },
+    { name: "Servicios", href: "/servicios" },
+    { name: "Proyectos", href: "/proyectos" },
 ];
 
 export const Navbar = () => {
@@ -29,8 +29,17 @@ export const Navbar = () => {
 
     const handleNavigate = (href: string) => {
         setIsOpen(false);
+        if (href.startsWith('/')) {
+            navigate(href);
+            window.scrollTo(0, 0);
+            return;
+        }
         if (location.pathname !== "/") {
-            navigate("/" + href);
+            navigate("/");
+            setTimeout(() => {
+                const target = href === "#inicio" ? document.body : document.querySelector(href);
+                target?.scrollIntoView({ behavior: "smooth" });
+            }, 100);
             return;
         }
         const target = href === "#inicio" ? document.body : document.querySelector(href);

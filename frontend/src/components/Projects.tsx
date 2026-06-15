@@ -8,7 +8,7 @@ import imgMagna from '../assets/Magna_web.png';
 import imgAmes from '../assets/Ames_web.png';
 import imgTopo from '../assets/topotoursweb.png';
 import imgCeli from '../assets/celicakeweb.png';
-import imgJuma from '../assets/jumaweb.png';
+import imgTraviesa from '../assets/Traviesa_logo.jpeg';
 import imgVolquetes from '../assets/web volquetes roldan .png';
 
 type Project = {
@@ -69,15 +69,15 @@ const PROJECTS_DATA: Project[] = [
         ],
     },
     {
-        name: 'Juma',
-        title: 'Elevar la presencia y percepción de marca',
-        image: imgJuma,
-        url: 'https://juma.jarbas.net/',
+        name: 'Traviesa',
+        title: 'Una tienda online de bazar intuitiva y atractiva',
+        image: imgTraviesa,
+        url: 'https://traviesa.online',
         story: [
-            'Con Juma trabajamos en una línea más enfocada en modernización, presencia y percepción de marca.',
-            'A veces una marca no necesita "decir más", sino decirlo mejor. Y eso fue parte del trabajo con Juma.',
-            'Fue un proyecto donde el detalle tuvo mucho peso. La presentación visual, la armonía general, la forma en la que cada elemento se percibía dentro del sitio.',
-            'Con Juma, el objetivo fue elevar la presencia digital y construir una imagen que inspire más confianza, más claridad y más solidez.',
+            'Con Traviesa el objetivo fue llevar su negocio de bazar al mundo digital, creando un e-commerce que no solo mostrara productos, sino que invitara a descubrir detalles para el hogar.',
+            'Un catálogo de bazar necesita orden y claridad. Nos enfocamos fuertemente en que la navegación sea intuitiva, permitiendo que los clientes encuentren rápidamente lo que buscan y se sorprendan con novedades.',
+            'Fue un proyecto donde trabajamos la estructura visual para destacar la variedad de artículos, manteniendo siempre un diseño amigable, cálido y moderno.',
+            'El resultado es una web sólida, preparada para compras fluidas, que refleja la esencia de Traviesa: diseño, practicidad y estilo en cada hogar.',
         ],
     },
     {

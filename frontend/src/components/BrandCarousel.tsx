@@ -2,29 +2,25 @@ import { motion } from 'framer-motion';
 
 // Logos disponibles en assets
 import logoAmes from '../assets/AMES_LOGO_FONDO_AZUL__2_-removebg-preview.png';
-import logoJuma from '../assets/juma_logo-removebg-preview.png';
 import logoTopo from '../assets/logo-topotours.png';
 import logoCeli from '../assets/logo_celicake-removebg-preview.png';
 import logoVolquetes from '../assets/LOGOTIPO VOLQUETES ROLDAN .png';
 import logoMagna from '../assets/logo_Magna.jpg';
+import logoTraviesa from '../assets/Traviesa_logo.jpeg';
 
 const BRANDS = [
-    { name: 'MagnaMKT', logo: logoMagna, initials: 'MG', color: '#17775b' },
-    { name: 'AMES Mutual', logo: logoAmes, initials: 'AM', color: '#17775b' },
-    { name: 'Topo Tours', logo: logoTopo, initials: 'TT', color: '#17775b' },
-    { name: 'CeliCake', logo: logoCeli, initials: 'CC', color: '#17775b' },
-    { name: 'Juma', logo: logoJuma, initials: 'JM', color: '#17775b' },
-    { name: 'Volquetes Roldán', logo: logoVolquetes, initials: 'VR', color: '#17775b' },
+    { name: 'MagnaMKT', logo: logoMagna, initials: 'MG', color: '#17775b', url: 'https://magnamkt.com' },
+    { name: 'AMES Mutual', logo: logoAmes, initials: 'AM', color: '#17775b', url: 'https://amesmutual.com' },
+    { name: 'Topo Tours', logo: logoTopo, initials: 'TT', color: '#17775b', url: 'https://topotours.ar' },
+    { name: 'CeliCake', logo: logoCeli, initials: 'CC', color: '#17775b', url: 'https://juan-rolo-26.github.io/celicake-crafted-with-love/' },
+    { name: 'Traviesa', logo: logoTraviesa, initials: 'TR', color: '#17775b', url: 'https://traviesa.online' },
+    { name: 'Volquetes Roldán', logo: logoVolquetes, initials: 'VR', color: '#17775b', url: 'https://volquetesroldan.com' },
 ];
 
 // Triplicamos para scroll infinito
 const TRACK = [...BRANDS, ...BRANDS, ...BRANDS];
 
-const scrollToProject = (brandName: string) => {
-    window.dispatchEvent(new CustomEvent('open-project', { detail: { name: brandName } }));
-    const section = document.getElementById('proyectos');
-    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+
 
 export const BrandCarousel = () => {
     return (
@@ -41,12 +37,14 @@ export const BrandCarousel = () => {
             <div className="brand-carousel-viewport">
                 <div className="brand-carousel-track">
                     {TRACK.map((brand, i) => (
-                        <button
+                        <a
                             key={`${brand.name}-${i}`}
                             className="brand-pill"
-                            onClick={() => scrollToProject(brand.name)}
-                            title={`Ver proyecto: ${brand.name}`}
-                            aria-label={`Ir al proyecto de ${brand.name}`}
+                            href={brand.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={`Visitar web de ${brand.name}`}
+                            aria-label={`Visitar web de ${brand.name}`}
                         >
                             {brand.logo ? (
                                 <img
@@ -68,7 +66,7 @@ export const BrandCarousel = () => {
                                 </span>
                             )}
                             <span className="brand-pill-name">{brand.name}</span>
-                        </button>
+                        </a>
                     ))}
                 </div>
             </div>

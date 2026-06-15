@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import heroPoster from '../assets/hero.png';
 import { BrandCarousel } from './BrandCarousel';
 
@@ -50,6 +51,7 @@ const buttonsVariants = {
 
 export const Hero = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const navigate = useNavigate();
 
     /**
      * ── SEO: Preload del video hero en el head para mejorar LCP.
@@ -77,11 +79,14 @@ export const Hero = () => {
         };
     }, []);
 
-    const handleScroll = () => {
+    const handleScrollServices = () => {
+        navigate('/servicios');
+        window.scrollTo(0, 0);
+    };
+
+    const handleScrollNext = () => {
         const next =
-            document.querySelector<HTMLElement>('#servicios') ||
             document.querySelector<HTMLElement>('#nosotros') ||
-            document.querySelector<HTMLElement>('#features') ||
             document.querySelector<HTMLElement>('.cta-section');
 
         if (next) {
@@ -147,8 +152,8 @@ export const Hero = () => {
                         variants={itemVariants}
                         style={{ fontFamily: "'Neue Machina', sans-serif" }}
                     >
-                        Desarrollo de Software {' '}
-                        <span className="hero-title-highlight">a medida</span>
+                        Desarrollo de software {' '}
+                        <span className="hero-title-highlight">para pymes</span>
                     </motion.h1>
 
                     {/*
@@ -181,7 +186,7 @@ export const Hero = () => {
                         <button
                             type="button"
                             className="hero-btn hero-btn-secondary"
-                            onClick={handleScroll}
+                            onClick={handleScrollServices}
                             aria-label="Ver servicios de software de Eccomfy"
                             id="btn-ver-servicios-hero"
                         >
@@ -206,7 +211,7 @@ export const Hero = () => {
             <button
                 type="button"
                 className="scroll-indicator"
-                onClick={handleScroll}
+                onClick={handleScrollNext}
                 aria-label="Continuar hacia la siguiente sección"
                 id="btn-scroll-hero"
             >

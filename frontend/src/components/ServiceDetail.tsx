@@ -65,7 +65,7 @@ export const ServiceDetail = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
-                <Link to="/#servicios" className="sd-back-link">
+                <Link to="/servicios" className="sd-back-link">
                     <ArrowLeft size={18} strokeWidth={2} />
                     <span>Volver a servicios</span>
                 </Link>

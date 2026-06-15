@@ -1,8 +1,6 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ScrollRevealText } from './components/ScrollRevealText';
-import { Features } from './components/Features';
-import { Projects } from './components/Projects';
 import { Footer } from './components/Footer';
 import { StackingWrapper } from './components/StackingWrapper';
 import { CalendlyButton } from './components/CalendlyButton';
@@ -187,18 +185,8 @@ export const HomePage = () => {
                 <CalendlyButton />
             </div>
 
-            {/* Servicios — H2: "Soluciones digitales que impulsan tu negocio" */}
-            <div style={{ position: 'relative', zIndex: 3, background: '#080808' }}>
-                <Features />
-            </div>
-
-            {/* Proyectos — H2: "Historias que construimos junto a cada marca" */}
-            <div style={{ position: 'relative', zIndex: 4, background: 'transparent' }}>
-                <Projects />
-            </div>
-
             {/* Footer — NAP: nombre, dirección, teléfono */}
-            <div style={{ position: 'relative', zIndex: 6, background: '#08111d' }}>
+            <div style={{ position: 'relative', zIndex: 6, background: '#08111d', marginTop: '60px' }}>
                 <Footer />
             </div>
         </div>
