@@ -121,7 +121,7 @@ export const Features = () => {
                                             </ul>
                                         )}
                                         <div className="service-detail">
-                                            <p itemProp="description" style={{ maxWidth: '800px', fontSize: '1.15rem', lineHeight: '1.8', color: 'rgba(255,255,255,0.8)', whiteSpace: 'pre-line' }}>
+                                            <p itemProp="description" style={{ maxWidth: '800px', fontSize: '1.15rem', lineHeight: '1.8', color: '#444444', whiteSpace: 'pre-line' }}>
                                                 {svc.desc}
                                             </p>
                                         </div>

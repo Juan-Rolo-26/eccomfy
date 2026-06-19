@@ -10,6 +10,7 @@ import imgTopo from '../assets/topotoursweb.png';
 import imgCeli from '../assets/celicakeweb.png';
 import imgTraviesa from '../assets/Traviesa_logo.jpeg';
 import imgVolquetes from '../assets/web volquetes roldan .png';
+import imgDodilix from '../assets/dodilix_web.png';
 
 type Project = {
     name: string;
@@ -48,7 +49,7 @@ const PROJECTS_DATA: Project[] = [
         name: 'Topo Tours',
         title: 'Una experiencia digital que invita, inspira y motiva',
         image: imgTopo,
-        url: 'https://topotours.ar',
+        url: 'https://topotours.com',
         story: [
             'Con Topo Tours el proceso tuvo una energía totalmente distinta. Entramos en una marca vinculada a los viajes, a las experiencias y a esa emoción previa que aparece cuando una persona empieza a imaginar un destino.',
             'Una marca de turismo necesita conectar desde lo visual, desde lo emocional y desde la facilidad con la que presenta su propuesta.',
@@ -90,6 +91,18 @@ const PROJECTS_DATA: Project[] = [
             'En Volquetes Roldán, el objetivo principal era lograr una web clara, confiable y funcional.',
             'Nos enfocamos en ordenar la información, jerarquizar correctamente los servicios y construir una imagen digital que diera una sensación de empresa activa, seria y preparada para responder.',
             'Fue un proyecto muy valioso para nosotros porque muestra perfectamente algo que defendemos mucho en Eccomfy: una buena presencia digital no es un lujo, es una herramienta de crecimiento.',
+        ],
+    },
+    {
+        name: 'Dodilix',
+        title: 'Gestión de siniestros digitalizada y eficiente',
+        image: imgDodilix,
+        url: 'https://www.dodilix.com',
+        story: [
+            'Dodilix llegó a nosotros con un desafío muy interesante: digitalizar y modernizar la gestión de siniestros en el sector asegurador. Un rubro donde la agilidad, la precisión y la confianza son fundamentales.',
+            'Desarrollamos una plataforma integral que permite gestionar siniestros de forma ordenada, rápida y transparente. Desde la carga inicial hasta el seguimiento completo, todo centralizado en un sistema diseñado para simplificar procesos que antes eran manuales y lentos.',
+            'El foco estuvo en construir una herramienta que no solo resolviera la operación interna, sino que también transmitiera profesionalismo hacia los asegurados. Una interfaz clara, flujos intuitivos y una arquitectura preparada para escalar.',
+            'Dodilix es un ejemplo perfecto de cómo la tecnología puede transformar un sector tradicional. Lo que antes requería papeles, llamadas y semanas de espera, ahora se resuelve de forma digital, eficiente y con trazabilidad completa.',
         ],
     },
 ];

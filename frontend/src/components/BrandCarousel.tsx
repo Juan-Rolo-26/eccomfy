@@ -7,14 +7,16 @@ import logoCeli from '../assets/logo_celicake-removebg-preview.png';
 import logoVolquetes from '../assets/LOGOTIPO VOLQUETES ROLDAN .png';
 import logoMagna from '../assets/logo_Magna.jpg';
 import logoTraviesa from '../assets/Traviesa_logo.jpeg';
+import logoDodilix from '../assets/logo_dodilix.png';
 
 const BRANDS = [
     { name: 'MagnaMKT', logo: logoMagna, initials: 'MG', color: '#17775b', url: 'https://magnamkt.com' },
     { name: 'AMES Mutual', logo: logoAmes, initials: 'AM', color: '#17775b', url: 'https://amesmutual.com' },
-    { name: 'Topo Tours', logo: logoTopo, initials: 'TT', color: '#17775b', url: 'https://topotours.ar' },
+    { name: 'Topo Tours', logo: logoTopo, initials: 'TT', color: '#17775b', url: 'https://topotours.com' },
     { name: 'CeliCake', logo: logoCeli, initials: 'CC', color: '#17775b', url: 'https://juan-rolo-26.github.io/celicake-crafted-with-love/' },
     { name: 'Traviesa', logo: logoTraviesa, initials: 'TR', color: '#17775b', url: 'https://traviesa.online' },
     { name: 'Volquetes Roldán', logo: logoVolquetes, initials: 'VR', color: '#17775b', url: 'https://volquetesroldan.com' },
+    { name: 'Dodilix', logo: logoDodilix, initials: 'DX', color: '#17775b', url: 'https://www.dodilix.com' },
 ];
 
 // Triplicamos para scroll infinito
