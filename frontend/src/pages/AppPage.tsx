@@ -1,12 +1,10 @@
-import { useEffect, useRef } from 'react';
 import { SEOHead } from '../components/SEOHead';
 import { Features } from '../components/Features';
 import { motion } from 'framer-motion';
-import { Lightbulb, ShieldCheck, Zap, HeadphonesIcon, Workflow, TrendingUp, Target, Rocket } from 'lucide-react';
+import { Lightbulb, ShieldCheck, Zap, HeadphonesIcon, Workflow, TrendingUp, Target, Rocket, ArrowUpRight } from 'lucide-react';
 import './SoftwarePage.css';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const CALENDLY_URL = 'https://calendly.com/juanpablorolo2007/new-meeting?primary_color=316b35';
 
 const whyChooseUs = [
     { icon: Lightbulb, title: 'De idea a producto', desc: 'Transformamos tu problema en una aplicación funcional. Vos ponés la idea, nosotros la tecnología.' },
@@ -23,19 +21,6 @@ const whyBuildApp = [
 ];
 
 export const AppPage = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!containerRef.current) return;
-        containerRef.current.innerHTML = `
-            <div class="calendly-inline-widget" data-url="${CALENDLY_URL}" style="min-width:320px;width:100%;height:950px;min-height:950px;"></div>
-        `;
-        const script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.async = true;
-        containerRef.current.appendChild(script);
-    }, []);
-
     return (
         <div className="app-container" style={{ background: '#f2f0ea', width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
             <SEOHead
@@ -61,20 +46,33 @@ export const AppPage = () => {
                         que Funciona
                     </h1>
                     <p className="sw-camp-hero__sub">
-                        Agendá una consultoría con nuestro equipo de forma{' '}
-                        <span className="sw-camp-hero__accent">gratuita</span>{' '}
-                        <span className="sw-camp-hero__accent">completando</span> el formulario{' '}
-                        <span className="sw-camp-hero__accent">debajo</span>.
+                        Escribinos por WhatsApp y hablemos sobre cómo darle vida a tu aplicación de forma{' '}
+                        <span className="sw-camp-hero__accent">rápida y segura</span>.
                     </p>
-                </motion.div>
-
-                <motion.div
-                    className="sw-camp-calendly"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.3, ease: EASE }}
-                >
-                    <div ref={containerRef} />
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                        <a
+                            href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20una%20idea%20de%20aplicación%20y%20me%20gustaría%20consultarles."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                background: '#1c6643',
+                                color: '#fff',
+                                padding: '14px 28px',
+                                borderRadius: '999px',
+                                fontSize: '1.05rem',
+                                fontWeight: 600,
+                                textDecoration: 'none',
+                                boxShadow: '0 8px 24px rgba(28, 102, 67, 0.25)',
+                                transition: 'all 0.25s ease'
+                            }}
+                        >
+                            Empecemos tu proyecto
+                            <ArrowUpRight size={18} strokeWidth={2.5} />
+                        </a>
+                    </div>
                 </motion.div>
             </section>
 
