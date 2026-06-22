@@ -151,7 +151,7 @@ export const TravelPage = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
                     >
-                        <img src={imgTopo} alt="Topo Tours — Web para agencia de viajes desarrollada por Eccomfy" loading="lazy" />
+                        <img src={imgTopo} alt="Topo Tours — Web para agencia de viajes desarrollada por Eccomfy" />
                     </motion.div>
                 </div>
             </section>

@@ -125,6 +125,90 @@
   z-index: 2;
 }
 
+/* Software hero background with tech images */
+.sw-camp-hero--software {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(242, 240, 234, 0.92) 0%, rgba(242, 240, 234, 0.88) 40%, rgba(242, 240, 234, 0.95) 100%),
+    url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920&q=80') center/cover no-repeat;
+}
+
+.sw-camp-hero--software::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=75') center/cover no-repeat;
+  opacity: 0.25;
+  border-radius: 0 0 40px 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, black 20%, transparent 100%);
+  mask-image: linear-gradient(to right, black 20%, transparent 100%);
+}
+
+.sw-camp-hero--software::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 33%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=75') center/cover no-repeat;
+  opacity: 0.25;
+  border-radius: 0 0 0 40px;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
+  mask-image: linear-gradient(to left, black 20%, transparent 100%);
+}
+
+/* App hero background with mobile images */
+.sw-camp-hero--app {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(242, 240, 234, 0.95) 0%, rgba(242, 240, 234, 0.90) 40%, rgba(242, 240, 234, 0.97) 100%),
+    url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1920&q=80') center/cover no-repeat;
+}
+
+.sw-camp-hero--app::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=75') center/cover no-repeat;
+  opacity: 0.25;
+  border-radius: 0 0 40px 0;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, black 20%, transparent 100%);
+  mask-image: linear-gradient(to right, black 20%, transparent 100%);
+}
+
+.sw-camp-hero--app::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 33%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=800&q=75') center/cover no-repeat;
+  opacity: 0.25;
+  border-radius: 0 0 0 40px;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to left, black 20%, transparent 100%);
+  mask-image: linear-gradient(to left, black 20%, transparent 100%);
+}
+
+.sw-camp-hero--software .sw-camp-hero__content,
+.sw-camp-hero--software .sw-camp-hero__project-link,
+.sw-camp-hero--app .sw-camp-hero__content,
+.sw-camp-hero--app .sw-camp-hero__project-link {
+  position: relative;
+  z-index: 2;
+}
+
 .sw-camp-hero__project-link {
   display: inline-flex;
   align-items: center;
@@ -149,13 +233,63 @@
 /* ── CALENDLY EMBED ── */
 .sw-camp-calendly {
   width: 100%;
-  max-width: 90%;
+  max-width: 1100px;
+  /* Limits the iframe container so it looks normal */
   background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.06),
     0 0 0 1px rgba(0, 0, 0, 0.03);
+}
+
+.sw-camp-calendly .calendly-inline-widget {
+  min-width: 1060px !important;
+  /* Forces the internal grid to stay in desktop view */
+}
+
+.app-calendly-section {
+  background: #ffffff;
+  padding: 5rem 3%;
+  /* Reduced padding slightly to give more room */
+  display: flex;
+  justify-content: center;
+}
+
+.app-calendly-inner {
+  max-width: 1800px;
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.app-calendly-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.app-calendly-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: var(--fw-bold);
+  color: #0d1f1a;
+  letter-spacing: var(--ls-tight);
+}
+
+.app-calendly-title span {
+  color: var(--primary);
+}
+
+.app-calendly-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: #555555;
+  max-width: 550px;
 }
 
 
@@ -544,6 +678,7 @@
    RESPONSIVE
 ══════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+
   .sw-why__grid,
   .sw-whyweb__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -611,6 +746,7 @@
 }
 
 @media (max-width: 640px) {
+
   .sw-why__grid,
   .sw-whyweb__grid {
     grid-template-columns: 1fr;

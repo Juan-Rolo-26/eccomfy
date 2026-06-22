@@ -32,7 +32,7 @@ export const SoftwarePage = () => {
             />
 
             {/* ── HERO CAMPAÑA ── */}
-            <section className="sw-camp-hero">
+            <section className="sw-camp-hero sw-camp-hero--software">
                 <motion.div
                     className="sw-camp-hero__content"
                     initial={{ opacity: 0, y: 40 }}
@@ -73,6 +73,9 @@ export const SoftwarePage = () => {
                         >
                             Empecemos tu proyecto
                             <ArrowUpRight size={18} strokeWidth={2.5} />
+                        </a>
+                        <a href="/proyectos" className="sw-camp-hero__project-link" style={{ marginTop: 0 }}>
+                            Ver proyectos realizados
                         </a>
                     </div>
                 </motion.div>
@@ -193,7 +196,7 @@ export const SoftwarePage = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
                     >
-                        <img src={imgMagna} alt="MagnaMKT — Web desarrollada por Eccomfy" loading="lazy" />
+                        <img src={imgMagna} alt="MagnaMKT — Web desarrollada por Eccomfy" />
                     </motion.div>
                 </div>
                 <motion.div

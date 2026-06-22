@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { SEOHead } from '../components/SEOHead';
 import { Features } from '../components/Features';
 import { motion } from 'framer-motion';
@@ -5,6 +6,7 @@ import { Lightbulb, ShieldCheck, Zap, HeadphonesIcon, Workflow, TrendingUp, Targ
 import './SoftwarePage.css';
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const CALENDLY_URL = 'https://calendly.com/juanpablorolo2007/new-meeting?primary_color=32733a';
 
 const whyChooseUs = [
     { icon: Lightbulb, title: 'De idea a producto', desc: 'Transformamos tu problema en una aplicación funcional. Vos ponés la idea, nosotros la tecnología.' },
@@ -21,6 +23,19 @@ const whyBuildApp = [
 ];
 
 export const AppPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        containerRef.current.innerHTML = `
+            <div class="calendly-inline-widget" data-url="${CALENDLY_URL}" style="min-width:320px;width:100%;height:700px;min-height:700px;"></div>
+        `;
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        containerRef.current.appendChild(script);
+    }, []);
+
     return (
         <div className="app-container" style={{ background: '#f2f0ea', width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
             <SEOHead
@@ -30,7 +45,7 @@ export const AppPage = () => {
                 schema={[]}
             />
 
-            <section className="sw-camp-hero">
+            <section className="sw-camp-hero sw-camp-hero--app">
                 <motion.div
                     className="sw-camp-hero__content"
                     initial={{ opacity: 0, y: 40 }}
@@ -46,32 +61,33 @@ export const AppPage = () => {
                         que Funciona
                     </h1>
                     <p className="sw-camp-hero__sub">
-                        Escribinos por WhatsApp y hablemos sobre cómo darle vida a tu aplicación de forma{' '}
-                        <span className="sw-camp-hero__accent">rápida y segura</span>.
+                        Agendá una consultoría{' '}
+                        <span className="sw-camp-hero__accent">gratuita</span>{' '}
+                        de 30 minutos con nuestro equipo.
                     </p>
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                        <a
-                            href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20una%20idea%20de%20aplicación%20y%20me%20gustaría%20consultarles."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                background: '#1c6643',
-                                color: '#fff',
-                                padding: '14px 28px',
-                                borderRadius: '999px',
-                                fontSize: '1.05rem',
-                                fontWeight: 600,
-                                textDecoration: 'none',
-                                boxShadow: '0 8px 24px rgba(28, 102, 67, 0.25)',
-                                transition: 'all 0.25s ease'
-                            }}
-                        >
-                            Empecemos tu proyecto
-                            <ArrowUpRight size={18} strokeWidth={2.5} />
-                        </a>
+                    <a href="/proyectos" className="sw-camp-hero__project-link" style={{ marginTop: '0.5rem' }}>
+                        Ver proyectos realizados
+                        <ArrowUpRight size={16} strokeWidth={2} />
+                    </a>
+                </motion.div>
+            </section>
+
+            {/* ── CALENDLY ── */}
+            <section className="app-calendly-section">
+                <motion.div
+                    className="app-calendly-inner"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: EASE }}
+                >
+                    <div className="app-calendly-header">
+                        <span className="sw-why__eyebrow" style={{ color: 'var(--primary)' }}>RESERVÁ TU TURNO</span>
+                        <h2 className="app-calendly-title">Elegí el horario <span>que mejor te queda</span></h2>
+                        <p className="app-calendly-sub">Sin compromiso. 30 minutos. Te contamos cómo podemos ayudarte.</p>
+                    </div>
+                    <div className="sw-camp-calendly">
+                        <div ref={containerRef} />
                     </div>
                 </motion.div>
             </section>
