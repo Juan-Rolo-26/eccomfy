@@ -145,7 +145,7 @@ export const TravelPage = () => {
                         </a>
                     </motion.div>
                     <motion.div
-                        className="sw-case__visual"
+                        className="sw-case__visual"7
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}

@@ -3,6 +3,7 @@ node_modules/
 
 # Build outputs
 frontend/dist/
+admin/frontend/dist/
 
 # Environment
 .env
@@ -14,6 +15,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Database
+*.db
+*.db-journal
 
 # OS
 .DS_Store
