@@ -110,7 +110,7 @@ app.get('/api/clients', authMiddleware, async (req, res) => {
     const clients = await prisma.client.findMany({
       where,
       orderBy: { company: 'asc' },
-      include: { payments: { orderBy: { date: 'desc' }, take: 5 } }
+      include: { payments: { orderBy: { date: 'desc' }, take: 5 }, services: true }
     });
 
     res.json({ clients });
@@ -122,25 +122,39 @@ app.get('/api/clients', authMiddleware, async (req, res) => {
 
 app.post('/api/clients', authMiddleware, async (req, res) => {
   try {
-    const { company, contact, email, phone, plan, monto, dueDay, venc, estado, metodo, domain, desde } = req.body;
+    const { company, contact, email, phone, dueDay, venc, estado, metodo, domain, desde, services } = req.body;
 
     const now = new Date();
     const nextDue = new Date(now.getFullYear(), now.getMonth() + 1, parseInt(dueDay) || 1);
+
+    const svcList = Array.isArray(services) ? services : [];
+    const monthlyTotal = svcList.filter(s => s.type === 'monthly').reduce((sum, s) => sum + (parseFloat(s.price) || 0), 0);
+    const planLabel = svcList.map(s => s.service).join(', ');
+
     const client = await prisma.client.create({
       data: {
         company,
         contact,
         email: email || '',
         phone: phone || '',
-        plan,
-        monto: parseFloat(monto) || 0,
+        plan: planLabel,
+        monto: monthlyTotal,
         dueDay: parseInt(dueDay) || 1,
         venc: venc ? new Date(venc) : nextDue,
         estado: estado || 'aldia',
         metodo,
         domain: domain || '',
         desde: desde ? new Date(desde) : now,
-      }
+        services: {
+          create: svcList.map(s => ({
+            service: s.service,
+            price: parseFloat(s.price) || 0,
+            type: s.type || 'monthly',
+            paid: s.type === 'monthly' ? false : (s.paid || false),
+          }))
+        }
+      },
+      include: { services: true }
     });
 
     res.status(201).json(client);
@@ -154,21 +168,41 @@ app.put('/api/clients/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const data = { ...req.body };
+    const services = data.services;
 
-    if (data.monto !== undefined) data.monto = parseFloat(data.monto);
     if (data.dueDay !== undefined) data.dueDay = parseInt(data.dueDay);
     if (data.venc) data.venc = new Date(data.venc);
     if (data.desde) data.desde = new Date(data.desde);
 
-    // Remove fields that shouldn't be updated directly
     delete data.id;
     delete data.createdAt;
     delete data.updatedAt;
     delete data.payments;
+    delete data.services;
+
+    if (Array.isArray(services)) {
+      const monthlyTotal = services.filter(s => s.type === 'monthly').reduce((sum, s) => sum + (parseFloat(s.price) || 0), 0);
+      data.monto = monthlyTotal;
+      data.plan = services.map(s => s.service).join(', ');
+
+      await prisma.clientService.deleteMany({ where: { clientId: parseInt(id) } });
+      await prisma.clientService.createMany({
+        data: services.map(s => ({
+          clientId: parseInt(id),
+          service: s.service,
+          price: parseFloat(s.price) || 0,
+          type: s.type || 'monthly',
+          paid: s.type === 'monthly' ? false : (s.paid || false),
+        }))
+      });
+    } else {
+      if (data.monto !== undefined) data.monto = parseFloat(data.monto);
+    }
 
     const client = await prisma.client.update({
       where: { id: parseInt(id) },
-      data
+      data,
+      include: { services: true }
     });
 
     res.json(client);
@@ -348,22 +382,27 @@ app.get('/api/dashboard', authMiddleware, async (req, res) => {
 
 app.get('/api/export/clients', authMiddleware, async (req, res) => {
   try {
-    const clients = await prisma.client.findMany({ orderBy: { company: 'asc' } });
+    const clients = await prisma.client.findMany({ orderBy: { company: 'asc' }, include: { services: true } });
 
-    const data = clients.map(c => ({
-      'Empresa': c.company,
-      'Contacto': c.contact,
-      'Email': c.email,
-      'Teléfono': c.phone,
-      'Plan': c.plan,
-      'Monto': c.monto,
-      'Día de Cobro': c.dueDay,
-      'Vencimiento': new Date(c.venc).toLocaleDateString('es-AR'),
-      'Estado': c.estado,
-      'Método de Pago': c.metodo,
-      'Dominio': c.domain,
-      'Cliente Desde': new Date(c.desde).toLocaleDateString('es-AR'),
-    }));
+    const data = clients.map(c => {
+      const monthly = (c.services || []).filter(s => s.type === 'monthly');
+      const onetime = (c.services || []).filter(s => s.type === 'onetime');
+      return {
+        'Empresa': c.company,
+        'Contacto': c.contact,
+        'Email': c.email,
+        'Teléfono': c.phone,
+        'Servicios': (c.services || []).map(s => s.service).join(', ') || c.plan,
+        'Monto Mensual': monthly.reduce((s, sv) => s + sv.price, 0) || c.monto,
+        'Pagos Únicos': onetime.map(s => `${s.service}: $${s.price}`).join(', ') || '-',
+        'Día de Cobro': c.dueDay,
+        'Vencimiento': new Date(c.venc).toLocaleDateString('es-AR'),
+        'Estado': c.estado,
+        'Método de Pago': c.metodo,
+        'Dominio': c.domain,
+        'Cliente Desde': new Date(c.desde).toLocaleDateString('es-AR'),
+      };
+    });
 
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(data);

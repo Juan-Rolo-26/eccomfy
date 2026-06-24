@@ -17,22 +17,34 @@ model User {
 }
 
 model Client {
-  id        Int       @id @default(autoincrement())
+  id        Int              @id @default(autoincrement())
   company   String
   contact   String
   email     String
   phone     String
-  plan      String
-  monto     Float
+  plan      String           @default("")
+  monto     Float            @default(0)
   dueDay    Int
   venc      DateTime
-  estado    String    @default("aldia")
+  estado    String           @default("aldia")
   metodo    String
   domain    String
   desde     DateTime
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
   payments  Payment[]
+  services  ClientService[]
+}
+
+model ClientService {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  service   String
+  price     Float
+  type      String   // 'monthly' o 'onetime'
+  paid      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 model Payment {

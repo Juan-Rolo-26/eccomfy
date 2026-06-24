@@ -5,6 +5,14 @@ import {
   Plus, X, Mail, Phone, Globe, Edit2, Trash2, MessageCircle,
 } from 'lucide-react';
 
+interface ServiceItem {
+  id?: number;
+  service: string;
+  price: number;
+  type: 'monthly' | 'onetime';
+  paid?: boolean;
+}
+
 interface Client {
   id: number;
   company: string;
@@ -19,6 +27,7 @@ interface Client {
   metodo: string;
   domain: string;
   desde: string;
+  services?: ServiceItem[];
 }
 
 const fmt = (n: number) => `$ ${n.toLocaleString('es-AR')}`;
@@ -43,17 +52,36 @@ const estadoBadge = (estado: string) => {
 const initials = (name: string) =>
   name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
 
-const plans = ['Community Basic', 'Community Pro', 'Ads Management', 'E-commerce 360', 'Branding Full', 'SEO + Contenido'];
+const SERVICES_CATALOG: { name: string; defaultPrice: number; type: 'monthly' | 'onetime' }[] = [
+  { name: 'Desarrollo Web', defaultPrice: 0, type: 'onetime' },
+  { name: 'Software', defaultPrice: 0, type: 'onetime' },
+  { name: 'Branding', defaultPrice: 0, type: 'onetime' },
+  { name: 'Hosting', defaultPrice: 0, type: 'monthly' },
+  { name: 'Dominio', defaultPrice: 0, type: 'monthly' },
+  { name: 'Community Manager', defaultPrice: 0, type: 'monthly' },
+  { name: 'Marketing', defaultPrice: 0, type: 'monthly' },
+  { name: 'Grabaciones y Videos', defaultPrice: 0, type: 'monthly' },
+  { name: 'SEO', defaultPrice: 0, type: 'monthly' },
+  { name: 'Mantenimiento', defaultPrice: 0, type: 'monthly' },
+];
+
 const metodos = ['Transferencia bancaria', 'Mercado Pago', 'Débito automático', 'Efectivo'];
 
-const emptyForm = {
-  company: '', contact: '', email: '', phone: '',
-  plan: 'Community Basic', monto: 45000, dueDay: 1, metodo: 'Transferencia bancaria', domain: '',
-};
+interface FormState {
+  company: string;
+  contact: string;
+  email: string;
+  phone: string;
+  dueDay: number;
+  metodo: string;
+  domain: string;
+  services: ServiceItem[];
+}
 
-const planPrices: Record<string, number> = {
-  'Community Basic': 45000, 'Community Pro': 85000, 'Ads Management': 120000,
-  'E-commerce 360': 185000, 'Branding Full': 150000, 'SEO + Contenido': 95000,
+const emptyForm: FormState = {
+  company: '', contact: '', email: '', phone: '',
+  dueDay: 1, metodo: 'Transferencia bancaria', domain: '',
+  services: [],
 };
 
 const cardStyle: React.CSSProperties = {
@@ -77,7 +105,7 @@ export default function Clients() {
   const [selected, setSelected] = useState<Client | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState<FormState>(emptyForm);
   const [loading, setLoading] = useState(true);
 
   const fetchClients = () => {
@@ -97,13 +125,46 @@ export default function Clients() {
     if (s) setSearch(s);
   }, [searchParams]);
 
+  const toggleService = (svcName: string) => {
+    const exists = form.services.find(s => s.service === svcName);
+    if (exists) {
+      setForm({ ...form, services: form.services.filter(s => s.service !== svcName) });
+    } else {
+      const catalog = SERVICES_CATALOG.find(c => c.name === svcName)!;
+      setForm({
+        ...form,
+        services: [...form.services, { service: svcName, price: catalog.defaultPrice, type: catalog.type }],
+      });
+    }
+  };
+
+  const updateServicePrice = (svcName: string, price: number) => {
+    setForm({
+      ...form,
+      services: form.services.map(s => s.service === svcName ? { ...s, price } : s),
+    });
+  };
+
+  const monthlyTotal = form.services.filter(s => s.type === 'monthly').reduce((sum, s) => sum + s.price, 0);
+  const onetimeTotal = form.services.filter(s => s.type === 'onetime').reduce((sum, s) => sum + s.price, 0);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      const payload = {
+        company: form.company,
+        contact: form.contact,
+        email: form.email,
+        phone: form.phone,
+        dueDay: form.dueDay,
+        metodo: form.metodo,
+        domain: form.domain,
+        services: form.services,
+      };
       if (editMode && selected) {
-        await api.put(`/api/clients/${selected.id}`, form);
+        await api.put(`/api/clients/${selected.id}`, payload);
       } else {
-        await api.post('/api/clients', form);
+        await api.post('/api/clients', payload);
       }
       setShowForm(false);
       setEditMode(false);
@@ -131,7 +192,8 @@ export default function Clients() {
   const openEdit = (c: Client) => {
     setForm({
       company: c.company, contact: c.contact, email: c.email, phone: c.phone,
-      plan: c.plan, monto: c.monto, dueDay: c.dueDay, metodo: c.metodo, domain: c.domain,
+      dueDay: c.dueDay, metodo: c.metodo, domain: c.domain,
+      services: (c.services || []).map(s => ({ service: s.service, price: s.price, type: s.type, paid: s.paid })),
     });
     setEditMode(true);
     setShowForm(true);
@@ -210,7 +272,7 @@ export default function Clients() {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid #222b29' }}>
-                {['Cliente', 'Plan', 'Monto', 'Día cobro', 'Vencimiento', 'Método', 'Estado'].map(h => (
+                {['Cliente', 'Servicios', 'Mensual', 'Día cobro', 'Vencimiento', 'Método', 'Estado'].map(h => (
                   <th key={h} style={{
                     padding: '12px 16px', textAlign: 'left', fontSize: 11,
                     fontWeight: 500, color: '#7d8884', textTransform: 'uppercase', letterSpacing: '0.5px',
@@ -248,7 +310,11 @@ export default function Clients() {
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: '12px 16px', fontSize: 13, color: '#94a09c' }}>{c.plan}</td>
+                  <td style={{ padding: '12px 16px', fontSize: 12, color: '#94a09c', maxWidth: 200 }}>
+                    <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {c.plan || '-'}
+                    </div>
+                  </td>
                   <td style={{ padding: '12px 16px', fontSize: 13, color: '#e9f0ee', fontFamily: "'IBM Plex Mono', monospace" }}>{fmt(c.monto)}</td>
                   <td style={{ padding: '12px 16px', fontSize: 13, color: '#94a09c' }}>{c.dueDay}</td>
                   <td style={{ padding: '12px 16px', fontSize: 13, color: '#94a09c' }}>{formatDate(c.venc)}</td>
@@ -264,7 +330,7 @@ export default function Clients() {
       {/* Slide-over panel */}
       {selected && !showForm && (
         <div style={{
-          position: 'fixed', top: 0, right: 0, bottom: 0, width: 400,
+          position: 'fixed', top: 0, right: 0, bottom: 0, width: 420,
           background: '#121917', borderLeft: '1px solid #222b29',
           zIndex: 100, overflowY: 'auto', padding: 24,
           boxShadow: '-8px 0 32px rgba(0,0,0,0.3)',
@@ -278,10 +344,8 @@ export default function Clients() {
             </button>
           </div>
 
-          {/* Status badge */}
           <div style={{ marginBottom: 20 }}>{estadoBadge(selected.estado)}</div>
 
-          {/* Info sections */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24 }}>
             {[
               { icon: <Mail size={14} />, label: 'Email', value: selected.email },
@@ -298,17 +362,53 @@ export default function Clients() {
             ))}
           </div>
 
+          {/* Servicios contratados */}
+          {selected.services && selected.services.length > 0 && (
+            <div style={{ background: '#0e1413', borderRadius: 10, padding: 16, marginBottom: 16, border: '1px solid #222b29' }}>
+              <div style={{ fontSize: 12, color: '#7d8884', marginBottom: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Servicios contratados</div>
+
+              {selected.services.filter(s => s.type === 'monthly').length > 0 && (
+                <>
+                  <div style={{ fontSize: 11, color: '#22c597', marginBottom: 6, fontWeight: 500 }}>Mensuales</div>
+                  {selected.services.filter(s => s.type === 'monthly').map((s, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #1a2120', fontSize: 13 }}>
+                      <span style={{ color: '#e9f0ee' }}>{s.service}</span>
+                      <span style={{ color: '#22c597', fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500 }}>{fmt(s.price)}/mes</span>
+                    </div>
+                  ))}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0 4px', fontSize: 13, fontWeight: 600 }}>
+                    <span style={{ color: '#94a09c' }}>Total mensual</span>
+                    <span style={{ color: '#e9f0ee', fontFamily: "'IBM Plex Mono', monospace" }}>{fmt(selected.monto)}</span>
+                  </div>
+                </>
+              )}
+
+              {selected.services.filter(s => s.type === 'onetime').length > 0 && (
+                <>
+                  <div style={{ fontSize: 11, color: '#e8b54e', marginTop: 12, marginBottom: 6, fontWeight: 500 }}>Pago único</div>
+                  {selected.services.filter(s => s.type === 'onetime').map((s, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: '1px solid #1a2120', fontSize: 13 }}>
+                      <span style={{ color: '#e9f0ee' }}>{s.service}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ color: '#e8b54e', fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500 }}>{fmt(s.price)}</span>
+                        <span style={{
+                          fontSize: 10, padding: '2px 6px', borderRadius: 4,
+                          background: s.paid ? 'rgba(52,201,138,0.12)' : 'rgba(239,106,97,0.12)',
+                          color: s.paid ? '#34c98a' : '#ef6a61',
+                        }}>
+                          {s.paid ? 'Pagado' : 'Pendiente'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+
           <div style={{ background: '#0e1413', borderRadius: 10, padding: 16, marginBottom: 20, border: '1px solid #222b29' }}>
-            <div style={{ fontSize: 12, color: '#7d8884', marginBottom: 4 }}>Plan y facturación</div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 8 }}>
-              <div>
-                <div style={{ fontSize: 11, color: '#7d8884' }}>Plan</div>
-                <div style={{ fontSize: 14, fontWeight: 500 }}>{selected.plan}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: 11, color: '#7d8884' }}>Monto</div>
-                <div style={{ fontSize: 14, fontWeight: 500, fontFamily: "'IBM Plex Mono', monospace" }}>{fmt(selected.monto)}</div>
-              </div>
+            <div style={{ fontSize: 12, color: '#7d8884', marginBottom: 8, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Facturación</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               <div>
                 <div style={{ fontSize: 11, color: '#7d8884' }}>Día de cobro</div>
                 <div style={{ fontSize: 14, fontWeight: 500 }}>{selected.dueDay}</div>
@@ -369,7 +469,6 @@ export default function Clients() {
             </div>
           </div>
 
-          {/* Edit / Delete */}
           <div style={{ display: 'flex', gap: 8 }}>
             <button
               onClick={() => openEdit(selected)}
@@ -402,7 +501,7 @@ export default function Clients() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200,
         }}>
           <form onSubmit={handleSubmit} style={{
-            width: 480, background: '#121917', borderRadius: 16, padding: 28,
+            width: 560, background: '#121917', borderRadius: 16, padding: 28,
             border: '1px solid #222b29', maxHeight: '90vh', overflowY: 'auto',
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
@@ -430,27 +529,13 @@ export default function Clients() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 <div>
                   <label style={labelStyle}>Email</label>
-                  <input type="email" style={inputStyle} required value={form.email}
+                  <input type="email" style={inputStyle} value={form.email}
                     onChange={e => setForm({ ...form, email: e.target.value })} />
                 </div>
                 <div>
                   <label style={labelStyle}>Teléfono</label>
                   <input style={inputStyle} value={form.phone}
                     onChange={e => setForm({ ...form, phone: e.target.value })} />
-                </div>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                <div>
-                  <label style={labelStyle}>Plan</label>
-                  <select style={inputStyle} value={form.plan}
-                    onChange={e => setForm({ ...form, plan: e.target.value, monto: planPrices[e.target.value] || form.monto })}>
-                    {plans.map(p => <option key={p} value={p}>{p}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label style={labelStyle}>Monto</label>
-                  <input type="number" style={inputStyle} required value={form.monto}
-                    onChange={e => setForm({ ...form, monto: Number(e.target.value) })} />
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -472,6 +557,108 @@ export default function Clients() {
                 <input style={inputStyle} value={form.domain} placeholder="ejemplo.com"
                   onChange={e => setForm({ ...form, domain: e.target.value })} />
               </div>
+
+              {/* Servicios */}
+              <div>
+                <label style={{ ...labelStyle, fontSize: 13, fontWeight: 600, color: '#e9f0ee', marginBottom: 10 }}>
+                  Servicios contratados
+                </label>
+
+                <div style={{ fontSize: 11, color: '#e8b54e', fontWeight: 500, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Pago único
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
+                  {SERVICES_CATALOG.filter(s => s.type === 'onetime').map(svc => {
+                    const active = form.services.some(s => s.service === svc.name);
+                    const current = form.services.find(s => s.service === svc.name);
+                    return (
+                      <div key={svc.name} style={{
+                        display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px',
+                        background: active ? 'rgba(232,181,78,0.08)' : '#0b100f',
+                        border: `1px solid ${active ? 'rgba(232,181,78,0.3)' : '#222b29'}`,
+                        borderRadius: 8,
+                      }}>
+                        <input
+                          type="checkbox"
+                          checked={active}
+                          onChange={() => toggleService(svc.name)}
+                          style={{ accentColor: '#e8b54e' }}
+                        />
+                        <span style={{ flex: 1, fontSize: 13, color: active ? '#e9f0ee' : '#7d8884' }}>{svc.name}</span>
+                        {active && (
+                          <input
+                            type="number"
+                            value={current?.price || 0}
+                            onChange={e => updateServicePrice(svc.name, Number(e.target.value))}
+                            placeholder="Precio"
+                            style={{ ...inputStyle, width: 120, textAlign: 'right' }}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div style={{ fontSize: 11, color: '#22c597', fontWeight: 500, marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  Mensuales
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {SERVICES_CATALOG.filter(s => s.type === 'monthly').map(svc => {
+                    const active = form.services.some(s => s.service === svc.name);
+                    const current = form.services.find(s => s.service === svc.name);
+                    return (
+                      <div key={svc.name} style={{
+                        display: 'flex', alignItems: 'center', gap: 10, padding: '8px 12px',
+                        background: active ? 'rgba(34,197,151,0.06)' : '#0b100f',
+                        border: `1px solid ${active ? 'rgba(34,197,151,0.25)' : '#222b29'}`,
+                        borderRadius: 8,
+                      }}>
+                        <input
+                          type="checkbox"
+                          checked={active}
+                          onChange={() => toggleService(svc.name)}
+                          style={{ accentColor: '#22c597' }}
+                        />
+                        <span style={{ flex: 1, fontSize: 13, color: active ? '#e9f0ee' : '#7d8884' }}>{svc.name}</span>
+                        {active && (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                            <input
+                              type="number"
+                              value={current?.price || 0}
+                              onChange={e => updateServicePrice(svc.name, Number(e.target.value))}
+                              placeholder="$/mes"
+                              style={{ ...inputStyle, width: 120, textAlign: 'right' }}
+                            />
+                            <span style={{ fontSize: 11, color: '#7d8884' }}>/mes</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Resumen de costos */}
+              {form.services.length > 0 && (
+                <div style={{
+                  background: '#0e1413', borderRadius: 10, padding: 14,
+                  border: '1px solid #222b29',
+                }}>
+                  <div style={{ fontSize: 12, color: '#7d8884', marginBottom: 8, fontWeight: 600 }}>Resumen</div>
+                  {monthlyTotal > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 4 }}>
+                      <span style={{ color: '#94a09c' }}>Total mensual</span>
+                      <span style={{ color: '#22c597', fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>{fmt(monthlyTotal)}/mes</span>
+                    </div>
+                  )}
+                  {onetimeTotal > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                      <span style={{ color: '#94a09c' }}>Total pago único</span>
+                      <span style={{ color: '#e8b54e', fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600 }}>{fmt(onetimeTotal)}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div style={{ display: 'flex', gap: 10, marginTop: 24 }}>
