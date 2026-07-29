@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { ArrowDownRight, ChevronDown } from 'lucide-react';
+import { useEffect, useRef } from "react";
+import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import heroPoster from '../assets/hero.png';
 import heroVideo from '../assets/video_hero.mp4';
-import { BrandCarousel } from './BrandCarousel';
+import heroPoster from '../assets/hero.png';
+import './Hero.css';
 
-// Easing cinematográfico: arranque lento, llegada suave (tipo power2.out)
 const EASE_CINEMATIC: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const containerVariants = {
@@ -14,63 +13,29 @@ const containerVariants = {
     visible: {
         transition: {
             staggerChildren: 0.18,
-            delayChildren: 0.5,
+            delayChildren: 0.2,
         },
     },
 };
 
 const itemVariants = {
-    hidden: {
-        opacity: 0,
-        y: 52,
-        filter: 'blur(6px)',
-    },
-    visible: {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        transition: {
-            duration: 1.4,
-            ease: EASE_CINEMATIC,
-        },
-    },
+    hidden: { opacity: 0, y: 30, filter: 'blur(4px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 1.2, ease: EASE_CINEMATIC } },
 };
-
-// Variante más sutil para los botones (menos desplazamiento)
-const buttonsVariants = {
-    hidden: { opacity: 0, y: 28 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 1.2,
-            ease: EASE_CINEMATIC,
-        },
-    },
-};
-
 
 export const Hero = () => {
-    const videoRef = useRef<HTMLVideoElement>(null);
     const navigate = useNavigate();
+    const videoRef = useRef<HTMLVideoElement>(null);
 
-    /**
-     * ── SEO: Preload del video hero en el head para mejorar LCP.
-     * El video es el elemento LCP más probable — cargarlo early reduce el tiempo.
-     */
     useEffect(() => {
         if (videoRef.current) {
-            videoRef.current.play().catch(error => {
-                console.error("Autoplay prevents", error);
-            });
+            videoRef.current.play().catch(console.error);
         }
 
-        // Preload del poster (imagen de inicio) para LCP inmediato
         const linkPoster = document.createElement('link');
         linkPoster.rel = 'preload';
         linkPoster.as = 'image';
         linkPoster.href = heroPoster;
-        linkPoster.setAttribute('fetchpriority', 'high');
         document.head.appendChild(linkPoster);
 
         return () => {
@@ -80,145 +45,70 @@ export const Hero = () => {
         };
     }, []);
 
+    const handleActionPrimary = () => {
+        window.open('https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20quisiera%20reservar%20una%20sesión%20de%20estrategia.', '_blank');
+    };
+
     const handleScrollServices = () => {
         navigate('/servicios');
         window.scrollTo(0, 0);
     };
 
-    const handleScrollNext = () => {
-        const next =
-            document.querySelector<HTMLElement>('#nosotros') ||
-            document.querySelector<HTMLElement>('.cta-section');
-
-        if (next) {
-            next.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     return (
-        /**
-         * ── SEO NOTES ────────────────────────────────────────────────────────
-         * id="inicio" → ancla para navegación interna (Navbar + internal links)
-         * aria-label → accesibilidad + señal semántica para bots
-         * El H1 usa la keyword principal: "Agencia de Software para PyMEs"
-         * LSI keywords en el párrafo: soluciones tecnológicas, aplicaciones móviles,
-         *   plataformas de alto rendimiento, negocios de la era digital
-         * ─────────────────────────────────────────────────────────────────── */
-        <section
-            id="inicio"
-            className="hero"
-            aria-label="Hero — Eccomfy Agencia de Software para PyMEs en Córdoba"
-        >
-            {/*
-             * VIDEO HERO — LCP Element
-             * ──────────────────────────────────────────────────────────────
-             * fetchpriority="high": le dice al navegador que este es recurso crítico
-             * preload="metadata": evita descargar el video completo hasta que sea necesario.
-             *   El poster (imagen) actúa como placeholder visual para LCP.
-             * aria-hidden="true": los bots no indexan video decorativo (correcto)
-             * ────────────────────────────────────────────────────────────── */}
+        <section id="inicio" className="hero-dark-v2" aria-label="Hero — Eccomfy Agencia de Software">
+
+            {/* Animated Video Background */}
             <video
                 ref={videoRef}
-                className="hero-video-bg"
+                className="hero-video-bg-v2"
                 autoPlay
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 poster={heroPoster}
                 aria-hidden="true"
                 src={heroVideo}
             />
-            <div className="hero-overlay" />
-            <div className="hero-noise" />
+            <div className="hero-cosmic-bg">
+                <div className="hero-cosmic-glow"></div>
+            </div>
 
-            <div className="hero-container">
-                {/* Contenedor staggered: cada hijo entra de forma escalonada */}
+            <div className="hero-v2-container wide">
                 <motion.div
-                    className="hero-content"
+                    className="hero-v2-content wide"
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    style={{ animation: 'none' }} /* desactiva heroFadeUp CSS */
                 >
-                    {/*
-                     * H1 — ÚNICO en toda la página
-                     * ────────────────────────────────────────────────────
-                     * Keyword principal: "Agencia de Software para PyMEs"
-                     * Longitud: 28 chars — óptimo para ranking
-                     * Jerarquía: H1 → H2 (servicios) → H2 (nosotros) → H2 (proyectos)
-                     * ─────────────────────────────────────────────────── */}
-                    <motion.h1
-                        className="hero-main-title"
-                        variants={itemVariants}
-                        style={{ fontFamily: "'Neue Machina', sans-serif" }}
-                    >
-                        Desarrollo de software {' '}
-                        <span className="hero-title-highlight">para pymes</span>
-                    </motion.h1>
+                    <div className="hero-v2-left">
+                        <motion.div className="hero-v2-badge" variants={itemVariants}>
+                            Agencia Digital B2B
+                        </motion.div>
 
-                    {/*
-                     * Párrafo descriptivo — Señales LSI para Google
-                     * Keywords secundarias: soluciones tecnológicas a medida,
-                     * aplicaciones móviles escalables, plataformas de alto rendimiento,
-                     * Córdoba, Argentina, automatización, IA
-                     */}
-                    <motion.p className="hero-description" variants={itemVariants}>
-                        En Eccomfy desarrollamos{' '}
-                        <strong>soluciones tecnológicas a medida</strong> para PyMEs en Córdoba
-                        y Argentina: sistemas de gestión, apps móviles escalables, automatizaciones
-                        con IA y landing pages de alto rendimiento.
-                    </motion.p>
+                        <motion.h1 className="hero-v2-title" variants={itemVariants}>
+                            Agencia digital para Pymes
+                        </motion.h1>
 
-                    <motion.div className="hero-actions" variants={buttonsVariants}>
-                        {/* CTA principal — rel="noopener noreferrer" para seguridad */}
-                        <a
-                            href="https://wa.me/5493513712759?text=Hola%20Eccomfy%2C%20tengo%20un%20proyecto%20de%20software%20y%20me%20gustaría%20consultarles."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hero-btn hero-btn-primary"
-                            id="btn-cta-hero-principal"
-                            aria-label="Consultar por WhatsApp con Eccomfy"
-                        >
-                            Contanos tu Proyecto
-                            <ArrowDownRight size={18} aria-hidden="true" />
-                        </a>
+                        <motion.p className="hero-v2-description" variants={itemVariants}>
+                            Somos Eccomfy, una agencia digital especializada en digitalizar pymes contando servicios como el desarrollo de plataformas a medida, sitios web corporativos, content management (redes sociales), estrategias de posicionamiento, filmmaking y Meta Ads para escalar negocios ambiciosos.
+                        </motion.p>
 
-                        <button
-                            type="button"
-                            className="hero-btn hero-btn-secondary"
-                            onClick={handleScrollServices}
-                            aria-label="Ver servicios de software de Eccomfy"
-                            id="btn-ver-servicios-hero"
-                        >
-                            Ver servicios
-                        </button>
-                    </motion.div>
+                        <motion.div className="hero-v2-actions" variants={itemVariants}>
+                            <button onClick={handleActionPrimary} className="hero-v2-btn hero-v2-btn-primary">
+                                Reserva una sesión de estrategia
+                                <ArrowUpRight size={18} />
+                            </button>
 
-                    {/* Separador sutil */}
-                    <motion.div
-                        className="hero-brand-divider"
-                        initial={{ opacity: 0, scaleX: 0 }}
-                        animate={{ opacity: 1, scaleX: 1 }}
-                        transition={{ duration: 1, delay: 1.4, ease: EASE_CINEMATIC }}
-                    />
-
-                    {/* Carrusel de marcas — señal de E-E-A-T (Experience) */}
-                    <BrandCarousel />
+                            <button onClick={handleScrollServices} className="hero-v2-btn hero-v2-btn-secondary">
+                                Descubre nuestros servicios
+                                <ArrowUpRight size={18} />
+                            </button>
+                        </motion.div>
+                    </div>
                 </motion.div>
             </div>
 
-            {/* scroll-indicator: CSS se encarga del bounce y del fade-in con delay */}
-            <button
-                type="button"
-                className="scroll-indicator"
-                onClick={handleScrollNext}
-                aria-label="Continuar hacia la siguiente sección"
-                id="btn-scroll-hero"
-            >
-                <span>Continua</span>
-                <ChevronDown size={18} strokeWidth={1.8} aria-hidden="true" />
-            </button>
         </section>
     );
 };

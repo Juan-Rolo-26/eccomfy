@@ -10,11 +10,17 @@ const navLinks = [
     { name: "Proyectos", href: "/proyectos" },
 ];
 
+// Pages with a light background that need a dark navbar
+const LIGHT_PAGES = ['/servicios', '/proyectos'];
+
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    // Detect if page has light background
+    const isLightPage = LIGHT_PAGES.some(p => location.pathname.startsWith(p));
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -52,7 +58,7 @@ export const Navbar = () => {
                 initial={{ y: -60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className={`nv ${scrolled ? "nv--scrolled" : ""}`}
+                className={`nv ${scrolled ? "nv--scrolled" : ""} ${isLightPage && !scrolled ? "nv--light" : ""}`}
             >
                 <div className="nv__inner">
 
@@ -112,7 +118,7 @@ export const Navbar = () => {
 
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className={`nv__burger ${isOpen ? "open" : ""}`}
+                            className={`nv__burger ${isOpen ? "open" : ""} ${isLightPage && !scrolled ? "nv__burger--dark" : ""}`}
                             aria-label="Menú"
                         >
                             <span />

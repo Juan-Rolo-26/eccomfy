@@ -1,10 +1,11 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import aboutImg from '../assets/Socios.jpg';
 
-const PARAGRAPH = "En Eccomfy ayudamos a empresas, emprendedores y organizaciones a transformar desafíos en oportunidades mediante tecnología. Nuestro enfoque combina estrategia, diseño y desarrollo para crear soluciones digitales que no solo funcionan, sino que generan impacto real en el negocio. Trabajamos con tecnologías modernas y metodologías ágiles para entregar proyectos escalables, seguros y preparados para el crecimiento futuro.";
+const PARAGRAPH = "En Eccomfy ayudamos a empresas, emprendedores y organizaciones a transformar desafíos en oportunidades con estrategias integrales. Nuestro enfoque combina marketing, contenido audiovisual y desarrollo para crear campañas que generan impacto real en el negocio. Somos los socios estratégicos que tu marca necesita para crecer en el ecosistema digital.";
 
 const RevealWord = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
-    const opacity = useTransform(progress, range, [0.2, 1]);
+    const opacity = useTransform(progress, range, [0.15, 1]);
     return (
         <motion.span style={{ opacity, display: 'inline-block', marginRight: '5px' }}>
             {children}
@@ -28,7 +29,7 @@ export const ScrollRevealText = () => {
             ref={containerRef}
             style={{
                 backgroundColor: '#f2f0ea',
-                padding: '6rem 4%',
+                padding: '7rem 2%',          /* minimal side padding = más ancho */
                 minHeight: '100vh',
                 display: 'flex',
                 alignItems: 'center',
@@ -38,29 +39,26 @@ export const ScrollRevealText = () => {
         >
             <div style={{
                 width: '100%',
-                maxWidth: '1400px',
-                display: 'flex',
-                flexDirection: 'row',
+                maxWidth: '100%',            /* sin restricción de ancho */
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
                 alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '4rem',
-                margin: '0 auto',
-                flexWrap: 'wrap'
+                gap: '5rem',
             }}>
-                {/* Content Side */}
+                {/* ── Left: Content ── */}
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    style={{ flex: '1 1 500px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem', paddingLeft: '4%' }}
                 >
                     <span style={{
                         display: 'inline-block',
                         fontFamily: 'var(--font-body, sans-serif)',
-                        fontSize: '0.875rem',
+                        fontSize: '0.78rem',
                         fontWeight: 600,
-                        letterSpacing: '0.15em',
+                        letterSpacing: '0.18em',
                         textTransform: 'uppercase',
                         color: '#17775b',
                         padding: '0.4rem 1.2rem',
@@ -69,25 +67,28 @@ export const ScrollRevealText = () => {
                         borderRadius: '999px',
                         alignSelf: 'flex-start'
                     }}>
-                        SOBRE NOSOTROS
+                        Sobre Nosotros
                     </span>
+
                     <h2 style={{
                         fontFamily: 'var(--font-display, sans-serif)',
-                        fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                        fontSize: 'clamp(3.5rem, 5.5vw, 6.5rem)',
                         fontWeight: 700,
                         color: '#0d1f1a',
-                        lineHeight: 1.1,
+                        lineHeight: 1.02,
+                        letterSpacing: '-2px',
                         margin: 0
                     }}>
-                        Socios tecnologicos de tu <span style={{ color: '#17775b' }}>Pyme</span>
+                        Socios estratégicos<br />
+                        de tu <span style={{ color: '#17775b' }}>negocio</span>
                     </h2>
+
                     <p style={{
                         fontFamily: 'var(--font-body, sans-serif)',
-                        fontSize: '1.25rem',
-                        lineHeight: 1.6,
+                        fontSize: '1.35rem',
+                        lineHeight: 1.7,
                         color: '#333333',
                         margin: 0,
-                        maxWidth: '600px',
                         display: 'flex',
                         flexWrap: 'wrap'
                     }}>
@@ -103,48 +104,46 @@ export const ScrollRevealText = () => {
                     </p>
                 </motion.div>
 
-                {/* Video Side — YouTube Shorts Embed */}
+                {/* ── Right: Image ── */}
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    transition={{ duration: 0.85, ease: "easeOut", delay: 0.15 }}
                     style={{
-                        flex: '1 1 500px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
+                        position: 'relative',
+                        height: '700px',
                     }}
                 >
-                    <div
+                    <img
+                        src={aboutImg}
+                        alt="Equipo Eccomfy — Agencia digital en Córdoba"
                         style={{
-                            position: 'relative',
                             width: '100%',
-                            maxWidth: '520px',
-                            aspectRatio: '9/16',
-                            borderRadius: '24px',
-                            overflow: 'hidden',
-                            boxShadow: '0 25px 50px -12px rgba(23, 119, 91, 0.25), 0 0 0 1px rgba(0,0,0,0.05)',
-                            backgroundColor: '#000',
-                            transform: 'translateZ(0)'
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            borderRadius: '20px',
+                            display: 'block',
+                            boxShadow: '0 30px 80px -12px rgba(23, 119, 91, 0.2), 0 0 0 1px rgba(0,0,0,0.06)',
                         }}
-                    >
-                        <iframe
-                            src="https://drive.google.com/file/d/1r10kSGF93hyt_T9xqJl9b106zA8_uAi3/preview"
-                            title="Eccomfy — Reel de marca personal"
-                            allow="autoplay; fullscreen"
-                            allowFullScreen
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                border: 'none',
-                                display: 'block'
-                            }}
-                        />
-                    </div>
+                        loading="lazy"
+                    />
+                    {/* decorative green accent stripe */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '-20px',
+                        left: '-20px',
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #17775b, #3eb290)',
+                        opacity: 0.18,
+                        filter: 'blur(20px)',
+                        zIndex: 0,
+                    }} />
                 </motion.div>
             </div>
         </section>
     );
 };
-

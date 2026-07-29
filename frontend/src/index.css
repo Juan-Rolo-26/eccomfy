@@ -1,3 +1,5 @@
+/* ── Custom Typography for Redesign ── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 /* ── Fontshare: Clash Display (UI) ── */
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap');
 /* ── Google Fonts: Syne (navbar) + Raleway (brand: Eccomfy) ── */
@@ -9,21 +11,23 @@
 ══════════════════════════════════════════════════ */
 :root {
   /* Brand */
-  --bg-color: #030303;
+  --bg-color: #030308;
   --text-main: #FFFFFF;
   --text-muted: #A1A1AA;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.1);
   --primary: #17775b;
+  /* Eccomfy green */
   --primary-glow: rgba(23, 119, 91, 0.4);
   --secondary: #3eb290;
+  /* Eccomfy light green */
   --accent: #ffb703;
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   /* ── Typography: Font families ── */
-  --font-display: 'Clash Display', sans-serif;
+  --font-display: 'Playfair Display', serif;
   /* Títulos, headings, UI bold */
-  --font-body: 'Clash Display', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
   /* Párrafos, labels, nav, botones */
   --font-brand: 'Raleway', sans-serif;
   /* Exclusivo para la palabra “Eccomfy” */
@@ -117,7 +121,7 @@ body {
   font-size: var(--text-base);
   font-weight: var(--fw-regular);
   background-color: var(--bg-color);
-  color: var(--nav-text, #fff);
+  color: var(--text-main);
   line-height: var(--lh-body);
   overflow-x: hidden;
   width: 100%;
@@ -319,7 +323,7 @@ button {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background: #0a0a0a;
+  background: var(--bg-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,8 +345,8 @@ button {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to right, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.2) 100%),
-    linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.2) 35%, rgba(0, 0, 0, 0.35) 100%);
+    linear-gradient(to right, rgba(248, 246, 241, 0.78) 0%, rgba(248, 246, 241, 0.45) 45%, rgba(248, 246, 241, 0.2) 100%),
+    linear-gradient(to top, rgba(248, 246, 241, 0.65) 0%, rgba(248, 246, 241, 0.2) 35%, rgba(248, 246, 241, 0.35) 100%);
 }
 
 .hero-noise {
@@ -410,19 +414,20 @@ button {
 .hero-main-title {
   margin: 0;
   max-width: 100%;
-  font-family: 'Neue Machina', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(3rem, 6.5vw, 6rem);
   line-height: var(--lh-tight);
   font-weight: var(--fw-bold);
   /* Usamos bold, no extrabold para que no se estire */
   letter-spacing: var(--ls-tighter);
-  color: #ffffff;
+  color: var(--text-main);
   text-wrap: pretty;
   text-align: center;
 }
 
 .hero-main-title span {
   color: var(--secondary);
+  font-style: italic;
 }
 
 .hero-description {
@@ -432,7 +437,7 @@ button {
   font-size: clamp(1.25rem, 1.8vw, 1.6rem);
   font-weight: var(--fw-regular);
   line-height: var(--lh-body);
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -592,7 +597,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
+  background: #f5f3ee;
   overflow: hidden;
   padding: 110px 4% 120px;
   box-sizing: border-box;
@@ -660,7 +665,7 @@ button {
 /* Título principal */
 .cta-v2-title {
   margin: 0;
-  font-family: 'Neue Machina', sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 6.2rem);
   font-weight: 700;
   line-height: 0.96;

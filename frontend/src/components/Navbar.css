@@ -23,6 +23,38 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* ── Light mode navbar: used on light-background pages before scrolling ── */
+.nv--light {
+    background: rgba(248, 246, 241, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.nv--light .nv__link {
+    color: #1a1a1a;
+}
+
+.nv--light .nv__underline {
+    background: #1a1a1a;
+}
+
+.nv--light .nv__logo span {
+    color: #1a1a1a;
+}
+
+.nv--light .nv__cta {
+    color: #1a1a1a;
+}
+
+.nv--light .nv__cta-underline {
+    background: #1a1a1a;
+}
+
+.nv__burger--dark span {
+    background: #1a1a1a;
+}
+
 /* ── Grid: links | logo | right — logo truly centered ── */
 .nv__inner {
     display: grid;
