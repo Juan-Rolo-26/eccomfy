@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import aboutImg from '../assets/Socios.jpg';
+import './ScrollRevealText.css';
 
 const PARAGRAPH = "En Eccomfy ayudamos a empresas, emprendedores y organizaciones a transformar desafíos en oportunidades con estrategias integrales. Nuestro enfoque combina marketing, contenido audiovisual y desarrollo para crear campañas que generan impacto real en el negocio. Somos los socios estratégicos que tu marca necesita para crecer en el ecosistema digital.";
 
@@ -27,31 +28,20 @@ export const ScrollRevealText = () => {
         <section
             id="nosotros"
             ref={containerRef}
+            className="scroll-reveal-container"
             style={{
                 backgroundColor: '#f2f0ea',
-                padding: '7rem 2%',          /* minimal side padding = más ancho */
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 overflow: 'hidden'
             }}
         >
-            <div style={{
-                width: '100%',
-                maxWidth: '100%',            /* sin restricción de ancho */
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                alignItems: 'center',
-                gap: '5rem',
-            }}>
+            <div className="scroll-reveal-grid">
                 {/* ── Left: Content ── */}
                 <motion.div
                     initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem', paddingLeft: '4%' }}
+                    className="scroll-reveal-left"
                 >
                     <span style={{
                         display: 'inline-block',
@@ -70,28 +60,12 @@ export const ScrollRevealText = () => {
                         Sobre Nosotros
                     </span>
 
-                    <h2 style={{
-                        fontFamily: 'var(--font-display, sans-serif)',
-                        fontSize: 'clamp(3.5rem, 5.5vw, 6.5rem)',
-                        fontWeight: 700,
-                        color: '#0d1f1a',
-                        lineHeight: 1.02,
-                        letterSpacing: '-2px',
-                        margin: 0
-                    }}>
+                    <h2 className="scroll-reveal-title">
                         Socios estratégicos<br />
                         de tu <span style={{ color: '#17775b' }}>negocio</span>
                     </h2>
 
-                    <p style={{
-                        fontFamily: 'var(--font-body, sans-serif)',
-                        fontSize: '1.35rem',
-                        lineHeight: 1.7,
-                        color: '#333333',
-                        margin: 0,
-                        display: 'flex',
-                        flexWrap: 'wrap'
-                    }}>
+                    <p className="scroll-reveal-text">
                         {words.map((word, i) => {
                             const start = i / words.length;
                             const end = start + (1 / words.length);
@@ -110,23 +84,12 @@ export const ScrollRevealText = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.85, ease: "easeOut", delay: 0.15 }}
-                    style={{
-                        position: 'relative',
-                        height: '700px',
-                    }}
+                    className="scroll-reveal-image-wrapper"
                 >
                     <img
                         src={aboutImg}
                         alt="Equipo Eccomfy — Agencia digital en Córdoba"
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                            borderRadius: '20px',
-                            display: 'block',
-                            boxShadow: '0 30px 80px -12px rgba(23, 119, 91, 0.2), 0 0 0 1px rgba(0,0,0,0.06)',
-                        }}
+                        className="scroll-reveal-image"
                         loading="lazy"
                     />
                     {/* decorative green accent stripe */}
