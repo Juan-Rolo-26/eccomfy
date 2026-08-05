@@ -8,6 +8,7 @@ import logoVolquetes from '../assets/LOGOTIPO VOLQUETES ROLDAN .png';
 import logoMagna from '../assets/logo_Magna.jpg';
 import logoTraviesa from '../assets/Traviesa_logo.jpeg';
 import logoDodilix from '../assets/logo_dodilix.png';
+import logoGestoria from '../assets/gestoria_logo.jpeg';
 
 const BRANDS = [
     { name: 'MagnaMKT', logo: logoMagna, initials: 'MG', color: '#17775b', url: 'https://magnamkt.com' },
@@ -17,6 +18,7 @@ const BRANDS = [
     { name: 'Traviesa', logo: logoTraviesa, initials: 'TR', color: '#17775b', url: 'https://traviesa.online' },
     { name: 'Volquetes Roldán', logo: logoVolquetes, initials: 'VR', color: '#17775b', url: 'https://volquetesroldan.com' },
     { name: 'Dodilix', logo: logoDodilix, initials: 'DX', color: '#17775b', url: 'https://www.dodilix.com' },
+    { name: 'Gestoría Villarreal', logo: logoGestoria, initials: 'GV', color: '#17775b', url: 'https://gestoriavillarreal.com' },
 ];
 
 // Triplicamos para scroll infinito

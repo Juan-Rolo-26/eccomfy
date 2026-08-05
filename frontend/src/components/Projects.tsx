@@ -10,6 +10,7 @@ import imgCeli from '../assets/celicakeweb.png';
 import imgTraviesa from '../assets/Traviesa_logo.jpeg';
 import imgVolquetes from '../assets/web volquetes roldan .png';
 import imgDodilix from '../assets/dodilix_web.png';
+import imgGestoria from '../assets/gestoria_real_web.png';
 
 type Project = {
     name: string;
@@ -68,6 +69,13 @@ const PROJECTS_DATA: Project[] = [
         image: imgDodilix,
         url: 'https://www.dodilix.com',
         desc: 'Plataforma integral para digitalizar la gestión de siniestros en el sector asegurador. Flujos intuitivos, interfaz clara y arquitectura preparada para escalar. Tecnología que transforma un sector tradicional.',
+    },
+    {
+        name: 'Gestoría Villarreal',
+        title: 'Liderazgo en gestión contable y mandataria',
+        image: imgGestoria,
+        url: 'https://gestoriavillarreal.com',
+        desc: 'Plataforma corporativa de alto impacto visual. Minimalismo oscuro y dinámico diseñado para potenciar la confiabilidad de servicios financieros, legales y de gestoría institucional.',
     },
 ];
 

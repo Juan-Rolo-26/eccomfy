@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import heroVideo from '../assets/video_hero.mp4';
 import heroPoster from '../assets/hero.png';
+import { BrandCarousel } from './BrandCarousel';
 import './Hero.css';
 
 const EASE_CINEMATIC: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -104,6 +105,10 @@ export const Hero = () => {
                                 Descubre nuestros servicios
                                 <ArrowUpRight size={18} />
                             </button>
+                        </motion.div>
+
+                        <motion.div variants={itemVariants} className="hero-carousel-wrapper">
+                            <BrandCarousel />
                         </motion.div>
                     </div>
                 </motion.div>

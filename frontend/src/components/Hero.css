@@ -173,10 +173,26 @@
     transform: translateY(-2px);
 }
 
+.hero-carousel-wrapper {
+    margin-top: 5vh;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+}
+
+.hero-carousel-wrapper .brand-carousel-label {
+    display: none;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
     .hero-v2-title {
         font-size: clamp(2.2rem, 9vw, 3.5rem);
+    }
+
+    .hero-carousel-wrapper {
+        margin-top: 10px;
     }
 
     .hero-v2-description {
